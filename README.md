@@ -8,10 +8,12 @@
 ## Group-PX-XX
 
 ## Members
-* Student Name 1 (sXXXXX)
-* Student Name 2 (sXXXXX)
-* Student Name 3 (sXXXXX)
-* Student Name 4 (sXXXXX)
+* Darby Vogt - s3948074
+* Laura Gatt - s3945256
+* Lance Belen - s3944846
+* Saksham Jain - s3923854
+* Lawrence Dawood - s3668011
+* Krisanahari Siva - s3941378
 
 ## Records
 
