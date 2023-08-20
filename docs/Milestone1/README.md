@@ -19,3 +19,7 @@
 * Github Project Board : https://github.com/orgs/cosc2299-sept-2023/projects/146
 * Teams Link : https://teams.microsoft.com/l/channel/19%3aZYWFqHolT5UAJb-q8hjY_h-OL87wKsUMG-TcbMgVzdQ1%40thread.tacv2/General?groupId=8f496168-6600-4b77-a866-7818f47e1cca&tenantId=d1323671-cdbe-4417-b4d4-bdb24b51316b
 * Additional Communications on a Private Discord Group Chat
+
+## Videos
+
+* Individual Contribution was discussed and showcased during the meeting with our tutor in Week 5.
