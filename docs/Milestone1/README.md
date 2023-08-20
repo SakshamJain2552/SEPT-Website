@@ -22,4 +22,4 @@
 
 ## Videos
 
-* Individual Contribution was discussed and showcased during the meeting with our tutor in Week 5.
+* Individual Contribution was discussed and showcased during the Scrum Meeting with our tutor in Week 5.
