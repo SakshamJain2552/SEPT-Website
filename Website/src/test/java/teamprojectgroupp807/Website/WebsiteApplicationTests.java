@@ -1,13 +1,13 @@
-package au.edu.rmit.sept.cinemas.movies;
+package teamprojectgroupp807.Website;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MoviesApplicationTests {
+class WebsiteApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+	@Test
+	void contextLoads() {
+	}
 
 }
