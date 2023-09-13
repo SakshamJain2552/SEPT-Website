@@ -13,6 +13,11 @@
   }
 }
 
+body {
+  background-color: #72a776; /* Set the background color */
+  font-family: Arial, sans-serif; /* Set the font family */
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
