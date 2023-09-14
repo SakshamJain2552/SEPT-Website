@@ -20,10 +20,3 @@ INSERT INTO ProductPrices (ProductID, StoreID, Price) VALUES
 (1, 2, 1.20),
 (2, 3, 1.50),
 (3, 4, 0.80);
-
--- Sample Inputs for Reviews (using users, products, and stores from above)
-INSERT INTO Reviews (UserID, ProductID, StoreID, Rating, Comment, DatePosted) VALUES
-(1, 1, 1, 5, 'Great quality!', '2023-09-12'),
-(2, 2, 3, 4, 'Good, but a bit pricey.', '2023-09-11'),
-(3, 3, 4, 3, 'Just okay.', '2023-09-10'),
-(4, 4, 1, 5, 'Always fresh!', '2023-09-09');

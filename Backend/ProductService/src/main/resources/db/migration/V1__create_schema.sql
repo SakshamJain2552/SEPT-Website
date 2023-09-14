@@ -36,19 +36,3 @@ CREATE TABLE IF NOT EXISTS ProductPrices (
   CONSTRAINT FK_ProductID_Price FOREIGN KEY (ProductID) REFERENCES Products(ProductID),
   CONSTRAINT FK_StoreID_Price FOREIGN KEY (StoreID) REFERENCES Stores(StoreID)
 );
-
--- -----------------------------------------------------
--- Table Reviews
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS Reviews (
-  ReviewID INT AUTO_INCREMENT PRIMARY KEY,
-  UserID INT,
-  ProductID INT,
-  StoreID INT,
-  Rating INT NOT NULL,
-  Comment TEXT,
-  DatePosted VARCHAR(255) NOT NULL,
-  CONSTRAINT FK_UserID_Review FOREIGN KEY (UserID) REFERENCES Users(UserID),
-  CONSTRAINT FK_ProductID_Review FOREIGN KEY (ProductID) REFERENCES Products(ProductID),
-  CONSTRAINT FK_StoreID_Review FOREIGN KEY (StoreID) REFERENCES Stores(StoreID)
-);
