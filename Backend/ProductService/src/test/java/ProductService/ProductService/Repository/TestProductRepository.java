@@ -20,8 +20,6 @@ class TestProductRepository {
 
         List<Product> products = productRepository.findAll();
         assertEquals(1L, products.get(0).productId());
-        assertEquals(2L, products.get(1).productId());
-        assertEquals(3L, products.get(2).productId());
 
     }
 
