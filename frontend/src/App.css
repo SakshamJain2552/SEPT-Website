@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+}
+
+body {
+  background-color: #f3f3f3; /* Set the background color */
+  font-family: Arial, sans-serif; /* Set the font family */
+}
+
+/* Style a class */
+.header {
+  background-color: rgb(206, 204, 204);
+  color: #fff;
+  padding: 20px;
+}
