@@ -7,9 +7,9 @@ INSERT INTO Stores (StoreName, StoreLocation, StoreDescription) VALUES
 
 -- Sample Inputs for Products
 INSERT INTO Products (ProductName, Category, Description) VALUES
-('Milk', 'Dairy', 'Fresh whole milk. 1L.'),
-('Bread', 'Bakery', 'Whole grain bread. 500g.'),
-('Apple', 'Fruits', 'Crisp and sweet. Per Kg.'),
+('test1', 'test1', 'test1'),
+('test2', 'test2', 'test2'),
+('test3', 'test3', 'test3'),
 ('Chicken', 'Meat', 'Fresh chicken breast. 500g.');
 
 -- (Assuming IDs are assigned sequentially starting from 1 for each table)
