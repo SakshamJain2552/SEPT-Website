@@ -4,8 +4,59 @@ on:
     branches:
       - main
       - develop  # Add the 'develop' branch
+      - user_service
+      - product_service
+      - delivery_service
 
 jobs:
+  build-backend-delivery-service:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Grant execute permission to mvnw
+        working-directory: Backend/DeliveryService
+        run: chmod +x mvnw
+      - name: Build with Maven
+        working-directory: Backend/DeliveryService
+        run: ./mvnw --batch-mode --update-snapshots package
+
+  build-backend-product-service:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Grant execute permission to mvnw
+        working-directory: Backend/ProductService
+        run: chmod +x mvnw
+      - name: Build with Maven
+        working-directory: Backend/ProductService
+        run: ./mvnw --batch-mode --update-snapshots package
+
+  build-backend-user-service:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Grant execute permission to mvnw
+        working-directory: Backend/UserService
+        run: chmod +x mvnw
+      - name: Build with Maven
+        working-directory: Backend/UserService
+        run: ./mvnw --batch-mode --update-snapshots package
+
   build-frontend:
     runs-on: ubuntu-latest
     steps:
