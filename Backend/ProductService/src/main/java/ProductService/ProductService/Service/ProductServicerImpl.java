@@ -20,7 +20,7 @@ public class ProductServicerImpl implements ProductServicer{
 
     @Override
     public Collection<Product> getProducts(){
-        return null;
+        return repository.findAll();
     }
 
 }
