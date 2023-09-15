@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import ProductService.ProductService.Model.Product;
 import ProductService.ProductService.Service.ProductServicer;
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/products")
 public class ProductController {
     
