@@ -11,7 +11,7 @@ export default function ActionAreaCard({ product }) {
       <Card sx={{ maxWidth: 345, height: '100%', display: 'flex', flexDirection: 'column' }}>
         <CardActionArea style={{ flexGrow: 1 }}>
           <CardMedia sx={{ height: 300 }} image={image} title="Product Name" />
-          <CardHeader title={product.name} subheader={`Store name: ${product.storeName}`} />
+          <CardHeader title={product.productName} subheader={`Store name: ${product.storeName}`} />
           <CardContent>
             <Typography variant="body2" color="textSecondary">
               {product.description}
