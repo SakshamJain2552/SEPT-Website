@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import SignIn from './pages/signin'
+import DisplayedProducts from './pages/display-products'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -25,6 +26,7 @@ function App() {
         </Route> */}
 
           <Route path="/" element={<SignIn />} />
+          <Route path="list" element={<DisplayedProducts />} />
 
       </Routes>
       </BrowserRouter>
