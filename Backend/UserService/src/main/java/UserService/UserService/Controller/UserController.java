@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import UserService.UserService.Service.UserService;
 
 @RestController
-@RequestMapping(value = "user")
+@RequestMapping(value = "/user")
 public class UserController {
     private final UserService userService;
 
