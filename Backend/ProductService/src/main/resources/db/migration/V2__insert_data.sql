@@ -12,12 +12,12 @@ INSERT INTO Stores (StoreName, StoreLocation, StoreDescription) VALUES
 INSERT INTO Products (ProductName, Category, Description) VALUES
 ('Apple', 'Fruits', 'Fresh red apple. 2g.'),
 ('Orange', 'Fruits', 'Fresh orange. 5g.'),
-('Grapes', 'Fruits', 'Fresh purple grapes. 200g.'),
+('Grapes', 'Fruits', 'Fresh purple grapes. 200g.');
 
 -- Meats
 INSERT INTO Products (ProductName, Category, Description) VALUES
-('Chicken', 'Meat', 'Fresh chicken breast. 500g.');
-('Lamb Chops', 'Meat', 'Fresh lamb chops. 250g.');
+('Chicken', 'Meat', 'Fresh chicken breast. 500g.'),
+('Lamb Chops', 'Meat', 'Fresh lamb chops. 250g.'),
 ('Salmon', 'Meat', 'Red salmon cut fillets. 500g.');
 
 -- Dairy
