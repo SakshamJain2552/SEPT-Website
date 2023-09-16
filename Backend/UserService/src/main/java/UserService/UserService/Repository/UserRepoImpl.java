@@ -29,9 +29,10 @@ public class UserRepoImpl implements UserRepo {
 
             ResultSet rs = stm.executeQuery();
 
+            System.out.println("Given username and password: " + username + " - " + password);
             while(rs.next()) {
-                
                 if (rs.getString(2).equals(username) && rs.getString(3).equals(password)) {
+                    System.out.println("Verified: " + rs.getString(2) + " " + rs.getString(3));
                     connection.close();
                     return true;
                 }

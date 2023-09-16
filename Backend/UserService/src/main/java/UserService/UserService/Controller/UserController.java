@@ -1,8 +1,13 @@
 package UserService.UserService.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import UserService.UserService.Service.UserService;
@@ -17,8 +22,9 @@ public class UserController {
         this.userService = userService;
     }
     
-    @PostMapping
-    public boolean userLogin(String username, String password) {
+    @GetMapping
+    @ResponseBody
+    public boolean userLogin(@RequestParam String username, @RequestParam String password) {
         return userService.userVerified(username, password);
-    } 
+    }
 }
