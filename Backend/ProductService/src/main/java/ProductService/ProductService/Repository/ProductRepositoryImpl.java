@@ -21,9 +21,10 @@ public class ProductRepositoryImpl implements ProductRepository{
     public ProductRepositoryImpl(DataSource dataSource){
         this.dataSource = dataSource;
     }
+       
 
     @Override
-    public List<Product> findAll() {
+    public List<Product> findAll(){
         
         try {
             Connection connection = dataSource.getConnection();
@@ -39,8 +40,13 @@ public class ProductRepositoryImpl implements ProductRepository{
             List<Product> products = new ArrayList<>();
             ResultSet rs = stm.executeQuery();
             while(rs.next()) {
+
+                String imagePath = null;
+
+                imagePath = "product_" + rs.getLong(1) + ".png";
+
                 Product product = new Product(rs.getLong(1), rs.getString(2), rs.getString(3), 
-                rs.getString(4), rs.getString(5), rs.getDouble(6), rs.getBlob(7));
+                rs.getString(4), rs.getString(5), rs.getDouble(6), imagePath);
                 products.add(product);
             }
             connection.close();
