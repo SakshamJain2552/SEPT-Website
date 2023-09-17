@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Container, Breadcrumbs, Link, Typography, Box } from '@mui/material';
-import Sidebar from '../Components/sidebar.js'; // Import your Sidebar, FilterBar, and BookList components
+// import Sidebar from '../Components/sidebar.js'; // Import your Sidebar, FilterBar, and BookList components
 // import FilterBar from './FilterBar';
 import Productlist from '../Components/productlist';
 
