@@ -1,0 +1,8 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.project.sourcePaths": [
+        "UserService",
+        "UserService\\src\\main\\java\\UserService\\UserService"
+    ],
+    "java.configuration.updateBuildConfiguration": "disabled"
+}
