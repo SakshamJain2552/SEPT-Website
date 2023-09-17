@@ -3,6 +3,9 @@ import { Card, CardContent, CardHeader, Typography, CardActionArea, CardMedia, B
 import image from './288-2881831_grey-food-icon-png-transparent-png.png';
 import CheckIcon from '@mui/icons-material/Check';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+// import images from './images/product_1.png';
+
+const imgPath = './images/product_1.png';
 
 export default function ActionAreaCard({ product }) {
     console.log(product);
@@ -10,7 +13,7 @@ export default function ActionAreaCard({ product }) {
     return (
       <Card sx={{ maxWidth: 345, height: '100%', display: 'flex', flexDirection: 'column' }}>
         <CardActionArea style={{ flexGrow: 1 }}>
-          <CardMedia sx={{ height: 300 }} image={image} title="Product Name" />
+          <CardMedia component="img" sx={{ height: 300 }} image={product.imagePath} title="Product Name" />
           <CardHeader title={product.productName} subheader={`Store name: ${product.storeName}`} />
           <CardContent>
             <Typography variant="body2" color="textSecondary">

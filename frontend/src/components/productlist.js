@@ -199,8 +199,7 @@ const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     function Sidebar({ onCategoryChange }) {
         const categories = [
-            'Specials',
-            'Fruits',
+            'Fruits & Vegetables',
             'Meat & Seafood',
             'Dairy, Eggs & Fridge',
             'Bakery',
