@@ -1,5 +1,8 @@
 package UserService.UserService.Controller;
 
+import java.util.Map;
+import java.util.HashMap;
+
 import org.springframework.boot.test.context.SpringBootTest;
 
 import org.mockito.Mock;
@@ -26,7 +29,10 @@ public class TestUserController {
     @Test
     public void testUserLogin() {
         when(userService.userVerified("alice123", "password123")).thenReturn(true);
-        boolean successfulLogin = userController.userLogin("alice123", "password123");
+        Map<String, String> body = new HashMap<>();
+        body.put("username", "alice123");
+        body.put("password", "password123");
+        boolean successfulLogin = userController.userLogin(body);
         assertTrue(successfulLogin);
     }
 }
