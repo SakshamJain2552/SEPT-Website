@@ -32,3 +32,6 @@
 * Step 8: cd frontend
 * Step 9: npm install
 * Step 10: npm start
+*** Step 11: on the Sign In Page:
+* Username: alice123
+* Password: password123**
