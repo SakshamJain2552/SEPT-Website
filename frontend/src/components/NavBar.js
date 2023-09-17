@@ -67,7 +67,7 @@ function NavBar() {
                 }}
               >
                 {/* SuperPrice */}
-                <img src={logo} alt="Logo" style= {{width:'20%', height:'20%' }} />
+                <img src={logo} alt="Logo" style= {{width:'200px', height:'20%' }} />
               </Typography>
             </Grid>
             <Grid item xs>
