@@ -1,11 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, Typography, CardActionArea, CardMedia, Button } from '@mui/material';
-import image from './288-2881831_grey-food-icon-png-transparent-png.png';
 import CheckIcon from '@mui/icons-material/Check';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-// import images from './images/product_1.png';
-
-const imgPath = './images/product_1.png';
 
 export default function ActionAreaCard({ product }) {
     console.log(product);
