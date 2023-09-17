@@ -40,21 +40,41 @@ import Productlist from '../components/productlist.js';
   
 
 // export default AllProducts;
-import NavBar from '../components/navbar';
+import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
+
+// function MainPage() {
+//   return (
+//     <div>
+//       <NavBar />
+//       <div>
+//         {/* <Sidebar /> */}
+//         <Productlist />
+//           </div>
+//           <div>
+//               <NavBar />
+//           </div>
+//     </div>
+//   );
+// }
+
+// export default MainPage;
 
 function MainPage() {
-  return (
-    <div>
-      <NavBar />
-      <div>
-        {/* <Sidebar /> */}
-        <Productlist />
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '110vh' }}>
+        <NavBar />
+        <div style={{ flex: '1 0 auto' }}>
+          <Productlist />
+        </div>
+        <div style={{ flexShrink: 0 }}>
+          <Footer />
+        </div>
       </div>
-    </div>
-  );
-}
-
-export default MainPage;
+    );
+  }
+  
+  export default MainPage;
 
 
 
