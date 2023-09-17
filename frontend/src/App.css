@@ -2,9 +2,9 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: #f3f3f3; /* Set the background color */
+  font-family: Arial, sans-serif; /* Set the font family */
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -150,5 +150,3 @@
     height: auto;
   }
 }
-
-
