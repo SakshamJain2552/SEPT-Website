@@ -1,75 +1,174 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem, InputBase } from '@mui/material';
+import { AppBar, Toolbar, Typography, Tooltip, IconButton, Grid, Button, InputBase,  Menu, MenuItem, Paper } from '@mui/material';
 import { Link } from 'react-router-dom';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+
 
 function NavBar() {
-  const [menuAnchor, setMenuAnchor] = useState(null);
+  // const [cartItemCount, setCartItemCount] = useState(0);
+  const [cartItemCount] = useState(3);
+  const [shopMenuAnchor, setShopMenuAnchor] = useState(null);
+  const [storesMenuAnchor, setStoresMenuAnchor] = useState(null);
+  const [accountMenuAnchor, setAccountMenuAnchor] = useState(null);
 
-  const handleMenuOpen = (event) => {
-    setMenuAnchor(event.currentTarget);
+  const handleShopMenuOpen = (event) => {
+    setShopMenuAnchor(event.currentTarget);
+  };
+
+  const handleStoresMenuOpen = (event) => {
+    setStoresMenuAnchor(event.currentTarget);
+  };
+
+  const handleAccountMenuOpen = (event) => {
+    setAccountMenuAnchor(event.currentTarget);
   };
 
   const handleMenuClose = () => {
-    setMenuAnchor(null);
+    setShopMenuAnchor(null);
+    setStoresMenuAnchor(null);
+    setAccountMenuAnchor(null);
   };
+
+
+  // // Function to add an item to the cart and update the count
+  // const addToCart = () => {
+  //   setCartItemCount(cartItemCount + 1);
+  // };
+
+
+  
 
   return (
     <>
       <AppBar position="static" color="inherit">
         <Toolbar>
-          <IconButton
-            edge="start"
-            color="primary"
-            aria-label="menu"
-            onClick={handleMenuOpen}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography color="primary" variant="h6" component={Link} to="/" style={{ textDecoration: 'none'}}>
-            SuperPrice
-          </Typography>
-          <div style={{ flex: 1, marginLeft: 'auto' }}>
-            <div style={{ position: 'relative' }}>
-              <div style={{ position: 'absolute', left: 50, top: '50%', transform: 'translateY(-50%)' }}>
-                <SearchIcon color="primary">
-                </SearchIcon>
-              </div>
-              <InputBase
-                placeholder="Search..."
-                fullWidth
-                inputProps={{ 'aria-label': 'search' }}
-                style={{ left: 50, paddingLeft: 40 }}
-              />
-            </div>
-          </div>
-          <div>
-            <Button color="primary" component={Link} to="/about">
-              About
-            </Button>
-            <Button color="primary" component={Link} to="/profile">
-              Profile
-            </Button>
-            <Button color="primary" component={Link} to="/cart">
-              Cart
-            </Button>
-            <Menu
-              anchorEl={menuAnchor}
-              open={Boolean(menuAnchor)}
-              onClose={handleMenuClose}
-            >
-              <MenuItem component={Link} to="/Category1" onClick={handleMenuClose}>
-                Category 1
-              </MenuItem>
-              <MenuItem component={Link} to="/Category2" onClick={handleMenuClose}>
-                Category 2
-              </MenuItem>
-              <MenuItem component={Link} to="/Category3" onClick={handleMenuClose}>
-                Category 3
-              </MenuItem>
-            </Menu>
-          </div>
+          <Grid container alignItems="center" spacing={2}>
+            {/* First Row */}
+            <Grid item>
+              <Typography
+                color="primary"
+                variant="h6"
+                component={Link}
+                to="/"
+                style={{
+                  textDecoration: 'none',
+                  fontFamily: 'Georgia',
+                  letterSpacing: '2px',
+                  fontWeight: 'bold',
+                  fontSize: '24px',
+                  color: 'primary',
+                  transition: 'color 0.3s',
+                }}
+              >
+                SuperPrice
+              </Typography>
+            </Grid>
+            <Grid item xs>
+              <div style={{ position: 'relative' }}>
+                  <Paper elevation={3} style={{ width: '700px', borderRadius: '50px', padding: '0px 4px', display: 'flex', alignItems: 'center'}}>
+                    <div style={{ paddingLeft: '10px' }}>
+                      <SearchIcon color="primary" />
+                    </div>
+                    <InputBase
+                      placeholder="What are you looking for?"
+                      fullWidth
+                      inputProps={{ 'aria-label': 'search' }}
+                      style={{ padding: '10px 20px', borderRadius: '25px' }}
+                    />
+                  </Paper>
+                </div>
+            </Grid>
+            <Grid item>
+              {/* Bell Icon */}
+              <Tooltip title="Notifications">
+                <IconButton color="primary" component={Link} to="/notifications">
+                  <NotificationsNoneIcon />
+                </IconButton>
+              </Tooltip>
+            </Grid>
+            <Grid item>
+              <Tooltip title="User Profile">
+                <IconButton color="primary" component={Link} to="/profile">
+                  <AccountCircleIcon />
+                </IconButton>
+              </Tooltip>
+            </Grid>
+            <Grid item>
+              <Tooltip title="Liked Products">
+                <IconButton color="primary" component={Link} to="/liked-products">
+                  <FavoriteBorderIcon />
+                </IconButton>
+              </Tooltip>
+            </Grid>
+            <Grid item>
+              <Tooltip title="Shopping Cart">
+                <IconButton color="primary" component={Link} to="/cart">
+                  <ShoppingCartIcon />
+                  {cartItemCount > 0 && (
+                    <span style={{ marginLeft: '5px', fontSize: '12px' }}>{cartItemCount}</span>
+                  )}
+                </IconButton>
+              </Tooltip>
+            </Grid>
+          </Grid>
+        </Toolbar>
+      </AppBar>
+
+      {/* Second Row */}
+      <AppBar position="static" color="inherit">
+        <Toolbar>
+          <Grid container alignItems="center" spacing={2}>
+            <Grid item>
+              <Button color="inherit" onClick={handleShopMenuOpen}>
+                Shop <KeyboardArrowDownIcon />
+              </Button>
+              <Menu
+                anchorEl={shopMenuAnchor}
+                open={Boolean(shopMenuAnchor)}
+                onClose={handleMenuClose}
+                getContentAnchorEl={null}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+              >
+                <MenuItem component={Link} to="/shop/all-products" onClick={handleMenuClose}>All Products</MenuItem>
+                <MenuItem component={Link} to="/shop/lowest-prices" onClick={handleMenuClose}>Lowest Prices</MenuItem>
+              </Menu>
+            </Grid>
+            <Grid item>
+              <Button color="inherit" onClick={handleStoresMenuOpen}>
+                Stores <KeyboardArrowDownIcon />
+              </Button>
+              <Menu
+                anchorEl={storesMenuAnchor}
+                open={Boolean(storesMenuAnchor)}
+                onClose={handleMenuClose}
+                getContentAnchorEl={null}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+              >
+                <MenuItem component={Link} to="/stores/all-stores" onClick={handleMenuClose}>All Stores</MenuItem>
+                <MenuItem component={Link} to="/stores/compare-stores" onClick={handleMenuClose}>Compare Stores</MenuItem>
+              </Menu>
+            </Grid>
+            <Grid item>
+              <Button color="inherit" onClick={handleAccountMenuOpen}>
+                Account <KeyboardArrowDownIcon />
+              </Button>
+              <Menu
+                anchorEl={accountMenuAnchor}
+                open={Boolean(accountMenuAnchor)}
+                onClose={handleMenuClose}
+                getContentAnchorEl={null}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+              >
+                <MenuItem component={Link} to="/account/about" onClick={handleMenuClose}>About Account</MenuItem>
+                <MenuItem component={Link} to="/account/notifications" onClick={handleMenuClose}>Account Notifications</MenuItem>
+              </Menu>
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
     </>
@@ -77,60 +176,3 @@ function NavBar() {
 }
 
 export default NavBar;
-
-
-
-// function NavBar() {
-//     const [menuAnchor, setMenuAnchor] = useState(null);
-
-//     const handleMenuOpen = (event) => {
-//     setMenuAnchor(event.currentTarget);
-//     };
-
-//     const handleMenuClose = () => {
-//     setMenuAnchor(null);
-//     };
-//     return (
-//         <>
-//       <AppBar position="static" color="inherit">
-//         <Toolbar>
-//           <IconButton
-//             edge="start"
-//             color="success"
-//             aria-label="menu"
-//             onClick={handleMenuOpen} // Open the menu when the icon is clicked
-//           >
-//             <MenuIcon />
-//           </IconButton>
-//           <Typography color="green" variant="h6" component={Link} to="/" style={{ textDecoration: 'none'}}>
-//             SuperPrice
-//           </Typography>
-//           <div style={{ marginLeft: 'auto' }}>
-//             <Button color="success" component={Link} to="/about">
-//               About
-//             </Button>
-//             <Button color="success" component={Link} to="/profile">
-//               Profile
-//             </Button>
-//             <Button color="success" component={Link} to="/cart">
-//               Cart
-//             </Button>
-//           </div>
-//         </Toolbar>
-//       </AppBar>
-
-//       <Menu
-//         anchorEl={menuAnchor}
-//         open={Boolean(menuAnchor)} // Open the menu when menuAnchor is not null
-//         onClose={handleMenuClose} // Close the menu when an item is clicked or when clicking outside
-//       >
-//         <MenuItem component={Link} to="/Category1" onClick={handleMenuClose}>Cagegory 1</MenuItem>
-//         <MenuItem component={Link} to="/Category2" onClick={handleMenuClose}>Cagegory 2</MenuItem>
-//         <MenuItem component={Link} to="/Category3" onClick={handleMenuClose}>Cagegory 3</MenuItem>
-//       </Menu>
-//     </>
-      
-//   );
-// }
-
-// export default NavBar;

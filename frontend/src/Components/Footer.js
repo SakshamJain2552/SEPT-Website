@@ -32,51 +32,56 @@ const Footer = () => {
                 </Typography>
                 <Typography variant="subtitle1">
                 <Link href="#" color="primary">
-                    Writing
+                    Products
                 </Link>
                 </Typography>
                 <Typography variant="subtitle1">
                 <Link href="#" color="primary">
-                    Internships
+                    Stores
                 </Link>
                 </Typography>
                 <Typography variant="subtitle1">
                 <Link href="#" color="primary">
-                    Coding
+                    Partnerships
                 </Link>
                 </Typography>
                 <Typography variant="subtitle1">
                 <Link href="#" color="primary">
-                    Teaching
+                    Careers
                 </Link>
                 </Typography>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
                 <Typography variant="h6" gutterBottom fontWeight="bold">
-                Contact Us
+                    Contact Us
                 </Typography>
                 <Typography variant="subtitle1">
-                <Link href="#" color="primary">
+                <Link href="/contact/laura" color="primary">
                     Laura
-                </Link>
+                </Link> 
                 </Typography>
                 <Typography variant="subtitle1">
-                <Link href="#" color="primary">
+                <Link href="/contact/lawrence" color="primary">
                     Lawrence
                 </Link>
                 </Typography>
                 <Typography variant="subtitle1">
-                <Link href="#" color="primary">
+                <Link href="/contact/saksham" color="primary">
                     Saksham
                 </Link>
                 </Typography>
                 <Typography variant="subtitle1">
-                <Link href="#" color="primary">
+                <Link href="/contact/hari" color="primary">
                     Hari
                 </Link>
                 </Typography>
                 <Typography variant="subtitle1">
-                <Link href="#" color="primary">
+                <Link href="/contact/lance" color="primary">
+                    Lance
+                </Link>
+                </Typography>
+                <Typography variant="subtitle1">
+                <Link href="/contact/darby" color="primary">
                     Darby
                 </Link>
                 </Typography>
