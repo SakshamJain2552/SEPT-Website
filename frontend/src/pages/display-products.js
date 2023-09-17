@@ -7,6 +7,7 @@ import Productlist from '../components/productlist';
 // export default AllProducts;
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
+import zIndex from '@mui/material/styles/zIndex';
 
 function MainPage() {
     return (
@@ -16,7 +17,7 @@ function MainPage() {
           <Productlist />
         </div>
         <div style={{ flexShrink: 0 }}>
-          <Footer />
+          <Footer style={{zIndex: '1'}} />
         </div>
       </div>
     );

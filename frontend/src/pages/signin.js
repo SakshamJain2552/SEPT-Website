@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -12,6 +12,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import logo from './logo.png';
+import axios from 'axios';
 
 function Copyright(props) {
   return (
@@ -31,15 +32,45 @@ const defaultTheme = createTheme();
 export default function SignIn() {
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   console.log({
+  //     email: data.get('email'),
+  //     password: data.get('password'),
+  //   });
+
+  //   navigate("/list");
+  // };
+
+  const [errorMessage, setErrorMessage] = useState(null);  // to display error messages
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  
+    const email = data.get('email');
+    const password = data.get('password');
 
-    navigate("/list");
+    try {
+      const response = await axios.post('http://localhost:8080/user/signin', {
+          "username": email,
+          "password": password
+        
+      });
+
+    // try {
+    //   const response = await axios.get(`http://localhost:8080/user?username=${email}&password=${password}`);
+
+      if (response.data) {
+        navigate("/list");
+      } else {
+        setErrorMessage('Invalid username or password');
+      }
+    } catch (error) {
+      console.error('Error during sign-in:', error);
+      setErrorMessage('Failed to sign in. Please try again later.');
+    }
   };
 
   return (
@@ -86,6 +117,12 @@ export default function SignIn() {
               control={<Checkbox value="remember" color="secondary" />}
               label="Remember me"
             />
+
+{errorMessage && (
+              <Typography variant="body2" color="error" align="center" style={{ width: '100%' }}>
+                {errorMessage}
+              </Typography>
+            )}
             <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
             <Button
   type="submit"

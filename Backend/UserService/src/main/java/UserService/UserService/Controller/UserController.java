@@ -25,7 +25,7 @@ public class UserController {
     public UserController(UserService userService){
         this.userService = userService;
     }
-    
+    @CrossOrigin
     @PostMapping(value = "/signin", consumes = "application/json")
     public boolean userLogin(@RequestBody Map<String, String> body) {
         return userService.userVerified(body.get("username"), body.get("password"));
