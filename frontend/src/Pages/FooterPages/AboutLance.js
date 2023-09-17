@@ -17,6 +17,8 @@ function AboutLance() {
         <li>Created fail and pass tests for service and controller in User Service microservice, specifically for the sign-in feature</li>
         <li>Implemented service and controller to pass the result from the repository to the controller</li>
         <li>Implemented a POST method in the controller for handling the user’s credentials</li>
+        <li>Wrote additional User Story and Use Case </li>
+        <li>Created the Sprint Retro </li>
       </ul>
     </div>
   );
