@@ -1,13 +1,13 @@
-// AboutAccount.js
+// ProfilePage.js
 import React from 'react';
 
-function AboutAccount() {
+function ProfilePage() {
   return (
     <div>
-      <h1>About Account</h1>
+      <h1>Profile Page</h1>
       {/* Add content for the home page */}
     </div>
   );
 }
 
-export default AboutAccount;
+export default ProfilePage;

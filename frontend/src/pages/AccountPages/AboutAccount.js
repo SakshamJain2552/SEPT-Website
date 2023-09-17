@@ -1,13 +1,13 @@
-// AboutDarby.js
+// AboutAccount.js
 import React from 'react';
 
-function AboutDarby() {
+function AboutAccount() {
   return (
     <div>
-      <h1>About Darby</h1>
+      <h1>About Account</h1>
       {/* Add content for the home page */}
     </div>
   );
 }
 
-export default AboutDarby;
+export default AboutAccount;
