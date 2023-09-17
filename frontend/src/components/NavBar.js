@@ -7,6 +7,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import logo from '../pages/logo.png';
 
 
 function NavBar() {
@@ -65,12 +66,13 @@ function NavBar() {
                   transition: 'color 0.3s',
                 }}
               >
-                SuperPrice
+                {/* SuperPrice */}
+                <img src={logo} alt="Logo" style= {{width:'20%', height:'20%' }} />
               </Typography>
             </Grid>
             <Grid item xs>
               <div style={{ position: 'relative' }}>
-                  <Paper elevation={3} style={{ width: '700px', borderRadius: '50px', padding: '0px 4px', display: 'flex', alignItems: 'center'}}>
+                  <Paper elevation={3} style={{ width: '300px', borderRadius: '50px', padding: '0px 4px', display: 'flex', alignItems: 'center'}}>
                     <div style={{ paddingLeft: '10px' }}>
                       <SearchIcon color="primary" />
                     </div>

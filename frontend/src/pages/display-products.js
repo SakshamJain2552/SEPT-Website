@@ -15,7 +15,7 @@ function MainPage() {
         <div style={{ flex: '1 0 auto' }}>
           <Productlist />
         </div>
-        <div style={{ flexShrink: 0 }}>
+        <div style={{ flexShrink: 0, marginLeft:'500px'}}>
           <Footer />
         </div>
       </div>
