@@ -5,8 +5,8 @@ on:
       - main
       - develop  # Add the 'develop' branch
       - user-service
-      - product_service
-      - delivery_service
+      - product-service
+      - delivery-service
 
 jobs:
   build-backend-delivery-service:
