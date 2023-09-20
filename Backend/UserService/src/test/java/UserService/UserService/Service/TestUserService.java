@@ -30,4 +30,11 @@ public class TestUserService {
         boolean successfulLogin = userService.userVerified("alice123", "password123");
         assertTrue(successfulLogin);
     }
+
+    @Test
+    public void testUsernameUnique() {
+        when(userRepo.usernameUniqueVerified("test123", "password123")).thenReturn(true);
+        boolean successfulLogin = userService.usernameUnique("test123", "password123");
+        assertTrue(successfulLogin);
+    }
 }

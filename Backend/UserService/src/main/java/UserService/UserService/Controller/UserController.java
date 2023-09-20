@@ -28,4 +28,9 @@ public class UserController {
     public boolean userLogin(@RequestBody Map<String, String> body) {
         return userService.userVerified(body.get("username"), body.get("password"));
     }
+
+    @PostMapping(value = "/signup", consumes = "application/json")
+    public boolean userSignup(@RequestBody Map<String, String> body) {
+        return userService.userVerified(body.get("username"), body.get("password"));
+    }
 }

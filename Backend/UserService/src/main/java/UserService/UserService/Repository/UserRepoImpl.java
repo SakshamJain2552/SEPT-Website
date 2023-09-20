@@ -47,4 +47,8 @@ public class UserRepoImpl implements UserRepo {
 
     }
 
+    @Override
+    public boolean usernameUniqueVerified(String username, String password) {
+        return false;
+    }
 }

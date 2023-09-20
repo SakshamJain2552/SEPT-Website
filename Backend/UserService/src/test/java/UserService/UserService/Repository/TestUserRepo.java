@@ -16,4 +16,10 @@ public class TestUserRepo {
         boolean userFound = userRepo.userFound("alice123", "password123");
         assertTrue(userFound);
     }
+
+    @Test
+    public void testUsernameUniqueVerified() {
+        boolean usernameUnique = userRepo.usernameUniqueVerified("test123", "password123");
+        assertTrue(usernameUnique);
+    }
 }

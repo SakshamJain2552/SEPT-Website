@@ -18,4 +18,9 @@ public class UserServiceImpl implements UserService{
     public boolean userVerified(String username, String password){
         return repository.userFound(username, password);
     }
+
+    @Override
+    public boolean usernameUnique(String username, String password){
+        return repository.userFound(username, password);
+    }
 }
