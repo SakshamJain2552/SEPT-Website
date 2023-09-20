@@ -4,7 +4,7 @@ on:
     branches:
       - main
       - develop  # Add the 'develop' branch
-      - user_service
+      - user-service
       - product_service
       - delivery_service
 
