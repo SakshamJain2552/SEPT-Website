@@ -3,9 +3,12 @@ package UserService.UserService.Controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import UserService.UserService.Service.UserService;
@@ -28,5 +31,11 @@ public class UserController {
     @PostMapping(value = "/signup", consumes = "application/json")
     public boolean userSignup(@RequestBody Map<String, String> body) {
         return userService.usernameUnique(body.get("username"), body.get("password"), body.get("email"));
+    }
+
+    @GetMapping(value = "/details")
+    @ResponseBody
+    public Map<String,String> userDetails(@RequestParam String username) {
+        return userService.findUser(username);
     }
 }
