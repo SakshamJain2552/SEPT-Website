@@ -27,7 +27,7 @@ public class ProductServicerImpl implements ProductServicer{
 
     @Override
     public Optional<DetailedProduct> findDetailProduct(Long id){
-        return null;
+        return repository.findDetailProductById(id);
     }
 
 }

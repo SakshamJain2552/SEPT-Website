@@ -32,7 +32,10 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public DetailedProduct getDetailedProductById(@PathVariable Long id) throws Exception {
-        return null;
+        String str = Long.toString(id);
+        return productServicer.findDetailProduct(id).orElseThrow(
+            () -> new Exception(str)
+        );
     }
 
 }
