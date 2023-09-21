@@ -1,5 +1,8 @@
 package UserService.UserService.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.boot.test.context.SpringBootTest;
 
 import org.mockito.Mock;
@@ -8,6 +11,7 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -38,5 +42,21 @@ public class TestUserService {
         when(userRepo.usernameUniqueVerified("unittestuser", "password123", "unittestuser@email.com")).thenReturn(true);
         boolean successfulLogin = userService.usernameUnique("unittestuser", "password123", "unittestuser@email.com");
         assertTrue(successfulLogin);
+    }
+
+    @Test
+    public void testFindUser() {
+        Map<String, String> testDetails = new HashMap<>();
+        testDetails.put("UserID", "1");
+        testDetails.put("Username", "alice123");
+        testDetails.put("Password", "password123");
+        testDetails.put ("Email", "alice@email.com");
+        when(userRepo.getUserDetails("alice123")).thenReturn(testDetails);
+       
+        Map<String, String> userDetails = userService.findUser("alice123");
+        assertEquals(testDetails.get("UserID"), userDetails.get("UserID"));
+        assertEquals(testDetails.get("Username"), userDetails.get("Username"));
+        assertEquals(testDetails.get("Password"), userDetails.get("Password"));
+        assertEquals(testDetails.get("Email"), userDetails.get("Email"));
     }
 }
