@@ -6,11 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.sql.DataSource;
 
 import org.springframework.stereotype.Repository;
 
+import ProductService.ProductService.Model.DetailedProduct;
 import ProductService.ProductService.Model.Product;
 
 @Repository
@@ -55,6 +57,11 @@ public class ProductRepositoryImpl implements ProductRepository{
             throw new RuntimeException("Error in findAll()", e);
         }
 
+    }
+
+    @Override
+    public Optional<DetailedProduct> findDetailProductById(Long id){
+        return null;
     }
 
 }
