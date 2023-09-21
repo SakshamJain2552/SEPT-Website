@@ -10,6 +10,8 @@ import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import UserService.UserService.Service.UserService;
@@ -35,4 +37,16 @@ public class TestUserController {
         boolean successfulLogin = userController.userLogin(body);
         assertTrue(successfulLogin);
     }
+
+    @Test
+    public void testUserSignupSuccesful() {
+        when(userService.usernameUnique("unittestuser", "password123", "unittestuser@email.com")).thenReturn(true);
+        Map<String, String> body = new HashMap<>();
+        body.put("username", "unittestuser");
+        body.put("password", "password123");
+        body.put ("email", "unittestuser@email.com");
+        boolean successfulSignup = userController.userSignup(body);
+        assertTrue(successfulSignup);
+    }
+
 }

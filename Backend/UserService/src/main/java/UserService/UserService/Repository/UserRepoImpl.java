@@ -42,9 +42,52 @@ public class UserRepoImpl implements UserRepo {
             return false;
             
         } catch (SQLException e) {
-            throw new RuntimeException("Error in findAll()", e);
+            throw new RuntimeException("Error in userFound()", e);
         }
 
     }
 
+    @Override
+    public boolean usernameUniqueVerified(String username, String password, String email) {
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement stm = connection.prepareStatement(
+                "SELECT UserID, Username, Password, Email\r\n" + //
+                "FROM Users;"
+            );
+
+            ResultSet rs = stm.executeQuery();
+
+            System.out.println("Given username and email: " + username + " - " + email);
+            int userID = 0;
+            while(rs.next()) {
+                userID = rs.getInt(1);
+                if (rs.getString(2).equals(username) && rs.getString(4).equals(email)) {
+                    System.out.println("Username or Email is already in the database.");
+                    connection.close();
+                    return false;
+                }
+            }
+            
+            // Username and Email is unique, so insert new user into database
+            userID += 1;
+            stm = connection.prepareStatement(
+                "INSERT INTO Users\r\n" + //
+                "VALUES (" + userID + ",'"  + username + "','" + password + "','" + email + "');"
+            );
+            stm.execute();
+
+            System.out.println("New user inserted into database:");
+            System.out.println("UserID: " + userID);
+            System.out.println("Username: " + username);
+            System.out.println("Password: " + password);
+            System.out.println("Email: " + email);
+
+            connection.close();
+            return true;
+            
+        } catch (SQLException e) {
+            throw new RuntimeException("Error in usernameUniqueVerified()", e);
+        }
+    }
 }
