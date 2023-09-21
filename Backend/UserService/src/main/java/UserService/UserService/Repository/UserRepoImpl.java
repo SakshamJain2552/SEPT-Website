@@ -1,5 +1,8 @@
 package UserService.UserService.Repository;
 
+import java.util.Map;
+import java.util.HashMap;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -88,6 +91,44 @@ public class UserRepoImpl implements UserRepo {
             
         } catch (SQLException e) {
             throw new RuntimeException("Error in usernameUniqueVerified()", e);
+        }
+    }
+
+    @Override
+    public Map<String, String> getUserDetails(String username) {
+
+        Map<String,String> userDetails = new HashMap<>();
+
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement stm = connection.prepareStatement(
+                "SELECT UserID, Username, Password, Email\r\n" + //
+                "FROM Users;"
+            );
+
+            ResultSet rs = stm.executeQuery();
+
+            System.out.println("Given username: " + username);
+            while(rs.next()) {
+                if (rs.getString(2).equals(username)) {
+                    System.out.println("User found: " + rs.getString(2));
+                    
+                    userDetails.put("UserID", Integer.toString(rs.getInt(1)));
+                    userDetails.put("Username", rs.getString(2));
+                    userDetails.put("Password", rs.getString(3));
+                    userDetails.put("Email", rs.getString(4));
+                
+                    connection.close();
+
+                    return userDetails;
+                }
+            }
+
+            connection.close();
+            return null;
+            
+        } catch (SQLException e) {
+            throw new RuntimeException("Error in getUserDetails()", e);
         }
     }
 }
