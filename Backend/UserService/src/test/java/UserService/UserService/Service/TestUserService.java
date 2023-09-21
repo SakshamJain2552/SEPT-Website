@@ -7,6 +7,8 @@ import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import UserService.UserService.Repository.UserRepo;
@@ -33,8 +35,8 @@ public class TestUserService {
 
     @Test
     public void testUsernameUnique() {
-        when(userRepo.usernameUniqueVerified("test123", "password123")).thenReturn(true);
-        boolean successfulLogin = userService.usernameUnique("test123", "password123");
+        when(userRepo.usernameUniqueVerified("unittestuser", "password123", "unittestuser@email.com")).thenReturn(true);
+        boolean successfulLogin = userService.usernameUnique("unittestuser", "password123", "unittestuser@email.com");
         assertTrue(successfulLogin);
     }
 }

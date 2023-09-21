@@ -4,6 +4,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
@@ -19,7 +20,7 @@ public class TestUserRepo {
 
     @Test
     public void testUsernameUniqueVerified() {
-        boolean usernameUnique = userRepo.usernameUniqueVerified("test123", "password123");
+        boolean usernameUnique = userRepo.usernameUniqueVerified("unittestuser", "password123", "unittestuser@email.com");
         assertTrue(usernameUnique);
     }
 }

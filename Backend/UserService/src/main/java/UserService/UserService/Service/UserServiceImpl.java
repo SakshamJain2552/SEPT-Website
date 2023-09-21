@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean usernameUnique(String username, String password){
-        return repository.userFound(username, password);
+    public boolean usernameUnique(String username, String password, String email){
+        return repository.usernameUniqueVerified(username, password, email);
     }
 }
