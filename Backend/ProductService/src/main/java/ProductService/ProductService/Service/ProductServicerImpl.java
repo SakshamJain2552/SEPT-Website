@@ -1,10 +1,12 @@
 package ProductService.ProductService.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ProductService.ProductService.Model.DetailedProduct;
 import ProductService.ProductService.Model.Product;
 import ProductService.ProductService.Repository.ProductRepository;
 
@@ -21,6 +23,11 @@ public class ProductServicerImpl implements ProductServicer{
     @Override
     public Collection<Product> getProducts(){
         return repository.findAll();
+    }
+
+    @Override
+    public Optional<DetailedProduct> findDetailProduct(Long id){
+        return null;
     }
 
 }
