@@ -1,6 +1,7 @@
 package ProductService.ProductService.Repository;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
@@ -29,14 +30,29 @@ class TestProductRepository {
 
     @Test
     public void testFindDetailedProductById(){
+        // Mock the data and repository
         Long id = 1L;
-        String[] storeNames = {"CityStore North", "SuperMart East", "GreenGrocer West", "SuperMart Central"};
-        Double[] prices = {2.78, 3.32, 4.45, 4.78};
-        DetailedProduct expectedProduct = new DetailedProduct(id, storeNames, prices);
+        String[] expectedStoreNames = {"CityStore North", "SuperMart East", "GreenGrocer West", "SuperMart Central"};
+        Double[] expectedPrices = {2.78, 3.32, 4.45, 4.78};
+        DetailedProduct expectedProduct = new DetailedProduct(id, expectedStoreNames, expectedPrices);
 
-        Optional<DetailedProduct> dProducts = productRepository.findDetailProductById(id);
-        assertTrue(dProducts.isPresent());
-        assertEquals(expectedProduct, dProducts.get());
+        // Call the repository method to get the actual result
+        Optional<DetailedProduct> actualProductOptional = productRepository.findDetailProductById(id);
+
+        // Check if the result is present
+        assertTrue(actualProductOptional.isPresent());
+
+        // Get the actual product from the Optional
+        DetailedProduct actualProduct = actualProductOptional.get();
+
+        // Compare the productId
+        assertEquals(expectedProduct.productId(), actualProduct.productId());
+
+        // Compare storeNames array
+        assertArrayEquals(expectedProduct.storeNames(), actualProduct.storeNames());
+
+        // Compare prices array
+        assertArrayEquals(expectedProduct.prices(), actualProduct.prices());
     }
 
 }
