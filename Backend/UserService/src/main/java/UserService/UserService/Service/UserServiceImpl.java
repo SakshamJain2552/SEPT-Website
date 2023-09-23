@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import UserService.UserService.Model.Cart;
 import UserService.UserService.Repository.UserRepo;
 
 @Service
@@ -30,4 +31,10 @@ public class UserServiceImpl implements UserService{
     public Map<String,String> findUser(String username){
         return repository.getUserDetails(username);
     }
+
+    @Override
+    public Cart createCart(Cart cart) {
+        return null;
+    }
+
 }

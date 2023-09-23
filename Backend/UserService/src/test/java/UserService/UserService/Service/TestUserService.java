@@ -4,8 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.boot.test.context.SpringBootTest;
-
 import org.mockito.Mock;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -13,8 +14,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import UserService.UserService.Model.Cart;
 import UserService.UserService.Repository.UserRepo;
 
 @SpringBootTest
@@ -59,4 +62,21 @@ public class TestUserService {
         assertEquals(testDetails.get("Password"), userDetails.get("Password"));
         assertEquals(testDetails.get("Email"), userDetails.get("Email"));
     }
+
+    @Test
+    public void testCartCreation() {
+        Cart testCart = new Cart(1L, "10/10/2010", 1L, "CityStore North", 1L);
+        testCart.cartId = 1L;
+        testCart.cartItemId = 1L;
+
+        when(userRepo.create(any(Cart.class))).thenReturn(testCart);
+
+        Cart createdCart = userService.createCart(testCart);
+
+        assertNotNull(createdCart);
+        assertEquals(1L, createdCart.cartId);
+        assertEquals(1L, createdCart.cartItemId);
+
+    }
+
 }
