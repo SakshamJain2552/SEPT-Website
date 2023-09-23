@@ -4,8 +4,15 @@ import java.util.Map;
 import java.util.HashMap;
 
 import org.springframework.boot.test.context.SpringBootTest;
-
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,10 +22,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import UserService.UserService.Model.Cart;
 import UserService.UserService.Service.UserService;
 
 @SpringBootTest
 public class TestUserController {
+
+    private MockMvc mockMvc;
 
     @Mock
     private UserService userService;
@@ -64,6 +74,29 @@ public class TestUserController {
         assertEquals(testDetails.get("Username"), userDetails.get("Username"));
         assertEquals(testDetails.get("Password"), userDetails.get("Password"));
         assertEquals(testDetails.get("Email"), userDetails.get("Email"));
+    }
+
+    @Test
+    public void testControllerCreateCart() throws Exception {
+        MockitoAnnotations.openMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(new UserController(userService)).build();
+
+        Cart newCart = new Cart(1L, "10/10/2010", 1L, "CityStore North", 1L);
+
+        when(userService.createCart(any(Cart.class))).thenReturn(newCart);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/v1/books")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content("{\"userId\": 1, \"dateCreated\": \"10/10/2010\", \"productId\": 1, \"storeName\": \"CityStore North\", \"quantity\": 1}")
+        )
+        .andExpect(MockMvcResultMatchers.status().isCreated())
+        .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.userId").value(1))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.dateCreated").value("10/10/2010"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.productId").value(1))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.storeName").value("CityStore North"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.quantity").value(1));
+
     }
 
 }
