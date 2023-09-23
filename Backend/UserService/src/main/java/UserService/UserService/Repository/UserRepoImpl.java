@@ -2,7 +2,7 @@ package UserService.UserService.Repository;
 
 import java.util.Map;
 import java.util.HashMap;
-
+import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -212,6 +212,11 @@ public class UserRepoImpl implements UserRepo {
         } catch (SQLException e) {
             throw new RuntimeException("Error in create cart", e);
         }
-    }            
+    }
+
+    @Override
+    public List<Cart> findById(Long id) {
+        return null;
+    }
 
 }
