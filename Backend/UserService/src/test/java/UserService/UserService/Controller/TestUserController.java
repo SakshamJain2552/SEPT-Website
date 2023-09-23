@@ -85,7 +85,7 @@ public class TestUserController {
 
         when(userService.createCart(any(Cart.class))).thenReturn(newCart);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/v1/books")
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/cart")
             .contentType(MediaType.APPLICATION_JSON)
             .content("{\"userId\": 1, \"dateCreated\": \"10/10/2010\", \"productId\": 1, \"storeName\": \"CityStore North\", \"quantity\": 1}")
         )
