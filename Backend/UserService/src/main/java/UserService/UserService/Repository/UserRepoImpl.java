@@ -136,7 +136,82 @@ public class UserRepoImpl implements UserRepo {
 
     @Override
     public Cart create(Cart cart) {
-        return null;
-    }
+        try {
+            Connection connection = dataSource.getConnection();
+    
+            // Check if the user exists
+            PreparedStatement checkUserStmt = connection.prepareStatement(
+                "SELECT UserID FROM Users WHERE UserID = ?;"
+            );
+            checkUserStmt.setLong(1, cart.userId);
+            ResultSet userResult = checkUserStmt.executeQuery();
+    
+            if (!userResult.next()) {
+                // User does not exist
+                connection.close();
+                throw new SQLException("User not found");
+            }
+    
+            // Check if a cart already exists for the user
+            PreparedStatement checkCartStmt = connection.prepareStatement(
+                "SELECT CartID FROM Carts WHERE UserID = ?;"
+            );
+            checkCartStmt.setLong(1, cart.userId);
+            ResultSet cartResult = checkCartStmt.executeQuery();
+    
+            long cartId;
+    
+            if (cartResult.next()) {
+                // Cart exists, retrieve the CartID
+                cartId = cartResult.getLong("CartID");
+            } else {
+                // Cart does not exist, create a new cart entry
+                PreparedStatement createCartStmt = connection.prepareStatement(
+                    "INSERT INTO Carts (UserID, DateCreated) VALUES (?, ?);",
+                    PreparedStatement.RETURN_GENERATED_KEYS
+                );
+                createCartStmt.setLong(1, cart.userId);
+                createCartStmt.setString(2, cart.dateCreated);
+                createCartStmt.executeUpdate();
+    
+                ResultSet generatedKeys = createCartStmt.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    cartId = generatedKeys.getLong(1);
+                } else {
+                    throw new SQLException("Creating cart failed, no generated key obtained.");
+                }
+            }
+    
+            // Create entries for cart items
+            PreparedStatement createCartItemStmt = connection.prepareStatement(
+                "INSERT INTO CartItems (CartID, ProductID, StoreName, Quantity) VALUES (?, ?, ?, ?);",
+                PreparedStatement.RETURN_GENERATED_KEYS
+            );
+            createCartItemStmt.setLong(1, cartId);
+            createCartItemStmt.setLong(2, cart.productId);
+            createCartItemStmt.setString(3, cart.storeName);
+            createCartItemStmt.setLong(4, cart.quantity);
+            createCartItemStmt.executeUpdate();
+    
+            ResultSet generatedCartItemKeys = createCartItemStmt.getGeneratedKeys();
+            long cartItemId;
+    
+            if (generatedCartItemKeys.next()) {
+                cartItemId = generatedCartItemKeys.getLong(1);
+            } else {
+                throw new SQLException("Creating cart item failed, no generated key obtained.");
+            }
+    
+            connection.close();
+    
+            // Set the cartId and cartItemId in the Cart object
+            cart.cartId = cartId;
+            cart.cartItemId = cartItemId;
+    
+            return cart;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error in create cart", e);
+        }
+    }            
 
 }
