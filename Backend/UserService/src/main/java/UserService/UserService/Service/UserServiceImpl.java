@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Collection<Cart> getCartItems(Long id) {
-        return null;
+        return repository.findById(id);
     }
 
 }
