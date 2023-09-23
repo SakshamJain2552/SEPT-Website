@@ -1,5 +1,6 @@
 package UserService.UserService.Service;
 
+import java.util.Collection;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public Cart createCart(Cart cart) {
         return repository.create(cart);
+    }
+
+    @Override
+    public Collection<Cart> getCartItems(Long id) {
+        return null;
     }
 
 }

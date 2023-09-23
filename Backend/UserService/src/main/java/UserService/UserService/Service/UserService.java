@@ -1,5 +1,6 @@
 package UserService.UserService.Service;
 
+import java.util.Collection;
 import java.util.Map;
 
 import UserService.UserService.Model.Cart;
@@ -9,7 +10,10 @@ public interface UserService {
     public boolean usernameUnique(String username, String password, String email);
     public Map<String, String> findUser(String username);
 
-    // Cart
+    // Cart - Create
     public Cart createCart(Cart cart);
+
+    // Cart - Read
+    public Collection<Cart> getCartItems(Long id);
 
 }

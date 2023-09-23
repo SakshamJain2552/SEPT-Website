@@ -1,6 +1,9 @@
 package UserService.UserService.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.boot.test.context.SpringBootTest;
@@ -76,6 +79,28 @@ public class TestUserService {
         assertNotNull(createdCart);
         assertEquals(1L, createdCart.cartId);
         assertEquals(1L, createdCart.cartItemId);
+
+    }
+
+    @Test
+    public void testGetCartItems() {
+
+        Long cartId = 1L;
+
+        List<Cart> mockCarts = new ArrayList<>();
+        Cart testCart = new Cart(1L, "10/10/2010", 1L, "CityStore North", 1L);
+        testCart.cartId = 1L;
+        testCart.cartItemId = 1L;
+        Cart testCart2 = new Cart(2L, "20/20/2020", 2L, "CityStore North", 2L);
+        testCart2.cartId = 1L;
+        testCart2.cartItemId = 2L;
+        mockCarts.add(testCart);
+        mockCarts.add(testCart2);
+        when(userRepo.findById(cartId)).thenReturn(mockCarts);
+
+        Collection<Cart> cartItems = userService.getCartItems(cartId);
+
+        assertEquals(mockCarts.size(), cartItems.size());
 
     }
 
