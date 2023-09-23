@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.boot.test.context.SpringBootTest;
+
+import UserService.UserService.Model.Cart;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.junit.jupiter.api.Test;
 
@@ -43,5 +46,17 @@ public class TestUserRepo {
         assertEquals(testDetails.get("Email"), userDetails.get("Email"));
     }
 
+    @Test
+    public void testCreateCart() {
+
+        Cart testCart = new Cart(1L, "10/10/2010", 1L, "CityStore North", 1L);
+        testCart.cartId = 1L;
+        testCart.cartItemId = 1L;
+        Cart retCart = userRepo.create(testCart);
+        assertEquals(testCart.cartId, retCart.cartId);
+        assertEquals(testCart.cartItemId, retCart.cartItemId);
+        assertEquals(testCart.userId, retCart.userId);
+
+    }
 
 }

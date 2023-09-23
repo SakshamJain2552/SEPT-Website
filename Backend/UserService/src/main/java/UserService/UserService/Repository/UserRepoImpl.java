@@ -12,6 +12,8 @@ import javax.sql.DataSource;
 
 import org.springframework.stereotype.Repository;
 
+import UserService.UserService.Model.Cart;
+
 @Repository
 public class UserRepoImpl implements UserRepo {
     private final DataSource dataSource;
@@ -131,4 +133,10 @@ public class UserRepoImpl implements UserRepo {
             throw new RuntimeException("Error in getUserDetails()", e);
         }
     }
+
+    @Override
+    public Cart create(Cart cart) {
+        return null;
+    }
+
 }
