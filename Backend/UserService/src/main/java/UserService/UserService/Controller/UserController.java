@@ -54,7 +54,7 @@ public class UserController {
     // Cart - read
     @GetMapping("/cart/{id}")
     public Collection<Cart> allCartItems(@PathVariable Long id) {
-        return null;
+        return userService.getCartItems(id);
     }
 
 }
