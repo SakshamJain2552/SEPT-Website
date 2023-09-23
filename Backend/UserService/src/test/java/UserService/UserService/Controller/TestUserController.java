@@ -111,7 +111,7 @@ public class TestUserController {
         Cart testCart = new Cart(1L, "10/10/2010", 1L, "CityStore North", 1L);
         testCart.cartId = 1L;
         testCart.cartItemId = 1L;
-        Cart testCart2 = new Cart(2L, "20/20/2020", 2L, "CityStore North", 2L);
+        Cart testCart2 = new Cart(1L, "20/20/2020", 2L, "CityStore North", 2L);
         testCart2.cartId = 1L;
         testCart2.cartItemId = 2L;
         mockCarts.add(testCart);
