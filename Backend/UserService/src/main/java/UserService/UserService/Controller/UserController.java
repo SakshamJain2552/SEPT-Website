@@ -45,7 +45,8 @@ public class UserController {
     // Cart - create
     @PostMapping(value = "/cart", consumes = "application/json")
     public ResponseEntity<Cart> newCart(@RequestBody Cart cart) {
-        return null;
+        Cart c = userService.createCart(cart);
+        return new ResponseEntity<Cart>(c, HttpStatus.CREATED);
     }
 
 }
