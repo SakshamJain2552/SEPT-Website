@@ -1,7 +1,10 @@
 package UserService.UserService.Controller;
 
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -96,6 +99,28 @@ public class TestUserController {
         .andExpect(MockMvcResultMatchers.jsonPath("$.productId").value(1))
         .andExpect(MockMvcResultMatchers.jsonPath("$.storeName").value("CityStore North"))
         .andExpect(MockMvcResultMatchers.jsonPath("$.quantity").value(1));
+
+    }
+
+    @Test
+    public void testAllCartItems() {
+
+        Long cartId = 1L;
+
+        List<Cart> mockCarts = new ArrayList<>();
+        Cart testCart = new Cart(1L, "10/10/2010", 1L, "CityStore North", 1L);
+        testCart.cartId = 1L;
+        testCart.cartItemId = 1L;
+        Cart testCart2 = new Cart(2L, "20/20/2020", 2L, "CityStore North", 2L);
+        testCart2.cartId = 1L;
+        testCart2.cartItemId = 2L;
+        mockCarts.add(testCart);
+        mockCarts.add(testCart2);
+        when(userService.getCartItems(cartId)).thenReturn(mockCarts);
+
+        Collection<Cart> cartItems = userController.allCartItems(cartId);
+
+        assertEquals(mockCarts.size(), cartItems.size());
 
     }
 
