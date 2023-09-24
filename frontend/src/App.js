@@ -19,6 +19,7 @@ import AboutSaksham from './pages/FooterPages/AboutSaksham';
 import AboutHari from './pages/FooterPages/AboutHari';
 import AboutLance from './pages/FooterPages/AboutLance';
 import AboutDarby from './pages/FooterPages/AboutDarby';
+import SignUp from './pages/signup';
 
 const theme = createTheme({
   palette: {
@@ -53,6 +54,7 @@ function App() {
         <Route path='/contact/hari' element={<AboutHari/>} />
         <Route path='/contact/lance' element={<AboutLance/>} />
         <Route path='/contact/darby' element={<AboutDarby/>} />
+        <Route path='/signup' element={<SignUp/>} />
 
       </Routes>
       </BrowserRouter>
