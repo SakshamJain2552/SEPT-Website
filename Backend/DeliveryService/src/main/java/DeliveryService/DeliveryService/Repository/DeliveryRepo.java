@@ -1,5 +1,5 @@
-package DeliveryService.DeliveryService.Repository;
+// package DeliveryService.DeliveryService.Repository;
 
-public interface DeliveryRepo {
+// public interface DeliveryRepo {
     
-}
+// }

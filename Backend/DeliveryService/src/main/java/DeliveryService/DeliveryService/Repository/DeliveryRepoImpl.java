@@ -1,12 +1,12 @@
-package DeliveryService.DeliveryService.Repository;
+// package DeliveryService.DeliveryService.Repository;
 
-import javax.sql.DataSource;
+// import javax.sql.DataSource;
 
 
-public class DeliveryRepoImpl implements DeliveryRepo {
-    private final DataSource dataSource;
+// public class DeliveryRepoImpl implements DeliveryRepo {
+//     private final DataSource dataSource;
 
-    public DeliveryRepoImpl(DataSource dataSource){
-        this.dataSource = dataSource;
-    }
-}
+//     public DeliveryRepoImpl(DataSource dataSource){
+//         this.dataSource = dataSource;
+//     }
+// }
