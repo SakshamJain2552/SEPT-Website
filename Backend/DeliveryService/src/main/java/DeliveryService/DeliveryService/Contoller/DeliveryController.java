@@ -9,10 +9,10 @@ import DeliveryService.DeliveryService.Service.DeliveryService;
 @RestController
 @RequestMapping(value = "/delivery")
 public class DeliveryController {
-    private final DeliveryService deliveryService;
+    // private final DeliveryService deliveryService;
 
-    @Autowired
-    public DeliveryController(DeliveryService deliveryService) {
-        this.deliveryService = deliveryService;
-    }
+    // @Autowired
+    // public DeliveryController(DeliveryService deliveryService) {
+    //     this.deliveryService = deliveryService;
+    // }
 }
