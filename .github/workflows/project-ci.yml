@@ -4,9 +4,9 @@ on:
     branches:
       - main
       - develop  # Add the 'develop' branch
-      - user_service
-      - product_service
-      - delivery_service
+      - user-service
+      - product-service
+      - delivery-service
 
 jobs:
   build-backend-delivery-service:
