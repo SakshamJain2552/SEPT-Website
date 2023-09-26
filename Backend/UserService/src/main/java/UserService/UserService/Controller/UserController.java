@@ -61,7 +61,8 @@ public class UserController {
     // Cart - update
     @PutMapping(value = "/cart", consumes = "application/json")
     public ResponseEntity<Cart> updateCartItems(@RequestBody Cart cart) {
-        return null;
+        Cart c = userService.updateCart(cart);
+        return new ResponseEntity<Cart>(c, HttpStatus.ACCEPTED);
     }
 
 }

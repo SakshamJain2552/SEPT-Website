@@ -256,8 +256,9 @@ public class UserRepoImpl implements UserRepo {
         try {
             Connection connection = dataSource.getConnection();
     
-            // Initialize cartId to a default value
+            // Initialize cartId and cartItemId to default values
             long cartId = -1;
+            long cartItemId = -1;
     
             // Check if the user exists
             PreparedStatement checkUserStmt = connection.prepareStatement(
@@ -294,24 +295,26 @@ public class UserRepoImpl implements UserRepo {
     
                 if (cartItemResult.next()) {
                     // Cart item exists, update its quantity
+                    cartItemId = cartItemResult.getLong("CartItemID");
                     PreparedStatement updateCartItemStmt = connection.prepareStatement(
                         "UPDATE CartItems SET Quantity = ? WHERE CartItemID = ?;"
                     );
                     updateCartItemStmt.setLong(1, cart.quantity);
-                    updateCartItemStmt.setLong(2, cartItemResult.getLong("CartItemID"));
+                    updateCartItemStmt.setLong(2, cartItemId);
                     updateCartItemStmt.executeUpdate();
                 }
             }
     
             connection.close();
     
-            // Set the cartId in the Cart object
+            // Set the cartId and cartItemId in the Cart object
             cart.cartId = cartId;
+            cart.cartItemId = cartItemId;
     
             return cart;
         } catch (SQLException e) {
             throw new RuntimeException("Error in update cart", e);
         }
-    }        
+    }            
 
 }

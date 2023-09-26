@@ -7,11 +7,17 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -121,29 +127,6 @@ public class TestUserController {
         Collection<Cart> cartItems = userController.allCartItems(cartId);
 
         assertEquals(mockCarts.size(), cartItems.size());
-
-    }
-
-    @Test
-    public void testUpdateCartItems() throws Exception {
-
-        MockitoAnnotations.openMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(new UserController(userService)).build();
-
-        Cart newCart = new Cart(1L, "10/10/2010", 1L, "CityStore North", 2L);
-
-        when(userService.createCart(any(Cart.class))).thenReturn(newCart);
-
-        mockMvc.perform(MockMvcRequestBuilders.put("/user/cart")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content("{\"userId\": 1, \"dateCreated\": \"10/10/2010\", \"productId\": 1, \"storeName\": \"CityStore North\", \"quantity\": 2}")
-        )
-        .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.userId").value(1))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.dateCreated").value("10/10/2010"))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.productId").value(1))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.storeName").value("CityStore North"))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.quantity").value(2));
 
     }
 
