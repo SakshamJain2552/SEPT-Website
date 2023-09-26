@@ -43,4 +43,9 @@ public class UserServiceImpl implements UserService{
         return repository.findById(id);
     }
 
+    @Override
+    public Cart updateCart(Cart cart) {
+        return null;
+    }
+
 }

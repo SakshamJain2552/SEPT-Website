@@ -104,4 +104,22 @@ public class TestUserService {
 
     }
 
+    @Test
+    public void testUpdateCart() {
+
+        Cart testCart = new Cart(1L, "10/10/2010", 1L, "CityStore North", 2L);
+        testCart.cartId = 1L;
+        testCart.cartItemId = 1L;
+
+        when(userRepo.create(any(Cart.class))).thenReturn(testCart);
+
+        Cart updatedCart = userService.updateCart(testCart);
+
+        assertNotNull(updatedCart);
+        assertEquals(testCart.cartId, updatedCart.cartId);
+        assertEquals(testCart.cartItemId, updatedCart.cartItemId);
+        assertEquals(testCart.quantity, updatedCart.quantity);
+
+    }
+
 }

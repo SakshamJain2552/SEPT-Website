@@ -16,4 +16,7 @@ public interface UserService {
     // Cart - Read
     public Collection<Cart> getCartItems(Long id);
 
+    // Cart - Update
+    public Cart updateCart(Cart cart);
+
 }
