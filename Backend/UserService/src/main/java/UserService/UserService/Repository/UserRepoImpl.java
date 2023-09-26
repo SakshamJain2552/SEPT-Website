@@ -253,7 +253,65 @@ public class UserRepoImpl implements UserRepo {
 
     @Override
     public Cart update(Cart cart) {
-        return null;
-    }
+        try {
+            Connection connection = dataSource.getConnection();
+    
+            // Initialize cartId to a default value
+            long cartId = -1;
+    
+            // Check if the user exists
+            PreparedStatement checkUserStmt = connection.prepareStatement(
+                "SELECT UserID FROM Users WHERE UserID = ?;"
+            );
+            checkUserStmt.setLong(1, cart.userId);
+            ResultSet userResult = checkUserStmt.executeQuery();
+    
+            if (!userResult.next()) {
+                // User does not exist
+                connection.close();
+                throw new SQLException("User not found");
+            }
+    
+            // Check if a cart already exists for the user
+            PreparedStatement checkCartStmt = connection.prepareStatement(
+                "SELECT CartID FROM Carts WHERE UserID = ?;"
+            );
+            checkCartStmt.setLong(1, cart.userId);
+            ResultSet cartResult = checkCartStmt.executeQuery();
+    
+            if (cartResult.next()) {
+                // Cart exists, retrieve the CartID
+                cartId = cartResult.getLong("CartID");
+    
+                // Check if the specified cart item exists
+                PreparedStatement checkCartItemStmt = connection.prepareStatement(
+                    "SELECT CartItemID FROM CartItems WHERE CartID = ? AND ProductID = ? AND StoreName = ?;"
+                );
+                checkCartItemStmt.setLong(1, cartId);
+                checkCartItemStmt.setLong(2, cart.productId);
+                checkCartItemStmt.setString(3, cart.storeName);
+                ResultSet cartItemResult = checkCartItemStmt.executeQuery();
+    
+                if (cartItemResult.next()) {
+                    // Cart item exists, update its quantity
+                    PreparedStatement updateCartItemStmt = connection.prepareStatement(
+                        "UPDATE CartItems SET Quantity = ? WHERE CartItemID = ?;"
+                    );
+                    updateCartItemStmt.setLong(1, cart.quantity);
+                    updateCartItemStmt.setLong(2, cartItemResult.getLong("CartItemID"));
+                    updateCartItemStmt.executeUpdate();
+                }
+            }
+    
+            connection.close();
+    
+            // Set the cartId in the Cart object
+            cart.cartId = cartId;
+    
+            return cart;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error in update cart", e);
+        }
+    }        
 
 }
