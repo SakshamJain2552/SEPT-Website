@@ -111,7 +111,7 @@ public class TestUserService {
         testCart.cartId = 1L;
         testCart.cartItemId = 1L;
 
-        when(userRepo.create(any(Cart.class))).thenReturn(testCart);
+        when(userRepo.update(any(Cart.class))).thenReturn(testCart);
 
         Cart updatedCart = userService.updateCart(testCart);
 

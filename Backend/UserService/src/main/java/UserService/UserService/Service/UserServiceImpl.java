@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Cart updateCart(Cart cart) {
-        return null;
+        return repository.update(cart);
     }
 
 }
