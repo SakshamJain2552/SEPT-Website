@@ -48,4 +48,9 @@ public class UserServiceImpl implements UserService{
         return repository.update(cart);
     }
 
+    @Override
+    public void deleteCart(Long userId, Long cartId, Long cartItemId){
+        repository.delete(userId, cartId, cartItemId);
+    }
+
 }
