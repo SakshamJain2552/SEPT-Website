@@ -124,4 +124,27 @@ public class TestUserController {
 
     }
 
+    @Test
+    public void testUpdateCartItems() throws Exception {
+
+        MockitoAnnotations.openMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(new UserController(userService)).build();
+
+        Cart newCart = new Cart(1L, "10/10/2010", 1L, "CityStore North", 2L);
+
+        when(userService.createCart(any(Cart.class))).thenReturn(newCart);
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/user/cart")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content("{\"userId\": 1, \"dateCreated\": \"10/10/2010\", \"productId\": 1, \"storeName\": \"CityStore North\", \"quantity\": 2}")
+        )
+        .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.userId").value(1))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.dateCreated").value("10/10/2010"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.productId").value(1))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.storeName").value("CityStore North"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.quantity").value(2));
+
+    }
+
 }
