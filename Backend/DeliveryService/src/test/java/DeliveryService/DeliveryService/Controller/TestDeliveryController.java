@@ -8,12 +8,12 @@ import DeliveryService.DeliveryService.Service.DeliveryService;
 
 @SpringBootTest
 public class TestDeliveryController {
-    @Mock
-    private DeliveryController deliveryController;
-    private DeliveryService deliveryService;
+    // @Mock
+    // private DeliveryController deliveryController;
+    // private DeliveryService deliveryService;
 
-    @BeforeEach
-    public void setup(){
-        deliveryController = new DeliveryController(deliveryService);
-    }
+    // @BeforeEach
+    // public void setup(){
+    //     deliveryController = new DeliveryController(deliveryService);
+    // }
 }

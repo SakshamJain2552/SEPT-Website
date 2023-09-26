@@ -9,12 +9,12 @@ import DeliveryService.DeliveryService.Repository.DeliveryRepo;
 @SpringBootTest
 public class TestDeliveryService {
 
-    @Mock
-    private DeliveryRepo deliveryRepo;
-    private DeliveryServiceImpl deliveryService;
+    // @Mock
+    // private DeliveryRepo deliveryRepo;
+    // private DeliveryServiceImpl deliveryService;
 
-    @BeforeEach
-    public void setup(){
-        deliveryService = new DeliveryServiceImpl(deliveryRepo);
-    }
+    // @BeforeEach
+    // public void setup(){
+    //     deliveryService = new DeliveryServiceImpl(deliveryRepo);
+    // }
 }

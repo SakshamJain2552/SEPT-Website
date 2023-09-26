@@ -5,6 +5,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class TestDeliveryRepo {
-    @Autowired
-    private DeliveryRepo deliveryRepo;
+    // @Autowired
+    // private DeliveryRepo deliveryRepo;
 }
