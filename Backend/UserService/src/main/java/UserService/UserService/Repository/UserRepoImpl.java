@@ -251,4 +251,9 @@ public class UserRepoImpl implements UserRepo {
         return cartItems;
     }
 
+    @Override
+    public Cart update(Cart cart) {
+        return null;
+    }
+
 }

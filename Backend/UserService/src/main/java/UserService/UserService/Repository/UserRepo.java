@@ -16,4 +16,7 @@ public interface UserRepo {
     // Cart - Read
     public List<Cart> findById(Long id);
 
+    // Cart - Update
+    public Cart update(Cart cart);
+
 }

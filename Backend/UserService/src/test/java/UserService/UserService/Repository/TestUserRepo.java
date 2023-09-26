@@ -79,4 +79,22 @@ public class TestUserRepo {
 
     }
 
+    @Test
+    public void testUpdate() {
+
+        Cart testCart = new Cart(1L, "10/10/2010", 1L, "CityStore North", 1L);
+        testCart.cartId = 1L;
+        testCart.cartItemId = 1L;
+        Cart retCart = userRepo.create(testCart);
+
+        Cart updateCart = new Cart(1L, "10/10/2010", 1L, "CityStore North", 2L);
+
+        Cart updateRetCart = userRepo.update(updateCart);
+
+        assertEquals(updateCart.cartId, updateRetCart.cartId);
+        assertEquals(updateCart.cartItemId, updateRetCart.cartItemId);
+        assertEquals(updateCart.quantity, updateRetCart.quantity);
+
+    }
+
 }
