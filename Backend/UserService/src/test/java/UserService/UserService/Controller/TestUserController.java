@@ -1,11 +1,27 @@
 package UserService.UserService.Controller;
 
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,10 +31,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import UserService.UserService.Model.Cart;
 import UserService.UserService.Service.UserService;
 
 @SpringBootTest
 public class TestUserController {
+
+    private MockMvc mockMvc;
 
     @Mock
     private UserService userService;
@@ -64,6 +83,51 @@ public class TestUserController {
         assertEquals(testDetails.get("Username"), userDetails.get("Username"));
         assertEquals(testDetails.get("Password"), userDetails.get("Password"));
         assertEquals(testDetails.get("Email"), userDetails.get("Email"));
+    }
+
+    @Test
+    public void testControllerCreateCart() throws Exception {
+        MockitoAnnotations.openMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(new UserController(userService)).build();
+
+        Cart newCart = new Cart(1L, "10/10/2010", 1L, "CityStore North", 1L);
+
+        when(userService.createCart(any(Cart.class))).thenReturn(newCart);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/user/cart")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content("{\"userId\": 1, \"dateCreated\": \"10/10/2010\", \"productId\": 1, \"storeName\": \"CityStore North\", \"quantity\": 1}")
+        )
+        .andExpect(MockMvcResultMatchers.status().isCreated())
+        .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.userId").value(1))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.dateCreated").value("10/10/2010"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.productId").value(1))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.storeName").value("CityStore North"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.quantity").value(1));
+
+    }
+
+    @Test
+    public void testAllCartItems() {
+
+        Long cartId = 1L;
+
+        List<Cart> mockCarts = new ArrayList<>();
+        Cart testCart = new Cart(1L, "10/10/2010", 1L, "CityStore North", 1L);
+        testCart.cartId = 1L;
+        testCart.cartItemId = 1L;
+        Cart testCart2 = new Cart(1L, "20/20/2020", 2L, "CityStore North", 2L);
+        testCart2.cartId = 1L;
+        testCart2.cartItemId = 2L;
+        mockCarts.add(testCart);
+        mockCarts.add(testCart2);
+        when(userService.getCartItems(cartId)).thenReturn(mockCarts);
+
+        Collection<Cart> cartItems = userController.allCartItems(cartId);
+
+        assertEquals(mockCarts.size(), cartItems.size());
+
     }
 
 }
