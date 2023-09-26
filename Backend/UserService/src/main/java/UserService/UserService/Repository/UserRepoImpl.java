@@ -218,36 +218,46 @@ public class UserRepoImpl implements UserRepo {
     @Override
     public List<Cart> findById(Long id) {
         List<Cart> cartItems = new ArrayList<>();
-
+    
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement stmt = connection.prepareStatement(
-                "SELECT CI.CartItemID, CI.CartID, CI.ProductID, CI.StoreName, CI.Quantity, C.UserID, C.DateCreated " +
-                "FROM CartItems CI " +
-                "JOIN Carts C ON CI.CartID = C.CartID " +
-                "WHERE CI.CartID = ?;"
+            PreparedStatement cartIdStmt = connection.prepareStatement(
+                "SELECT CartID FROM Carts WHERE UserID = ?;"
             );
-            stmt.setLong(1, id);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                Cart cart = new Cart();
-                cart.cartItemId = rs.getLong("CartItemID");
-                cart.cartId = rs.getLong("CartID");
-                cart.productId = rs.getLong("ProductID");
-                cart.storeName = rs.getString("StoreName");
-                cart.quantity = rs.getLong("Quantity");
-                cart.userId = rs.getLong("UserID");
-                cart.dateCreated = rs.getString("DateCreated");
-
-                cartItems.add(cart);
+            cartIdStmt.setLong(1, id);
+            ResultSet cartIdResult = cartIdStmt.executeQuery();
+    
+            if (cartIdResult.next()) {
+                long cartId = cartIdResult.getLong("CartID");
+    
+                PreparedStatement stmt = connection.prepareStatement(
+                    "SELECT CI.CartItemID, CI.CartID, CI.ProductID, CI.StoreName, CI.Quantity, C.UserID, C.DateCreated " +
+                    "FROM CartItems CI " +
+                    "JOIN Carts C ON CI.CartID = C.CartID " +
+                    "WHERE CI.CartID = ?;"
+                );
+                stmt.setLong(1, cartId);
+                ResultSet rs = stmt.executeQuery();
+    
+                while (rs.next()) {
+                    Cart cart = new Cart();
+                    cart.cartItemId = rs.getLong("CartItemID");
+                    cart.cartId = rs.getLong("CartID");
+                    cart.productId = rs.getLong("ProductID");
+                    cart.storeName = rs.getString("StoreName");
+                    cart.quantity = rs.getLong("Quantity");
+                    cart.userId = rs.getLong("UserID");
+                    cart.dateCreated = rs.getString("DateCreated");
+    
+                    cartItems.add(cart);
+                }
             }
-
+    
             connection.close();
         } catch (SQLException e) {
             throw new RuntimeException("Error in findById", e);
         }
-
+    
         return cartItems;
     }
 
