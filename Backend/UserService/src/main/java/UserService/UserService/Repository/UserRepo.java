@@ -19,4 +19,7 @@ public interface UserRepo {
     // Cart - Update
     public Cart update(Cart cart);
 
+    // Cart - Delete
+    public void delete(Long userId, Long cartId, Long cartItemId);
+
 }

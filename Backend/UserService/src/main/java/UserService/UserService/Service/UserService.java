@@ -19,4 +19,7 @@ public interface UserService {
     // Cart - Update
     public Cart updateCart(Cart cart);
 
+    // Cart - Delete
+    public void deleteCart(Long userId, Long cartId, Long cartItemId);
+
 }
