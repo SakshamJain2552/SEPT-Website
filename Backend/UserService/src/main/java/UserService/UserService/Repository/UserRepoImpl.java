@@ -325,6 +325,65 @@ public class UserRepoImpl implements UserRepo {
         } catch (SQLException e) {
             throw new RuntimeException("Error in update cart", e);
         }
-    }            
+    }
+    
+    @Override
+    public void delete(Long userId, Long cartId, Long cartItemId) {
+        try {
+            Connection connection = dataSource.getConnection();
+    
+            // Check if the user exists
+            PreparedStatement checkUserStmt = connection.prepareStatement(
+                "SELECT UserID FROM Users WHERE UserID = ?;"
+            );
+            checkUserStmt.setLong(1, userId);
+            ResultSet userResult = checkUserStmt.executeQuery();
+    
+            if (!userResult.next()) {
+                // User does not exist
+                connection.close();
+                throw new SQLException("User not found");
+            }
+    
+            // Check if the specified cart exists for the user
+            PreparedStatement checkCartStmt = connection.prepareStatement(
+                "SELECT CartID FROM Carts WHERE CartID = ? AND UserID = ?;"
+            );
+            checkCartStmt.setLong(1, cartId);
+            checkCartStmt.setLong(2, userId);
+            ResultSet cartResult = checkCartStmt.executeQuery();
+    
+            if (!cartResult.next()) {
+                // Cart does not exist for the user
+                connection.close();
+                throw new SQLException("Cart not found");
+            }
+    
+            // Check if the specified cart item exists in the cart
+            PreparedStatement checkCartItemStmt = connection.prepareStatement(
+                "SELECT CartItemID FROM CartItems WHERE CartItemID = ? AND CartID = ?;"
+            );
+            checkCartItemStmt.setLong(1, cartItemId);
+            checkCartItemStmt.setLong(2, cartId);
+            ResultSet cartItemResult = checkCartItemStmt.executeQuery();
+    
+            if (!cartItemResult.next()) {
+                // Cart item does not exist in the cart
+                connection.close();
+                throw new SQLException("Cart item not found");
+            }
+    
+            // Delete the specified cart item
+            PreparedStatement deleteCartItemStmt = connection.prepareStatement(
+                "DELETE FROM CartItems WHERE CartItemID = ?;"
+            );
+            deleteCartItemStmt.setLong(1, cartItemId);
+            deleteCartItemStmt.executeUpdate();
+    
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error in delete cart item", e);
+        }
+    }    
 
 }
