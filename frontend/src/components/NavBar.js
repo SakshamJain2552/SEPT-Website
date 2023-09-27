@@ -94,8 +94,8 @@ function NavBar() {
               </Tooltip>
             </Grid>
             <Grid item>
-              <Tooltip title="User Profile">
-                <IconButton color="primary" component={Link} to="/profile">
+              <Tooltip title="User Details">
+                <IconButton color="primary" component={Link} to="/userdetails">
                   <AccountCircleIcon />
                 </IconButton>
               </Tooltip>

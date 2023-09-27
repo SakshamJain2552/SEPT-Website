@@ -5,7 +5,7 @@ import DisplayedProducts from './pages/display-products'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import LikedProducts from './pages/IconPages/LikedProducts';
-import ProfilePage from './pages/IconPages/ProfilePage';
+import UserDetails from './pages/IconPages/ProfilePage';
 import CartPage from './pages/IconPages/CartPage';
 import LowestPrices from './pages/ShopPages/LowestPrices';
 import AllStores from './pages/StoresPages/AllStores';
@@ -40,7 +40,7 @@ function App() {
         <Route path="/" element={<SignIn />} />
         <Route path="list" element={<DisplayedProducts />} />
         <Route path='/liked-products' element={<LikedProducts/>} />
-        <Route path='/profile' element={<ProfilePage/>} />
+        <Route path='/profile' element={<UserDetails/>} />
         <Route path='/cart' element={<CartPage/>} />
         <Route path='/shop/all-products' element={<AllProducts/>} />
         <Route path='/shop/lowest-prices' element={<LowestPrices/>} />
