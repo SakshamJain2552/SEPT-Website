@@ -60,4 +60,19 @@ public class DeliveryRepoImpl implements DeliveryRepo{
             throw new RuntimeException("Error in DeliveryRepoImpl.java - addDelivery()", e);
         }
     }
+
+    @Override
+    public Delivery findDelivery(String orderID) {
+        Delivery delivery;
+        try {
+            Connection connection = dataSource.getConnection();
+
+            
+        }
+
+        catch (SQLException e) {
+            throw new RuntimeException("Error in DeliveryRepoImpl.java - findDelivery()", e);
+        }
+        return null;
+    }
 }

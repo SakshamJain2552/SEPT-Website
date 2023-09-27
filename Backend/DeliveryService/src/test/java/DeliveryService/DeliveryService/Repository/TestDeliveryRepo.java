@@ -22,4 +22,11 @@ public class TestDeliveryRepo {
         Delivery returnedDelivery = deliveryRepo.addDelivery("alice123", "1 Alice Street, Victoria", "1-1-2023", "12:00", "card");
         assertEquals(testDelivery, returnedDelivery);
     }
+
+    @Test
+    public void testFindDelivery() {
+        Delivery testDelivery = new Delivery("alice123", "1 Alice Street, Victoria", "1-1-2023", "12:00", "card");
+        Delivery returnedDelivery = deliveryRepo.findDelivery("alice123");
+        assertEquals(testDelivery, returnedDelivery);
+    }
 }

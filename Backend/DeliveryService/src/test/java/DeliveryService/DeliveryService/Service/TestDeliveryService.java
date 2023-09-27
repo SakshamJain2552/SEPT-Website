@@ -38,4 +38,14 @@ public class TestDeliveryService {
         assertNotNull(createdDelivery);
         assertEquals(testDelivery, createdDelivery);
     }
+
+    @Test
+    public void testGetDelivery() {
+        Delivery testDelivery = new Delivery("alice123", "1 Alice Street, Victoria", "1-1-2023", "12:00", "card");
+        when(deliveryRepo.findDelivery("alice123")).thenReturn(testDelivery);
+        Delivery createdDelivery = deliveryService.getDelivery("alice123");
+
+        assertNotNull(createdDelivery);
+        assertEquals(testDelivery, createdDelivery);
+    }
 }

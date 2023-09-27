@@ -64,4 +64,12 @@ public class TestDeliveryController {
         .andExpect(MockMvcResultMatchers.jsonPath("$['paymentMethod']").value("card"));
 
     }
+    
+    @Test
+    public void testDeliveryDetails() {
+        Delivery testDelivery = new Delivery("alice123", "1 Alice Street, Victoria", "1-1-2023", "12:00", "card");
+        when(deliveryService.getDelivery("alice123")).thenReturn(testDelivery);
+        Delivery returnedDelivery = deliveryController.deliveryDetails("alice123");
+        assertEquals(testDelivery, returnedDelivery);
+    }
 }
