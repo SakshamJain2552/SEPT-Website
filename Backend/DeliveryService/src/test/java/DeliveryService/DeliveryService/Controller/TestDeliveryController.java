@@ -47,7 +47,7 @@ public class TestDeliveryController {
         MockitoAnnotations.openMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(new DeliveryController(deliveryService)).build();
 
-        Delivery delivery = new Delivery("alice123", "1 Alice Street, Victoria", "1-1-2023", "12:00", "card");
+        Delivery delivery = new Delivery(1, "alice123", "1 Alice Street, Victoria", "1-1-2023", "12:00", "card");
 
         when(deliveryService.setDelivery("alice123", "1 Alice Street, Victoria", "1-1-2023", "12:00", "card")).thenReturn(delivery);
 
@@ -63,5 +63,13 @@ public class TestDeliveryController {
         .andExpect(MockMvcResultMatchers.jsonPath("$['deliveryTime']").value("12:00"))
         .andExpect(MockMvcResultMatchers.jsonPath("$['paymentMethod']").value("card"));
 
+    }
+    
+    @Test
+    public void testDeliveryDetails() {
+        Delivery testDelivery = new Delivery(1, "alice123", "1 Alice Street, Victoria", "1-1-2023", "12:00", "card");
+        when(deliveryService.getDelivery("1")).thenReturn(testDelivery);
+        Delivery returnedDelivery = deliveryController.deliveryDetails("1");
+        assertEquals(testDelivery, returnedDelivery);
     }
 }

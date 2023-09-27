@@ -20,7 +20,6 @@ public class DeliveryRepoImpl implements DeliveryRepo{
 
     @Override
     public Delivery addDelivery(String username, String address, String date, String time, String paymentMethod) {
-        Delivery delivery = new Delivery(username, address, date, time, paymentMethod);
         try {
             Connection connection = dataSource.getConnection();
 
@@ -53,11 +52,58 @@ public class DeliveryRepoImpl implements DeliveryRepo{
             );
             createDelivery.executeUpdate();
             connection.close();
+
+            Delivery delivery = new Delivery(deliveryID, username, address, date, time, paymentMethod);
             return delivery;
         }
 
         catch (SQLException e) {
             throw new RuntimeException("Error in DeliveryRepoImpl.java - addDelivery()", e);
+        }
+    }
+
+    @Override
+    public Delivery findDelivery(String deliveryID) {
+
+        try {
+            Connection connection = dataSource.getConnection();
+
+            // Check if orderID exists
+            PreparedStatement checkOrderID = connection.prepareStatement(
+                "SELECT DeliveryID FROM Deliveries WHERE DeliveryID = '" + deliveryID + "';"
+            );
+
+            ResultSet orderIDResult = checkOrderID.executeQuery();
+            if (!orderIDResult.next()) {
+                connection.close();
+                throw new SQLException("Order does not exist");
+            }
+
+            // Get delivery
+            PreparedStatement getDelivery = connection.prepareStatement(
+                "SELECT * FROM Deliveries WHERE DeliveryID = '" + deliveryID + "';"
+            );
+
+            ResultSet deliveryResult = getDelivery.executeQuery();
+
+            deliveryResult.next();
+
+            int id = deliveryResult.getInt(1);
+            String username = deliveryResult.getString(2);
+            String address = deliveryResult.getString(3);
+            String date = deliveryResult.getString(4);
+            String time = deliveryResult.getString(5);
+            String paymentMethod = deliveryResult.getString(6);
+
+            Delivery delivery = new Delivery(id, username, address, date, time, paymentMethod);
+
+            connection.close();
+            return delivery;
+            
+        }
+
+        catch (SQLException e) {
+            throw new RuntimeException("Error in DeliveryRepoImpl.java - findDelivery()", e);
         }
     }
 }
