@@ -135,6 +135,18 @@ INSERT INTO Products (ProductName, Category, Description) VALUES
 ('Hookah Tobacco', 'Tobacco', 'Flavored hookah tobacco. 200g.'),
 ('E-cigarettes', 'Tobacco', 'Electronic cigarettes. Pack of 5.');
 
+-- Generate UserRatings for three users with random ratings
+INSERT INTO UserRating (UserID, ProductID, StoreName, ReviewInteger)
+VALUES
+(1, 1, 'SuperMart Central', 5),
+(1, 2, 'SuperMart Central', 3),
+(1, 3, 'SuperMart Central', 1),
+(2, 1, 'SuperMart Central', 3),
+(2, 2, 'SuperMart Central', 3),
+(2, 3, 'SuperMart Central', 5),
+(3, 1, 'SuperMart Central', 3),
+(3, 2, 'SuperMart Central', 5),
+(3, 3, 'SuperMart Central', 1);
 
 INSERT INTO ProductPrices (ProductID, StoreID, Price) VALUES
 (1, 1, 4.78),

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import ProductService.ProductService.Model.DetailedProduct;
 import ProductService.ProductService.Model.Product;
+import ProductService.ProductService.Model.UserReview;
 
 @Repository
 public class ProductRepositoryImpl implements ProductRepository{
@@ -94,6 +95,66 @@ public class ProductRepositoryImpl implements ProductRepository{
             return Optional.of(detailedProduct);
         } catch (SQLException e) {
             throw new RuntimeException("Error in findDetailProductById()", e);
+        }
+    }    
+
+    @Override
+    public UserReview setReview(UserReview userReview) {
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement insertStatement = connection.prepareStatement(
+                "INSERT INTO UserRating (UserID, ProductID, StoreName, ReviewInteger) VALUES (?, ?, ?, ?)",
+                PreparedStatement.RETURN_GENERATED_KEYS
+            );
+    
+            // Set parameters for the INSERT statement
+            insertStatement.setLong(1, userReview.userId());
+            insertStatement.setLong(2, userReview.productId());
+            insertStatement.setString(3, userReview.storeName());
+            insertStatement.setDouble(4, userReview.rating());
+    
+            // Execute the INSERT statement
+            int affectedRows = insertStatement.executeUpdate();
+    
+            if (affectedRows > 0) {
+                // The review was successfully inserted, return the same UserReview object
+                connection.close();
+                return userReview;
+            } else {
+                // Something went wrong, no rows were affected
+                connection.close();
+                throw new RuntimeException("Failed to insert review.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error in setReview()", e);
+        }
+    }    
+
+    @Override
+    public Double getReview(Long productId) {
+        try {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement avgStatement = connection.prepareStatement(
+                "SELECT AVG(ReviewInteger) AS avgRating FROM UserRating WHERE ProductID = ?"
+            );
+    
+            // Set the productId parameter
+            avgStatement.setLong(1, productId);
+    
+            ResultSet resultSet = avgStatement.executeQuery();
+    
+            if (resultSet.next()) {
+                // Get the average rating
+                double averageRating = resultSet.getDouble("avgRating");
+                connection.close();
+                return averageRating;
+            } else {
+                // No reviews found for the given product ID
+                connection.close();
+                return null;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error in getReview()", e);
         }
     }    
 
