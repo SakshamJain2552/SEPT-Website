@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,5 +38,10 @@ public class DeliveryController {
 
         Delivery delivery =  deliveryService.setDelivery(username, address, date, time, paymentMethod);
         return new ResponseEntity<Delivery>(delivery, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    public Delivery deliveryDetails(@PathVariable("id") String id) {
+        return deliveryService.getDelivery(id);
     }
 }

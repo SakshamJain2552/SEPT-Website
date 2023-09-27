@@ -19,4 +19,9 @@ public class DeliveryServiceImpl implements DeliveryService {
     public Delivery setDelivery(String username, String address, String date, String time, String paymentMethod) {
         return deliveryRepo.addDelivery(username, address, date, time, paymentMethod);
     }
+
+    @Override
+    public Delivery getDelivery(String deliveryID) {
+        return deliveryRepo.findDelivery(deliveryID);
+    }
 }
