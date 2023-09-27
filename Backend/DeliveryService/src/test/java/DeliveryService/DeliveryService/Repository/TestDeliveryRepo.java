@@ -18,9 +18,13 @@ public class TestDeliveryRepo {
 
     @Test
     public void testAddDelivery() {
-        Delivery testDelivery = new Delivery("alice123", "1 Alice Street, Victoria", "1-1-2023", "12:00", "card");
+        Delivery testDelivery = new Delivery(1, "alice123", "1 Alice Street, Victoria", "1-1-2023", "12:00", "card");
         Delivery returnedDelivery = deliveryRepo.addDelivery("alice123", "1 Alice Street, Victoria", "1-1-2023", "12:00", "card");
-        assertEquals(testDelivery, returnedDelivery);
+        assertEquals(testDelivery.username(), returnedDelivery.username());
+        assertEquals(testDelivery.address(), returnedDelivery.address());
+        assertEquals(testDelivery.deliveryDate(), returnedDelivery.deliveryDate());
+        assertEquals(testDelivery.deliveryTime(), returnedDelivery.deliveryTime());
+        assertEquals(testDelivery.paymentMethod(), returnedDelivery.paymentMethod());
     }
 
     @Test
