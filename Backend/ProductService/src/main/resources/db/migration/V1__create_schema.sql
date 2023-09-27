@@ -5,6 +5,7 @@
 -- MySQL uses AUTO_INCREMENT, while H2 uses IDENTITY
 
 -- Drop tables if they exist, starting with the one that has foreign key constraints
+DROP TABLE IF EXISTS UserRating; -- Add this line to drop the UserRating table if it exists
 DROP TABLE IF EXISTS ProductPrices;
 DROP TABLE IF EXISTS Products;
 DROP TABLE IF EXISTS Stores;
@@ -40,4 +41,15 @@ CREATE TABLE IF NOT EXISTS ProductPrices (
   Price DOUBLE NOT NULL,
   CONSTRAINT FK_ProductID_Price FOREIGN KEY (ProductID) REFERENCES Products(ProductID),
   CONSTRAINT FK_StoreID_Price FOREIGN KEY (StoreID) REFERENCES Stores(StoreID)
+);
+
+-- -----------------------------------------------------
+-- Table UserRating
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS UserRating (
+  RatingID INT AUTO_INCREMENT PRIMARY KEY,
+  UserID INT,
+  ProductID INT,
+  StoreName VARCHAR(255) NOT NULL,
+  ReviewInteger DOUBLE
 );
