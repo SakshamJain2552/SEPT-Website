@@ -51,10 +51,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Grant execute permission to mvnw
-        working-directory: Backend/UserService
+        working-directory: Backend/user-service
         run: chmod +x mvnw
       - name: Build with Maven
-        working-directory: Backend/UserService
+        working-directory: Backend/user-service
         run: ./mvnw --batch-mode --update-snapshots package
 
   build-frontend:
