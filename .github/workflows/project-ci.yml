@@ -19,10 +19,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Grant execute permission to mvnw
-        working-directory: Backend/DeliveryService
+        working-directory: Backend/delivery-service
         run: chmod +x mvnw
       - name: Build with Maven
-        working-directory: Backend/DeliveryService
+        working-directory: Backend/delivery-service
         run: ./mvnw --batch-mode --update-snapshots package
 
   build-backend-product-service:
