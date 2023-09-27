@@ -45,9 +45,9 @@ public class TestDeliveryService {
 
     @Test
     public void testGetDelivery() {
-        Delivery testDelivery = new Delivery("alice123", "1 Alice Street, Victoria", "1-1-2023", "12:00", "card");
-        when(deliveryRepo.findDelivery("alice123")).thenReturn(testDelivery);
-        Delivery createdDelivery = deliveryService.getDelivery("alice123");
+        Delivery testDelivery = new Delivery(1, "alice123", "1 Alice Street, Victoria", "01-01-2023", "12:00", "card");
+        when(deliveryRepo.findDelivery("1")).thenReturn(testDelivery);
+        Delivery createdDelivery = deliveryService.getDelivery("1");
 
         assertNotNull(createdDelivery);
         assertEquals(testDelivery, createdDelivery);

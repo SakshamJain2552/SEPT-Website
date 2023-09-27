@@ -21,7 +21,7 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     @Override
-    public Delivery getDelivery(String orderID) {
-        return deliveryRepo.findDelivery(orderID);
+    public Delivery getDelivery(String deliveryID) {
+        return deliveryRepo.findDelivery(deliveryID);
     }
 }
