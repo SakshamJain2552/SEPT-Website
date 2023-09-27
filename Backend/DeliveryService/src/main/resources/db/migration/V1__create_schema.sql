@@ -17,10 +17,10 @@ CREATE TABLE IF NOT EXISTS Users (
 );
 
 -- -----------------------------------------------------
--- Table OrderDetails
+-- Table Delivery
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS OrderDetails (
-    OrderID INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS Deliveries (
+    DeliveryID INT AUTO_INCREMENT PRIMARY KEY,
     Username VARCHAR(255) NOT NULL,
     DeliveryAddress VARCHAR(255) NOT NULL,
     DeliveryDate VARCHAR(255) NOT NULL,
