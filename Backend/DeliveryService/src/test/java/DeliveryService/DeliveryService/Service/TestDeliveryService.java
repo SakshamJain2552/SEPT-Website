@@ -31,11 +31,15 @@ public class TestDeliveryService {
 
     @Test
     public void testServiceSetDelivery() {
-        Delivery testDelivery = new Delivery("alice123", "1 Alice Street, Victoria", "1-1-2023", "12:00", "card");
+        Delivery testDelivery = new Delivery(1, "alice123", "1 Alice Street, Victoria", "1-1-2023", "12:00", "card");
         when(deliveryRepo.addDelivery("alice123", "1 Alice Street, Victoria", "1-1-2023", "12:00", "card")).thenReturn(testDelivery);
         Delivery createdDelivery = deliveryService.setDelivery("alice123", "1 Alice Street, Victoria", "1-1-2023", "12:00", "card");
 
         assertNotNull(createdDelivery);
-        assertEquals(testDelivery, createdDelivery);
+        assertEquals(testDelivery.username(), createdDelivery.username());
+        assertEquals(testDelivery.address(), createdDelivery.address());
+        assertEquals(testDelivery.deliveryDate(), createdDelivery.deliveryDate());
+        assertEquals(testDelivery.deliveryTime(), createdDelivery.deliveryTime());
+        assertEquals(testDelivery.paymentMethod(), createdDelivery.paymentMethod());
     }
 }
