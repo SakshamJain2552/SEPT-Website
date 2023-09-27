@@ -20,7 +20,6 @@ public class DeliveryRepoImpl implements DeliveryRepo{
 
     @Override
     public Delivery addDelivery(String username, String address, String date, String time, String paymentMethod) {
-        Delivery delivery = new Delivery(username, address, date, time, paymentMethod);
         try {
             Connection connection = dataSource.getConnection();
 
@@ -53,6 +52,8 @@ public class DeliveryRepoImpl implements DeliveryRepo{
             );
             createDelivery.executeUpdate();
             connection.close();
+
+            Delivery delivery = new Delivery(deliveryID, username, address, date, time, paymentMethod);
             return delivery;
         }
 
