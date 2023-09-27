@@ -4,6 +4,11 @@
 -- Use AUTO_INCREMENT for H2
 -- MySQL uses AUTO_INCREMENT, while H2 uses IDENTITY
 
+-- Drop tables if they exist, starting with the one that has foreign key constraints
+DROP TABLE IF EXISTS ProductPrices;
+DROP TABLE IF EXISTS Products;
+DROP TABLE IF EXISTS Stores;
+
 -- -----------------------------------------------------
 -- Table Products
 -- -----------------------------------------------------
