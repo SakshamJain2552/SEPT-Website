@@ -6,7 +6,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import LikedProducts from './pages/IconPages/LikedProducts';
 import ProfilePage from './pages/IconPages/ProfilePage';
-import CartPage from './pages/IconPages/CartPage';
+// import CartPage from './pages/IconPages/CartPage';
 import LowestPrices from './pages/ShopPages/LowestPrices';
 import AllStores from './pages/StoresPages/AllStores';
 import CompareStores from './pages/StoresPages/CompareStores';
@@ -19,6 +19,11 @@ import AboutSaksham from './pages/FooterPages/AboutSaksham';
 import AboutHari from './pages/FooterPages/AboutHari';
 import AboutLance from './pages/FooterPages/AboutLance';
 import AboutDarby from './pages/FooterPages/AboutDarby';
+// import SignUp from './pages/signup';
+import ProductDetail from './components/productdetails'; 
+import CartPage from './components/cart';
+import Checkout from './components/checkout';
+
 
 const theme = createTheme({
   palette: {
@@ -40,7 +45,7 @@ function App() {
         <Route path="list" element={<DisplayedProducts />} />
         <Route path='/liked-products' element={<LikedProducts/>} />
         <Route path='/profile' element={<ProfilePage/>} />
-        <Route path='/cart' element={<CartPage/>} />
+        {/* <Route path='/cart' element={<CartPage/>} /> */}
         <Route path='/shop/all-products' element={<AllProducts/>} />
         <Route path='/shop/lowest-prices' element={<LowestPrices/>} />
         <Route path='/stores/all-stores' element={<AllStores/>} />
@@ -53,6 +58,10 @@ function App() {
         <Route path='/contact/hari' element={<AboutHari/>} />
         <Route path='/contact/lance' element={<AboutLance/>} />
         <Route path='/contact/darby' element={<AboutDarby/>} />
+          {/* <Route path='/signup' element={<SignUp />} /> */}
+          <Route path="/product/:productId" element={<ProductDetail />} />
+          <Route path="cart" element={<CartPage />} />
+          <Route path="checkout" element={<Checkout />} />
 
       </Routes>
       </BrowserRouter>
