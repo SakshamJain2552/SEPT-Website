@@ -7,13 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.boot.test.context.SpringBootTest;
-import org.mockito.Mock;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import org.mockito.Mock;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -22,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import UserService.UserService.Model.Cart;
 import UserService.UserService.Repository.UserRepo;
+import UserService.UserService.Model.User;
 
 @SpringBootTest
 public class TestUserService {
@@ -44,9 +44,12 @@ public class TestUserService {
     }
 
     @Test
-    public void testUsernameUnique() {
-        when(userRepo.usernameUniqueVerified("unittestuser", "password123", "unittestuser@email.com")).thenReturn(true);
-        boolean successfulLogin = userService.usernameUnique("unittestuser", "password123", "unittestuser@email.com");
+    public void testCreateUser() {
+        // New user object to be tested
+        User user = new User(0, "test", "user", "unittestuser", "password123", "unittestuser@gmail.com", true, "", 0, "", 0);
+        
+        when(userRepo.addUser(user)).thenReturn(true);
+        boolean successfulLogin = userService.createUser(user);
         assertTrue(successfulLogin);
     }
 
@@ -121,5 +124,4 @@ public class TestUserService {
         assertEquals(testCart.quantity, updatedCart.quantity);
 
     }
-
 }

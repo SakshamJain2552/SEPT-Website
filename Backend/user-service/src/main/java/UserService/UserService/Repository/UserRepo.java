@@ -3,11 +3,17 @@ package UserService.UserService.Repository;
 import java.util.List;
 import java.util.Map;
 
+import UserService.UserService.Model.User;
 import UserService.UserService.Model.Cart;
 
 public interface UserRepo {
+    // User - Read (Login)
     public boolean userFound(String username, String password);
-    public boolean usernameUniqueVerified(String username, String password, String email);
+
+    // User - Create (Sign-up)
+    public boolean addUser(User user);
+    
+    // User - Read
     public Map<String, String> getUserDetails(String username);
 
     // Cart - Create

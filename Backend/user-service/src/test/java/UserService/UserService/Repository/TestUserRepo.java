@@ -1,15 +1,15 @@
 package UserService.UserService.Repository;
 
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.jupiter.api.Test;
+
+import UserService.UserService.Model.User;
+import UserService.UserService.Model.Cart;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.boot.test.context.SpringBootTest;
-
-import UserService.UserService.Model.Cart;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -27,8 +27,10 @@ public class TestUserRepo {
     }
 
     @Test
-    public void testUsernameUniqueVerified() {
-        boolean usernameUnique = userRepo.usernameUniqueVerified("unittestuser", "password123", "unittestuser@email.com");
+    public void testAddUser() {
+        // New user object to be tested
+        User user = new User(0, "test", "user", "unittestuser", "password123", "unittestuser@gmail.com", true, "", 0, "", 0);
+        boolean usernameUnique = userRepo.addUser(user);
         assertTrue(usernameUnique);
     }
 
@@ -96,5 +98,4 @@ public class TestUserRepo {
         assertEquals(updateCart.quantity, updateRetCart.quantity);
 
     }
-
 }

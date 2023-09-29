@@ -1,9 +1,11 @@
 package UserService.UserService.Repository;
 
+
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +15,9 @@ import javax.sql.DataSource;
 
 import org.springframework.stereotype.Repository;
 
+import UserService.UserService.Model.User;
 import UserService.UserService.Model.Cart;
+
 
 @Repository
 public class UserRepoImpl implements UserRepo {
@@ -54,7 +58,18 @@ public class UserRepoImpl implements UserRepo {
     }
 
     @Override
-    public boolean usernameUniqueVerified(String username, String password, String email) {
+    public boolean addUser(User user) {
+        String firstname = user.firstname();
+        String lastname = user.lastname();
+        String username = user.username();
+        String password = user.password();
+        String email = user.email();
+        boolean notifications = user.notifications();
+        String cardName = user.cardName();
+        int cardNumber = user.cardNumber();
+        String cardExpiration = user.cardExpiration();
+        int cardCVV = user.cardCVV();
+  
         try {
             Connection connection = dataSource.getConnection();
             PreparedStatement stm = connection.prepareStatement(
@@ -68,7 +83,7 @@ public class UserRepoImpl implements UserRepo {
             int userID = 0;
             while(rs.next()) {
                 userID = rs.getInt(1);
-                if (rs.getString(2).equals(username) && rs.getString(4).equals(email)) {
+                if (rs.getString(2).equals(username) || rs.getString(4).equals(email)) {
                     System.out.println("Username or Email is already in the database.");
                     connection.close();
                     return false;
@@ -79,14 +94,14 @@ public class UserRepoImpl implements UserRepo {
             userID += 1;
             stm = connection.prepareStatement(
                 "INSERT INTO Users\r\n" + //
-                "VALUES (" + userID + ",'"  + username + "','" + password + "','" + email + "');"
+                "VALUES (" + userID + ",'" + firstname + "','" + lastname + "','" + username + "','" + password + "','" + email + 
+                "','" + notifications + "','" + cardName + "'," + cardNumber + ",'" + cardExpiration + "'," + cardCVV + ");"
             );
             stm.execute();
 
             System.out.println("New user inserted into database:");
             System.out.println("UserID: " + userID);
             System.out.println("Username: " + username);
-            System.out.println("Password: " + password);
             System.out.println("Email: " + email);
 
             connection.close();
@@ -385,5 +400,4 @@ public class UserRepoImpl implements UserRepo {
             throw new RuntimeException("Error in delete cart item", e);
         }
     }    
-
 }
