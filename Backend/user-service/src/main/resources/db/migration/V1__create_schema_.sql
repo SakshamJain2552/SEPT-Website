@@ -9,9 +9,16 @@
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Users (
   UserID INT AUTO_INCREMENT PRIMARY KEY,
+  FirstName VARCHAR(255) NOT NULL,
+  LastName VARCHAR(255) NOT NULL,
   Username VARCHAR(255) NOT NULL,
   Password VARCHAR(255) NOT NULL,
   Email VARCHAR(255) NOT NULL,
+  Notifications BOOLEAN NOT NULL,
+  CardName VARCHAR(255),
+  CardNumber INT,
+  CardExpiration VARCHAR(255),
+  CardCVV INT,
   CONSTRAINT UQ_Username UNIQUE (Username),
   CONSTRAINT UQ_Email UNIQUE (Email)
 );

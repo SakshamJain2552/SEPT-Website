@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import UserService.UserService.Model.Cart;
+import UserService.UserService.Model.User;
 import UserService.UserService.Repository.UserRepo;
 
 @Service
@@ -24,8 +25,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean usernameUnique(String username, String password, String email){
-        return repository.usernameUniqueVerified(username, password, email);
+    public boolean createUser(User user){
+        return repository.addUser(user);
     }
 
     @Override
@@ -52,5 +53,4 @@ public class UserServiceImpl implements UserService{
     public void deleteCart(Long userId, Long cartId, Long cartItemId){
         repository.delete(userId, cartId, cartItemId);
     }
-
 }
