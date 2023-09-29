@@ -38,15 +38,29 @@ public class TestUserRepo {
     public void testGetUserDetails() {
         Map<String, String> testDetails = new HashMap<>();
         testDetails.put("UserID", "1");
+        testDetails.put("FirstName", "alice");
+        testDetails.put("LastName", "123");
         testDetails.put("Username", "alice123");
         testDetails.put("Password", "password123");
         testDetails.put ("Email", "alice@email.com");
+        testDetails.put("Notifications", "false");
+        testDetails.put("CardName", "");
+        testDetails.put("CardNumber", "0");
+        testDetails.put("CardExpiration", "");
+        testDetails.put("CardCVV", "0");
 
         Map<String, String> userDetails = userRepo.getUserDetails("alice123");
         assertEquals(testDetails.get("UserID"), userDetails.get("UserID"));
+        assertEquals(testDetails.get("FirstName"), userDetails.get("FirstName"));
+        assertEquals(testDetails.get("LastName"), userDetails.get("LastName"));
         assertEquals(testDetails.get("Username"), userDetails.get("Username"));
         assertEquals(testDetails.get("Password"), userDetails.get("Password"));
         assertEquals(testDetails.get("Email"), userDetails.get("Email"));
+        assertEquals(testDetails.get("Notifications"), userDetails.get("Notifications"));
+        assertEquals(testDetails.get("CardName"), userDetails.get("CardName"));
+        assertEquals(testDetails.get("CardNumber"), userDetails.get("CardNumber"));
+        assertEquals(testDetails.get("CardExpiration"), userDetails.get("CardExpiration"));
+        assertEquals(testDetails.get("CardCVV"), userDetails.get("CardCVV"));
     }
 
     @Test
