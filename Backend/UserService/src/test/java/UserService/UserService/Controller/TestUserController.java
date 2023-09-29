@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import UserService.UserService.Service.UserService;
+import UserService.UserService.Model.User;
 
 @SpringBootTest
 public class TestUserController {
@@ -40,12 +41,25 @@ public class TestUserController {
 
     @Test
     public void testUserSignupSuccesful() {
-        when(userService.usernameUnique("unittestuser", "password123", "unittestuser@email.com")).thenReturn(true);
+
+        // New user object to be tested
+        User user = new User(0, "test", "user", "unittestuser", "password123", "unittestuser@email.com", true, "", 0, "", 0);
+        when(userService.createUser(user)).thenReturn(true);
+        
+        // Mapping of user values to be passed on to the function to be tested
         Map<String, String> body = new HashMap<>();
+        body.put("firstname", "test");
+        body.put("lastname", "user");
         body.put("username", "unittestuser");
         body.put("password", "password123");
         body.put ("email", "unittestuser@email.com");
+        body.put("notifications", "true");
+        body.put("cardName", "");
+        body.put("cardNumber", "0");
+        body.put("cardExpiration", "");
+        body.put("cardCVV", "0");
         boolean successfulSignup = userController.userSignup(body);
+
         assertTrue(successfulSignup);
     }
 

@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import UserService.UserService.Model.User;
+
 @SpringBootTest
 public class TestUserRepo {
     @Autowired
@@ -19,8 +21,10 @@ public class TestUserRepo {
     }
 
     @Test
-    public void testUsernameUniqueVerified() {
-        boolean usernameUnique = userRepo.usernameUniqueVerified("unittestuser", "password123", "unittestuser@email.com");
+    public void testAddUser() {
+        // New user object to be tested
+        User user = new User(0, "test", "user", "unittestuser", "password123", "unittestuser@gmail.com", true, "", 0, "", 0);
+        boolean usernameUnique = userRepo.addUser(user);
         assertTrue(usernameUnique);
     }
 }

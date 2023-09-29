@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import UserService.UserService.Repository.UserRepo;
+import UserService.UserService.Model.User;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -20,7 +21,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean usernameUnique(String username, String password, String email){
-        return repository.usernameUniqueVerified(username, password, email);
+    public boolean createUser(User user){
+        return repository.addUser(user);
     }
 }

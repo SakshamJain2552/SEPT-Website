@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import UserService.UserService.Repository.UserRepo;
+import UserService.UserService.Model.User;
 
 @SpringBootTest
 public class TestUserService {
@@ -34,9 +35,12 @@ public class TestUserService {
     }
 
     @Test
-    public void testUsernameUnique() {
-        when(userRepo.usernameUniqueVerified("unittestuser", "password123", "unittestuser@email.com")).thenReturn(true);
-        boolean successfulLogin = userService.usernameUnique("unittestuser", "password123", "unittestuser@email.com");
+    public void testCreateUser() {
+        // New user object to be tested
+        User user = new User(0, "test", "user", "unittestuser", "password123", "unittestuser@gmail.com", true, "", 0, "", 0);
+        
+        when(userRepo.addUser(user)).thenReturn(true);
+        boolean successfulLogin = userService.createUser(user);
         assertTrue(successfulLogin);
     }
 }

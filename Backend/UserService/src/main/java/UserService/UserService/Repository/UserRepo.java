@@ -1,6 +1,11 @@
 package UserService.UserService.Repository;
 
+import UserService.UserService.Model.User;
+
 public interface UserRepo {
+    // Read
     public boolean userFound(String username, String password);
-    public boolean usernameUniqueVerified(String username, String password, String email);
+
+    // Create
+    public boolean addUser(User user);
 }
