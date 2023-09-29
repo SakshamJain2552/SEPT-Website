@@ -16,6 +16,9 @@ public interface UserService {
     // User - Read
     public Map<String, String> findUser(String username);
 
+    // User - Update
+    public boolean updateUserNotifications(boolean userPreference, String username);
+
     // Cart - Create
     public Cart createCart(Cart cart);
 

@@ -16,6 +16,9 @@ public interface UserRepo {
     // User - Read
     public Map<String, String> getUserDetails(String username);
 
+    // User - Update
+    public boolean updateUserNotificationPreference(boolean userPreference, String username);
+
     // Cart - Create
     public Cart create(Cart cart);
 

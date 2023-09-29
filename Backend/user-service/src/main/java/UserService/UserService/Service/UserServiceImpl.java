@@ -34,6 +34,10 @@ public class UserServiceImpl implements UserService{
         return repository.getUserDetails(username);
     }
 
+    public boolean updateUserNotifications(boolean userPreference, String username) {
+        return repository.updateUserNotificationPreference(userPreference, username);
+    }
+
     @Override
     public Cart createCart(Cart cart) {
         return repository.create(cart);

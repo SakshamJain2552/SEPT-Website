@@ -75,6 +75,13 @@ public class UserController {
         return userService.findUser(username);
     }
 
+    @PutMapping(value = "/notifications", consumes = "application/json")
+    public boolean updateUserNotifications(@RequestBody Map<String, String> body) {
+        boolean preference = Boolean.parseBoolean(body.get("notifications"));
+        String username = body.get("username");
+        return userService.updateUserNotifications(preference, username);
+    }
+
     // Cart - create
     @PostMapping(value = "/cart", consumes = "application/json")
     public ResponseEntity<Cart> newCart(@RequestBody Cart cart) {

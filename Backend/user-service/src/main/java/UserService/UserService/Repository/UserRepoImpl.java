@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.naming.spi.DirStateFactory.Result;
 import javax.sql.DataSource;
 
 import org.springframework.stereotype.Repository;
@@ -120,22 +121,28 @@ public class UserRepoImpl implements UserRepo {
         try {
             Connection connection = dataSource.getConnection();
             PreparedStatement stm = connection.prepareStatement(
-                "SELECT UserID, Username, Password, Email\r\n" + //
-                "FROM Users;"
+                "SELECT * FROM Users;"
             );
 
             ResultSet rs = stm.executeQuery();
 
             System.out.println("Given username: " + username);
             while(rs.next()) {
-                if (rs.getString(2).equals(username)) {
+                if (rs.getString(4).equals(username)) {
                     System.out.println("User found: " + rs.getString(2));
                     
                     userDetails.put("UserID", Integer.toString(rs.getInt(1)));
-                    userDetails.put("Username", rs.getString(2));
-                    userDetails.put("Password", rs.getString(3));
-                    userDetails.put("Email", rs.getString(4));
-                
+                    userDetails.put("FirstName", rs.getString(2));
+                    userDetails.put("LastName", rs.getString(3));
+                    userDetails.put("Username", rs.getString(4));
+                    userDetails.put("Password", rs.getString(5));
+                    userDetails.put("Email", rs.getString(6));
+                    userDetails.put("Notifications", Boolean.toString(rs.getBoolean(7)));
+                    userDetails.put("CardName", rs.getString(8));
+                    userDetails.put("CardNumber", Integer.toString(rs.getInt(9)));
+                    userDetails.put("CardExpiration", rs.getString(10));
+                    userDetails.put("CardCVV", Integer.toString(rs.getInt(11)));
+
                     connection.close();
 
                     return userDetails;
@@ -147,6 +154,44 @@ public class UserRepoImpl implements UserRepo {
             
         } catch (SQLException e) {
             throw new RuntimeException("Error in getUserDetails()", e);
+        }
+    }
+
+    @Override
+    public boolean updateUserNotificationPreference(boolean userPreference, String username) {
+        try {
+            Connection connection = dataSource.getConnection();
+
+            PreparedStatement stm = connection.prepareStatement(
+                "SELECT Notifications\r\n" +
+                "FROM Users\r\n" +
+                "WHERE Username = '" + username + "';"
+            );
+
+            ResultSet rs = stm.executeQuery();
+
+            // Check if user exists
+            if (!rs.next()) {
+                System.out.println("User not found");
+                connection.close();
+                return false;
+            }
+
+            // Update user notification preference
+            stm = connection.prepareStatement(
+                "UPDATE Users\r\n" +
+                "SET Notifications = '" + userPreference + "'\r\n" +
+                "WHERE Username = '" + username + "';"
+            );
+
+            stm.executeUpdate();
+
+            System.out.println("User notification preference updated.");
+            connection.close();
+            return true;
+            
+        } catch (SQLException e) {
+            throw new RuntimeException("Error in updateUserNotificationPreference()", e);
         }
     }
 
