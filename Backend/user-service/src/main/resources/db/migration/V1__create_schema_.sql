@@ -22,3 +22,21 @@ CREATE TABLE IF NOT EXISTS Users (
   CONSTRAINT UQ_Username UNIQUE (Username),
   CONSTRAINT UQ_Email UNIQUE (Email)
 );
+
+-- Table: Carts
+CREATE TABLE Carts (
+    CartID INT AUTO_INCREMENT PRIMARY KEY,
+    UserID INT,
+    DateCreated TEXT NOT NULL,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+-- Table: CartItems
+CREATE TABLE CartItems (
+    CartItemID INT AUTO_INCREMENT PRIMARY KEY,
+    CartID INT,
+    ProductID INT,
+    StoreName VARCHAR(255),
+    Quantity INT NOT NULL,
+    FOREIGN KEY (CartID) REFERENCES Carts(CartID)
+);

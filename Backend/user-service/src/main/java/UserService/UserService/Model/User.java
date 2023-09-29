@@ -1,5 +1,3 @@
-
-
 package UserService.UserService.Model;
 
 public record User(
