@@ -43,7 +43,7 @@ public class TestUserRepo {
         testDetails.put("Username", "alice123");
         testDetails.put("Password", "password123");
         testDetails.put ("Email", "alice@email.com");
-        testDetails.put("Notifications", "true");
+        testDetails.put("Notifications", "false");
         testDetails.put("CardName", "");
         testDetails.put("CardNumber", "0");
         testDetails.put("CardExpiration", "");
