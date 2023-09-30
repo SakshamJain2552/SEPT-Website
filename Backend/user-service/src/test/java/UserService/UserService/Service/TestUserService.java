@@ -40,17 +40,17 @@ public class TestUserService {
     public void testUserVerified() {
         when(userRepo.userFound("alice123", "password123")).thenReturn(true);
         boolean successfulLogin = userService.userVerified("alice123", "password123");
-        assertTrue(successfulLogin);
+        assertEquals(userRepo.userFound("alice123", "password123"), successfulLogin);
     }
 
     @Test
     public void testCreateUser() {
         // New user object to be tested
         User user = new User(0, "test", "user", "unittestuser", "password123", "unittestuser@gmail.com", true, "", 0, "", 0);
-        
+
         when(userRepo.addUser(user)).thenReturn(true);
         boolean successfulLogin = userService.createUser(user);
-        assertTrue(successfulLogin);
+        assertEquals(userRepo.addUser(user), successfulLogin);
     }
 
     @Test
@@ -81,6 +81,13 @@ public class TestUserService {
         assertEquals(testDetails.get("CardNumber"), userDetails.get("CardNumber"));
         assertEquals(testDetails.get("CardExpiration"), userDetails.get("CardExpiration"));
         assertEquals(testDetails.get("CardCVV"), userDetails.get("CardCVV"));
+    }
+
+    @Test
+    public void testUpdateUserNotifications() {
+        when(userRepo.updateUserNotificationPreference(true, "alice123")).thenReturn(true);
+        boolean successfulUpdate = userService.updateUserNotifications(true, "alice123");
+        assertEquals(userRepo.updateUserNotificationPreference(true, "alice123"), successfulUpdate);
     }
 
     @Test
