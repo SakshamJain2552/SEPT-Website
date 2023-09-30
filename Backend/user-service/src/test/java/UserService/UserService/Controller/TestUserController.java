@@ -56,7 +56,7 @@ public class TestUserController {
         body.put("username", "alice123");
         body.put("password", "password123");
         boolean successfulLogin = userController.userLogin(body);
-        assertTrue(successfulLogin);
+        assertEquals(userService.userVerified("alice123", "password123"), successfulLogin);
     }
 
     @Test
@@ -79,7 +79,7 @@ public class TestUserController {
         body.put("cardCVV", "0");
         boolean successfulSignup = userController.userSignup(body);
 
-        assertTrue(successfulSignup);
+        assertEquals(userService.createUser(user), successfulSignup);
     }
 
     @Test
@@ -110,6 +110,16 @@ public class TestUserController {
         assertEquals(testDetails.get("CardNumber"), userDetails.get("CardNumber"));
         assertEquals(testDetails.get("CardExpiration"), userDetails.get("CardExpiration"));
         assertEquals(testDetails.get("CardCVV"), userDetails.get("CardCVV"));
+    }
+
+    @Test
+    public void testUpdateUserNotifications() {
+        when(userService.updateUserNotifications(true, "alice123")).thenReturn(true);
+        Map<String, String> body = new HashMap<>();
+        body.put("notifications", "true");
+        body.put("username", "alice123");
+        boolean successfulUpdate = userController.updateUserNotifications(body);
+        assertEquals(userService.updateUserNotifications(true, "alice123"), successfulUpdate);
     }
 
     @Test

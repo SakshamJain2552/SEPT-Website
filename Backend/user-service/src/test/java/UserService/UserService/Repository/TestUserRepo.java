@@ -64,6 +64,12 @@ public class TestUserRepo {
     }
 
     @Test
+    public void testUpdateUserNotificationPreference() {
+        boolean updateSuccessful = userRepo.updateUserNotificationPreference(true, "alice123");
+        assertTrue(updateSuccessful);
+    }
+
+    @Test
     public void testCreateCart() {
 
         Cart testCart = new Cart(1L, "10/10/2010", 1L, "CityStore North", 1L);
