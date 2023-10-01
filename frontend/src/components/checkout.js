@@ -119,6 +119,8 @@ function CheckoutPage() {
 //       </Button>
 //     </div>
   //   );
+
+  const isFormComplete = address && selectedDate && time && paymentMethod;
   
   return (
     <div style={{ maxWidth: '700px', margin: '40px auto', padding: '20px' }}>
@@ -178,7 +180,7 @@ function CheckoutPage() {
             <Typography variant="h6" style={{ marginTop: '20px' }}>Total Price: ${totalPrice.toFixed(2)}</Typography>
         </Card>
 
-        <Button variant="contained" color="primary" fullWidth onClick={handleSubmit}>
+        <Button variant="contained" color="primary" fullWidth onClick={handleSubmit} disabled={!isFormComplete}>
             Confirm Order
         </Button>
     </div>
