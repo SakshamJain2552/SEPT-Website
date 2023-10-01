@@ -22,7 +22,7 @@ import AboutDarby from './pages/FooterPages/AboutDarby';
 // import SignUp from './pages/signup';
 import ProductDetail from './pages/product-details'; 
 import CartPage from './pages/cart';
-import Checkout from './components/checkout';
+import Checkout from './pages/checkout';
 
 
 const theme = createTheme({
