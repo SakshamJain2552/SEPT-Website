@@ -26,5 +26,6 @@ CREATE TABLE IF NOT EXISTS Deliveries (
     DeliveryDate VARCHAR(255) NOT NULL,
     DeliveryTime VARCHAR(255) NOT NULL,
     PaymentMethod VARCHAR(255) NOT NULL,
+    CONSTRAINT UQ_DeliveryID UNIQUE (DeliveryID),
     CONSTRAINT FK_Username_Order FOREIGN KEY (Username) REFERENCES Users(Username)
 )
