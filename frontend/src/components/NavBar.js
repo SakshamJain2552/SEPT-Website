@@ -41,7 +41,7 @@ function NavBar() {
                 color="primary"
                 variant="h6"
                 component={Link}
-                to="/"
+                to="/list"
                 style={{
                   textDecoration: 'none',
                   fontFamily: 'Georgia',
