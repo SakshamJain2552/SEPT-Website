@@ -169,41 +169,83 @@ function CartPage() {
   };
   
 
-  return (
-    <div style={{ maxWidth: '1200px', margin: '20px auto', padding: '20px' }}>
-      <h2>Your Cart</h2>
-      {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
-      ) : (
-        <div>
-            {cartItems.map(item => {
+//   return (
+//     <div style={{ maxWidth: '1200px', margin: '20px auto', padding: '20px' }}>
+//       <h2>Your Cart</h2>
+//       {cartItems.length === 0 ? (
+//         <p>Your cart is empty.</p>
+//       ) : (
+//         <div>
+//             {cartItems.map(item => {
+//           const product = products.find(p => p.productId === item.productId);
+//           return product ? (
+//             <div key={item.cartItemId} style={{ display: 'flex', borderBottom: '1px solid #eee', padding: '15px 0' }}>
+//               <img src={product.imagePath} alt={product.productName} style={{ width: '100px', height: '100px', marginRight: '20px' }} />
+//               <div style={{ flex: '1' }}>
+//                 <h4>{product.productName}</h4>
+//                 <p>Store: {item.storeName}</p>
+//                 <p>Price: ${item.detailedPrice}</p>
+//                 <p>Quantity: {item.quantity}</p>
+//                 <p>Date Added: {item.dateCreated}</p>
+//               </div>
+//               <div onClick={() => handleDelete(item)} style={{ cursor: 'pointer' }}>
+//                 <DeleteIcon />
+//               </div>
+//             </div>
+//           ) : null;
+//             })}
+            
+//           <div style={{ textAlign: 'right', marginTop: '20px' }}>
+//             <Button variant="contained" color="primary" onClick={() => navigate('/checkout')}>
+//               Checkout
+//             </Button>
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// }
+
+// export default CartPage;
+
+return (
+  <div style={{ maxWidth: '1200px', margin: '40px auto', padding: '20px', backgroundColor: '#f7f7f7' }}>
+    <h2 style={{ marginBottom: '30px', textAlign: 'center' }}>Your Cart</h2>
+    {cartItems.length === 0 ? (
+      <p style={{ textAlign: 'center' }}>Your cart is empty.</p>
+    ) : (
+      <div>
+        {cartItems.map(item => {
           const product = products.find(p => p.productId === item.productId);
           return product ? (
-            <div key={item.cartItemId} style={{ display: 'flex', borderBottom: '1px solid #eee', padding: '15px 0' }}>
-              <img src={product.imagePath} alt={product.productName} style={{ width: '100px', height: '100px', marginRight: '20px' }} />
-              <div style={{ flex: '1' }}>
-                <h4>{product.productName}</h4>
-                <p>Store: {item.storeName}</p>
-                <p>Price: ${item.detailedPrice}</p>
-                <p>Quantity: {item.quantity}</p>
-                <p>Date Added: {item.dateCreated}</p>
+            <div key={item.cartItemId} style={{ display: 'flex', backgroundColor: '#fff', margin: '10px 0', borderRadius: '5px', boxShadow: '0 0 10px rgba(0,0,0,0.1)', overflow: 'hidden' }}>
+              <img src={product.imagePath} alt={product.productName} style={{ width: '180px', objectFit: 'cover' }} />
+              <div style={{ flex: '1', padding: '15px' }}>
+                <h4 style={{ marginBottom: '5px' }}>{product.productName}</h4>
+                <p style={{ color: '#777', marginBottom: '5px' }}>Store: {item.storeName}</p>
+                <p style={{ color: '#333', fontWeight: 'bold', marginBottom: '5px' }}>Price: ${item.detailedPrice}</p>
+                <p style={{ color: '#777', marginBottom: '5px' }}>Quantity: {item.quantity}</p>
+                <p style={{ color: '#777', marginBottom: '5px' }}>Date Added: {item.dateCreated}</p>
               </div>
-              <div onClick={() => handleDelete(item)} style={{ cursor: 'pointer' }}>
-                <DeleteIcon />
+              <div onClick={() => handleDelete(item)} style={{ cursor: 'pointer', padding: '15px' }}>
+                <DeleteIcon style={{ color: '#f44336' }} />
               </div>
             </div>
           ) : null;
-            })}
-            
-          <div style={{ textAlign: 'right', marginTop: '20px' }}>
-            <Button variant="contained" color="primary" onClick={() => navigate('/checkout')}>
-              Checkout
-            </Button>
+        })}
+
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+          <div>
+            <h3>Total: ${cartItems.reduce((total, item) => total + (item.detailedPrice * item.quantity), 0).toFixed(2)}</h3>
           </div>
+          <Button variant="contained" color="primary" size="large" onClick={() => navigate('/checkout')}>
+            Checkout
+          </Button>
         </div>
-      )}
-    </div>
-  );
+      </div>
+    )}
+  </div>
+);
 }
 
 export default CartPage;
