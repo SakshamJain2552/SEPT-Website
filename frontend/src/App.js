@@ -20,7 +20,7 @@ import AboutHari from './pages/FooterPages/AboutHari';
 import AboutLance from './pages/FooterPages/AboutLance';
 import AboutDarby from './pages/FooterPages/AboutDarby';
 // import SignUp from './pages/signup';
-import ProductDetail from './components/productdetails'; 
+import ProductDetail from './pages/product-details'; 
 import CartPage from './components/cart';
 import Checkout from './components/checkout';
 
