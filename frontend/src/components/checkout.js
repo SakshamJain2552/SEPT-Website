@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { TextField, Button, Select, MenuItem, FormControl, InputLabel, Typography, Card, CardContent } from '@mui/material';
+import Breadcrumb from './Breadcrumbs';
 
 function CheckoutPage() {
   const [address, setAddress] = useState('');
@@ -11,13 +12,7 @@ function CheckoutPage() {
 
   const [cardNumber, setCardNumber] = useState('');
 const [expiryDate, setExpiryDate] = useState('');
-const [cvv, setCvv] = useState('');
-
-  const availableDates = Array.from({ length: 7 }, (_, i) => {
-    const d = new Date();
-    d.setDate(d.getDate() + i);
-    return d.toLocaleDateString();
-  });
+  const [cvv, setCvv] = useState('');
 
   useEffect(() => {
     calculateTotalPrice();
@@ -49,11 +44,10 @@ const [cvv, setCvv] = useState('');
     try {
       await axios.post('http://localhost:8082/delivery/setDelivery', payload);
       alert("Order placed successfully!");
-      localStorage.removeItem('cartItems');
     } catch (error) {
       alert("Error placing the order. Please try again later.");
     }
-  };
+    };
 
 
   const isFormComplete = address && selectedDate && time &&
@@ -62,6 +56,7 @@ const [cvv, setCvv] = useState('');
   
   return (
     <div style={{ maxWidth: '700px', margin: '40px auto', padding: '20px' }}>
+      <Breadcrumb category="Checkout" />
         <Typography variant="h4" gutterBottom align="center">Checkout</Typography>
 
         <Card style={{ padding: '20px', marginBottom: '20px' }}>
