@@ -65,7 +65,7 @@ function CheckoutPage() {
         onChange={e => setAddress(e.target.value)}
         margin="normal"
       />
-
+{/* 
       <FormControl fullWidth variant="outlined" margin="normal">
         <InputLabel>Date</InputLabel>
         <Select
@@ -77,7 +77,20 @@ function CheckoutPage() {
             <MenuItem key={date} value={date}>{date}</MenuItem>
           ))}
         </Select>
-      </FormControl>
+      </FormControl> */}
+
+<TextField
+  fullWidth
+  variant="outlined"
+  label="Date"
+  type="date"
+  value={selectedDate}
+  onChange={e => setSelectedDate(e.target.value)}
+  margin="normal"
+  InputLabelProps={{
+    shrink: true,
+  }}
+/>
 
       <TextField
         fullWidth
