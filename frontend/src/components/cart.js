@@ -161,7 +161,7 @@ function CartPage() {
       const updatedLocalCartItems = localCartItems.filter(item => item.productId !== cartItem.productId || item.storeName !== cartItem.storeName);
       localStorage.setItem('cartItems', JSON.stringify(updatedLocalCartItems));
   
-      // Refresh products to ensure consistency, though this step might not be necessary if products aren't changed.
+      // Refresh products to ensure consistency
       fetchCartAndProducts();
     } catch (error) {
       console.error('Error deleting cart item', error);
