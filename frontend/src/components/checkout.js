@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { TextField, Button, Select, MenuItem, FormControl, InputLabel, Typography } from '@mui/material';
+import { TextField, Button, Select, MenuItem, FormControl, InputLabel, Typography, Card, CardContent } from '@mui/material';
 
 function CheckoutPage() {
   const [address, setAddress] = useState('');
@@ -51,74 +51,138 @@ function CheckoutPage() {
     }
   };
 
+//   return (
+//     <div style={{ maxWidth: '600px', margin: '40px auto', padding: '20px' }}>
+//       <Typography variant="h4" gutterBottom>Checkout</Typography>
+//       <Typography variant="h6">Total Price: ${totalPrice.toFixed(2)}</Typography>
+//       <br />
+
+//       <TextField
+//         fullWidth
+//         variant="outlined"
+//         label="Address"
+//         value={address}
+//         onChange={e => setAddress(e.target.value)}
+//         margin="normal"
+//       />
+// {/*
+//       <FormControl fullWidth variant="outlined" margin="normal">
+//         <InputLabel>Date</InputLabel>
+//         <Select
+//           value={selectedDate}
+//           onChange={e => setSelectedDate(e.target.value)}
+//           label="Date"
+//         >
+//           {availableDates.map(date => (
+//             <MenuItem key={date} value={date}>{date}</MenuItem>
+//           ))}
+//         </Select>
+//       </FormControl> */}
+
+// <TextField
+//   fullWidth
+//   variant="outlined"
+//   label="Date"
+//   type="date"
+//   value={selectedDate}
+//   onChange={e => setSelectedDate(e.target.value)}
+//   margin="normal"
+//   InputLabelProps={{
+//     shrink: true,
+//   }}
+// />
+
+//       <TextField
+//         fullWidth
+//         variant="outlined"
+//         label="Time (HH:mm)"
+//         type="time"
+//         value={time}
+//         onChange={e => setTime(e.target.value)}
+//         margin="normal"
+//       />
+
+//       <FormControl fullWidth variant="outlined" margin="normal">
+//         <InputLabel>Payment Method</InputLabel>
+//         <Select
+//           value={paymentMethod}
+//           onChange={e => setPaymentMethod(e.target.value)}
+//           label="Payment Method"
+//         >
+//           <MenuItem value="card">Card</MenuItem>
+//           <MenuItem value="cash">Cash</MenuItem>
+//         </Select>
+//       </FormControl>
+
+//       <Button variant="contained" color="primary" fullWidth onClick={handleSubmit}>
+//         Confirm Order
+//       </Button>
+//     </div>
+  //   );
+  
   return (
-    <div style={{ maxWidth: '600px', margin: '40px auto', padding: '20px' }}>
-      <Typography variant="h4" gutterBottom>Checkout</Typography>
-      <Typography variant="h6">Total Price: ${totalPrice.toFixed(2)}</Typography>
-      <br />
+    <div style={{ maxWidth: '700px', margin: '40px auto', padding: '20px' }}>
+        <Typography variant="h4" gutterBottom align="center">Checkout</Typography>
 
-      <TextField
-        fullWidth
-        variant="outlined"
-        label="Address"
-        value={address}
-        onChange={e => setAddress(e.target.value)}
-        margin="normal"
-      />
-{/* 
-      <FormControl fullWidth variant="outlined" margin="normal">
-        <InputLabel>Date</InputLabel>
-        <Select
-          value={selectedDate}
-          onChange={e => setSelectedDate(e.target.value)}
-          label="Date"
-        >
-          {availableDates.map(date => (
-            <MenuItem key={date} value={date}>{date}</MenuItem>
-          ))}
-        </Select>
-      </FormControl> */}
+        <Card style={{ padding: '20px', marginBottom: '20px' }}>
+            <Typography variant="h5" gutterBottom>Shipping Details</Typography>
 
-<TextField
-  fullWidth
-  variant="outlined"
-  label="Date"
-  type="date"
-  value={selectedDate}
-  onChange={e => setSelectedDate(e.target.value)}
-  margin="normal"
-  InputLabelProps={{
-    shrink: true,
-  }}
-/>
+            <TextField
+                fullWidth
+                variant="outlined"
+                label="Address"
+                value={address}
+                onChange={e => setAddress(e.target.value)}
+                margin="normal"
+            />
 
-      <TextField
-        fullWidth
-        variant="outlined"
-        label="Time (HH:mm)"
-        type="time"
-        value={time}
-        onChange={e => setTime(e.target.value)}
-        margin="normal"
-      />
+            <TextField
+                fullWidth
+                variant="outlined"
+                label="Date"
+                type="date"
+                value={selectedDate}
+                onChange={e => setSelectedDate(e.target.value)}
+                margin="normal"
+                InputLabelProps={{
+                    shrink: true,
+                }}
+            />
 
-      <FormControl fullWidth variant="outlined" margin="normal">
-        <InputLabel>Payment Method</InputLabel>
-        <Select
-          value={paymentMethod}
-          onChange={e => setPaymentMethod(e.target.value)}
-          label="Payment Method"
-        >
-          <MenuItem value="card">Card</MenuItem>
-          <MenuItem value="cash">Cash</MenuItem>
-        </Select>
-      </FormControl>
+            <TextField
+                fullWidth
+                variant="outlined"
+                label="Time (HH:mm)"
+                type="time"
+                value={time}
+                onChange={e => setTime(e.target.value)}
+                margin="normal"
+            />
+        </Card>
 
-      <Button variant="contained" color="primary" fullWidth onClick={handleSubmit}>
-        Confirm Order
-      </Button>
+        <Card style={{ padding: '20px', marginBottom: '20px' }}>
+            <Typography variant="h5" gutterBottom>Payment Details</Typography>
+
+            <FormControl fullWidth variant="outlined" margin="normal">
+                <InputLabel>Payment Method</InputLabel>
+                <Select
+                    value={paymentMethod}
+                    onChange={e => setPaymentMethod(e.target.value)}
+                    label="Payment Method"
+                >
+                    <MenuItem value="card">Card</MenuItem>
+                    <MenuItem value="cash">Cash</MenuItem>
+                </Select>
+            </FormControl>
+
+            <Typography variant="h6" style={{ marginTop: '20px' }}>Total Price: ${totalPrice.toFixed(2)}</Typography>
+        </Card>
+
+        <Button variant="contained" color="primary" fullWidth onClick={handleSubmit}>
+            Confirm Order
+        </Button>
     </div>
-  );
+);
 }
 
 export default CheckoutPage;
