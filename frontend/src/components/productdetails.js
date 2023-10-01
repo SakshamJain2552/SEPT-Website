@@ -81,15 +81,21 @@ function ProductDetail() {
       storeName: product.storeNames[product.prices.indexOf(selectedPrice)],
       quantity
     };
-  
+
+    // Check if product from the same store is already in the cart
+    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    if (cartItems.some(item => item.productId === cartData.productId && item.storeName === cartData.storeName)) {
+      alert("Product already in Cart, Please delete it first to complete this action");
+      return;
+    }
+
     try {
       const response = await axios.post('http://localhost:8080/user/cart', cartData);
       if (response && response.data) {
-        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
         cartItems.push(response.data);
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        alert('Product added to cart successfully!');
       }
-      alert('Product added to cart successfully!');
     } catch (error) {
       console.error('Error adding product to cart', error);
       alert('Error adding product to cart. Please try again.');
@@ -100,17 +106,7 @@ function ProductDetail() {
 
 return (
   <div style={{ maxWidth: '1200px', margin: '20px auto', padding: '20px', backgroundColor: '#fff', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
-    {/* <nav style={{ borderRadius: '5px', marginBottom: '20px', padding: '12px', backgroundColor: '#f5f5f5' }}>
-      <ol style={{ display: 'flex', listStyleType: 'none', padding: 0 }}>
-        <li>
-          <Link to="/list" style={{ textDecoration: 'none', color: 'grey', marginRight: '10px' }}>
-            All Products
-          </Link>
-        </li>
-        <li>{product.productName}</li>
-      </ol>
-    </nav> */}
-    <Breadcrumb category={product.productName} /> {/* Use the Breadcrumb component instead of the old breadcrumbs */}
+    <Breadcrumb category={product.productName} /> 
     <div style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}>
       <div style={{ flex: '1' }}>
         <img
