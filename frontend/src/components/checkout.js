@@ -9,6 +9,10 @@ function CheckoutPage() {
   const [paymentMethod, setPaymentMethod] = useState('card');
   const [totalPrice, setTotalPrice] = useState(0);
 
+  const [cardNumber, setCardNumber] = useState('');
+const [expiryDate, setExpiryDate] = useState('');
+const [cvv, setCvv] = useState('');
+
   const availableDates = Array.from({ length: 7 }, (_, i) => {
     const d = new Date();
     d.setDate(d.getDate() + i);
@@ -51,76 +55,10 @@ function CheckoutPage() {
     }
   };
 
-//   return (
-//     <div style={{ maxWidth: '600px', margin: '40px auto', padding: '20px' }}>
-//       <Typography variant="h4" gutterBottom>Checkout</Typography>
-//       <Typography variant="h6">Total Price: ${totalPrice.toFixed(2)}</Typography>
-//       <br />
 
-//       <TextField
-//         fullWidth
-//         variant="outlined"
-//         label="Address"
-//         value={address}
-//         onChange={e => setAddress(e.target.value)}
-//         margin="normal"
-//       />
-// {/*
-//       <FormControl fullWidth variant="outlined" margin="normal">
-//         <InputLabel>Date</InputLabel>
-//         <Select
-//           value={selectedDate}
-//           onChange={e => setSelectedDate(e.target.value)}
-//           label="Date"
-//         >
-//           {availableDates.map(date => (
-//             <MenuItem key={date} value={date}>{date}</MenuItem>
-//           ))}
-//         </Select>
-//       </FormControl> */}
-
-// <TextField
-//   fullWidth
-//   variant="outlined"
-//   label="Date"
-//   type="date"
-//   value={selectedDate}
-//   onChange={e => setSelectedDate(e.target.value)}
-//   margin="normal"
-//   InputLabelProps={{
-//     shrink: true,
-//   }}
-// />
-
-//       <TextField
-//         fullWidth
-//         variant="outlined"
-//         label="Time (HH:mm)"
-//         type="time"
-//         value={time}
-//         onChange={e => setTime(e.target.value)}
-//         margin="normal"
-//       />
-
-//       <FormControl fullWidth variant="outlined" margin="normal">
-//         <InputLabel>Payment Method</InputLabel>
-//         <Select
-//           value={paymentMethod}
-//           onChange={e => setPaymentMethod(e.target.value)}
-//           label="Payment Method"
-//         >
-//           <MenuItem value="card">Card</MenuItem>
-//           <MenuItem value="cash">Cash</MenuItem>
-//         </Select>
-//       </FormControl>
-
-//       <Button variant="contained" color="primary" fullWidth onClick={handleSubmit}>
-//         Confirm Order
-//       </Button>
-//     </div>
-  //   );
-
-  const isFormComplete = address && selectedDate && time && paymentMethod;
+  const isFormComplete = address && selectedDate && time &&
+    (paymentMethod === 'cash' || 
+     (paymentMethod === 'card' && cardNumber && expiryDate && cvv));
   
   return (
     <div style={{ maxWidth: '700px', margin: '40px auto', padding: '20px' }}>
@@ -177,10 +115,51 @@ function CheckoutPage() {
                 </Select>
             </FormControl>
 
-            <Typography variant="h6" style={{ marginTop: '20px' }}>Total Price: ${totalPrice.toFixed(2)}</Typography>
+            {paymentMethod === 'card' && (
+                <div>
+                    <TextField
+                        fullWidth
+                        variant="outlined"
+                        label="Card Number"
+                        value={cardNumber}
+                        onChange={e => setCardNumber(e.target.value)}
+                        margin="normal"
+                        type="number"
+                    />
+                    <TextField
+                        fullWidth
+                        variant="outlined"
+                        label="Expiry Date"
+                        value={expiryDate}
+                        onChange={e => setExpiryDate(e.target.value)}
+                        margin="normal"
+                        type="text"
+                        placeholder="MM/YY"
+                    />
+                    <TextField
+                        fullWidth
+                        variant="outlined"
+                        label="CVV"
+                        value={cvv}
+                        onChange={e => setCvv(e.target.value)}
+                        margin="normal"
+                        type="number"
+                    />
+                </div>
+            )}
+
+            <Typography variant="h6" style={{ marginTop: '20px' }}>
+                Total Price: ${totalPrice.toFixed(2)}
+            </Typography>
         </Card>
 
-        <Button variant="contained" color="primary" fullWidth onClick={handleSubmit} disabled={!isFormComplete}>
+        <Button 
+            variant="contained" 
+            color="primary" 
+            fullWidth 
+            onClick={handleSubmit}
+            disabled={!isFormComplete}
+        >
             Confirm Order
         </Button>
     </div>
