@@ -91,6 +91,7 @@ import axios from 'axios';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
+import Breadcrumb from './Breadcrumbs';
 
 function CartPage() {
   const [cartItems, setCartItems] = useState([]);
@@ -168,48 +169,9 @@ function CartPage() {
     }
   };
   
-
-//   return (
-//     <div style={{ maxWidth: '1200px', margin: '20px auto', padding: '20px' }}>
-//       <h2>Your Cart</h2>
-//       {cartItems.length === 0 ? (
-//         <p>Your cart is empty.</p>
-//       ) : (
-//         <div>
-//             {cartItems.map(item => {
-//           const product = products.find(p => p.productId === item.productId);
-//           return product ? (
-//             <div key={item.cartItemId} style={{ display: 'flex', borderBottom: '1px solid #eee', padding: '15px 0' }}>
-//               <img src={product.imagePath} alt={product.productName} style={{ width: '100px', height: '100px', marginRight: '20px' }} />
-//               <div style={{ flex: '1' }}>
-//                 <h4>{product.productName}</h4>
-//                 <p>Store: {item.storeName}</p>
-//                 <p>Price: ${item.detailedPrice}</p>
-//                 <p>Quantity: {item.quantity}</p>
-//                 <p>Date Added: {item.dateCreated}</p>
-//               </div>
-//               <div onClick={() => handleDelete(item)} style={{ cursor: 'pointer' }}>
-//                 <DeleteIcon />
-//               </div>
-//             </div>
-//           ) : null;
-//             })}
-            
-//           <div style={{ textAlign: 'right', marginTop: '20px' }}>
-//             <Button variant="contained" color="primary" onClick={() => navigate('/checkout')}>
-//               Checkout
-//             </Button>
-//           </div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default CartPage;
-
 return (
   <div style={{ maxWidth: '1200px', margin: '40px auto', padding: '20px', backgroundColor: '#f7f7f7' }}>
+    <Breadcrumb category="Your Cart" />  {/* Add the Breadcrumb component here with the category prop */}
     <h2 style={{ marginBottom: '30px', textAlign: 'center' }}>Your Cart</h2>
     {cartItems.length === 0 ? (
       <p style={{ textAlign: 'center' }}>Your cart is empty.</p>
