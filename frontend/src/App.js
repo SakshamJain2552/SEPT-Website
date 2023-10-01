@@ -21,7 +21,7 @@ import AboutLance from './pages/FooterPages/AboutLance';
 import AboutDarby from './pages/FooterPages/AboutDarby';
 // import SignUp from './pages/signup';
 import ProductDetail from './pages/product-details'; 
-import CartPage from './components/cart';
+import CartPage from './pages/cart';
 import Checkout from './components/checkout';
 
 
