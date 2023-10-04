@@ -7,6 +7,8 @@
 -- -----------------------------------------------------
 -- Table Users
 -- -----------------------------------------------------
+USE deliverydb;
+
 CREATE TABLE IF NOT EXISTS Users (
   UserID INT AUTO_INCREMENT PRIMARY KEY,
   Username VARCHAR(255) NOT NULL,
