@@ -12,18 +12,14 @@ import logo from '../pages/logo.png';
 
 function NavBar() {
   // const [cartItemCount, setCartItemCount] = useState(0);
-  const [cartItemCount] = useState(3);
+  const [cartItemCount] = useState(null);
   const [shopMenuAnchor, setShopMenuAnchor] = useState(null);
-  const [storesMenuAnchor, setStoresMenuAnchor] = useState(null);
   const [accountMenuAnchor, setAccountMenuAnchor] = useState(null);
 
   const handleShopMenuOpen = (event) => {
     setShopMenuAnchor(event.currentTarget);
   };
 
-  const handleStoresMenuOpen = (event) => {
-    setStoresMenuAnchor(event.currentTarget);
-  };
 
   const handleAccountMenuOpen = (event) => {
     setAccountMenuAnchor(event.currentTarget);
@@ -31,19 +27,9 @@ function NavBar() {
 
   const handleMenuClose = () => {
     setShopMenuAnchor(null);
-    setStoresMenuAnchor(null);
     setAccountMenuAnchor(null);
   };
-
-
-  // // Function to add an item to the cart and update the count
-  // const addToCart = () => {
-  //   setCartItemCount(cartItemCount + 1);
-  // };
-
-
   
-
   return (
     <>
       <AppBar position="static" color="inherit">
@@ -55,7 +41,7 @@ function NavBar() {
                 color="primary"
                 variant="h6"
                 component={Link}
-                to="/"
+                to="/list"
                 style={{
                   textDecoration: 'none',
                   fontFamily: 'Georgia',
@@ -136,23 +122,7 @@ function NavBar() {
                 getContentAnchorEl={null}
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
               >
-                <MenuItem component={Link} to="/shop/all-products" onClick={handleMenuClose}>All Products</MenuItem>
-                <MenuItem component={Link} to="/shop/lowest-prices" onClick={handleMenuClose}>Lowest Prices</MenuItem>
-              </Menu>
-            </Grid>
-            <Grid item>
-              <Button color="inherit" onClick={handleStoresMenuOpen}>
-                Stores <KeyboardArrowDownIcon />
-              </Button>
-              <Menu
-                anchorEl={storesMenuAnchor}
-                open={Boolean(storesMenuAnchor)}
-                onClose={handleMenuClose}
-                getContentAnchorEl={null}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-              >
-                <MenuItem component={Link} to="/stores/all-stores" onClick={handleMenuClose}>All Stores</MenuItem>
-                <MenuItem component={Link} to="/stores/compare-stores" onClick={handleMenuClose}>Compare Stores</MenuItem>
+                <MenuItem component={Link} to="/list" onClick={handleMenuClose}>All Products</MenuItem>
               </Menu>
             </Grid>
             <Grid item>
@@ -167,7 +137,6 @@ function NavBar() {
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
               >
                 <MenuItem component={Link} to="/account/about" onClick={handleMenuClose}>About Account</MenuItem>
-                <MenuItem component={Link} to="/account/notifications" onClick={handleMenuClose}>Account Notifications</MenuItem>
               </Menu>
             </Grid>
           </Grid>

@@ -63,6 +63,8 @@ export default function SignIn() {
     //   const response = await axios.get(`http://localhost:8080/user?username=${email}&password=${password}`);
 
       if (response.data) {
+        const userdata = await axios.get('http://localhost:8080/user/details?username=' + email);
+        localStorage.setItem('user', JSON.stringify(userdata.data));
         navigate("/list");
       } else {
         setErrorMessage('Invalid username or password');
