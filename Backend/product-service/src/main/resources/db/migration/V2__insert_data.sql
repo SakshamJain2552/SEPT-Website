@@ -1,3 +1,5 @@
+USE productdb; 
+
 -- Sample Inputs for Stores
 INSERT INTO Stores (StoreName, StoreLocation, StoreDescription) VALUES
 ('SuperMart Central', '123 Central Ave, City', 'Largest branch in the city'),

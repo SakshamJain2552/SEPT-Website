@@ -35,6 +35,7 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -52,6 +53,17 @@
 			<version>2.13.0</version>
 		</dependency>
 
+		<dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.28</version>
+        </dependency>
+		
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-mysql</artifactId>
+        </dependency>
+
 	</dependencies>
 
 	<build>
@@ -61,8 +73,8 @@
 				<artifactId>flyway-maven-plugin</artifactId>
 				<version>9.21.0</version>
 				<configuration>
-					<url>jdbc:h2:file:/tmp/userdb</url>
-					<user>sa</user>
+					<url>jdbc:mysql://localhost:3306/userdb?createDatabaseIfNotExist=true</url>
+					<user>root</user>
 					<password>password</password>
 					<baselineOnMigrate>true</baselineOnMigrate>
 				</configuration>
