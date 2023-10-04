@@ -1,128 +1,149 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Use useNavigate
-import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Container from '@mui/material/Container';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const SignUpHeading = styled(Typography)`
-  margin-bottom: ${({ theme }) => theme.spacing(2)}px;
-  color: ${({ theme }) => theme.palette.primary.main};
-  font-weight: bold;
-  font-size: 24px;
-`;
+const defaultTheme = createTheme();
 
 export default function SignUp() {
-    const navigate = useNavigate(); // Use useNavigate
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    const temp = {username: formData.username, email: formData.email, password: formData.password};
+    temp[name] = value;
+    setFormData(temp);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+   // Check if any of the required fields are empty
+    if (!formData.username || !formData.email || !formData.password) {
+        setErrorMessage('Please fill in all the required fields.');
+        return; // Prevent form submission
+    }
     
-    const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-    });
-
-    const [errorMessage, setErrorMessage] = useState(null);
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:8080/user/signup', {
-                firstName: formData.firstName,
-                lastName: formData.lastName,
-                email: formData.email,
-                password: formData.password,
-            });
+    try {
       
-            if (response.data) {
-                navigate('/list');
-            } 
-            else {
-                setErrorMessage('Failed to sign up. Please check your information.');
-            }
-        } 
-        catch (error) {
-            console.error('Error during sign-up:', error);
-            setErrorMessage('Failed to sign up. Please try again later.');
-        }
-    };
+        const response = await axios.post('http://localhost:8080/user/signup', {
+          "username": formData.username,
+          "email": formData.email,
+          "password": formData.password
+      });
+    //   console.log('Registration successful:', response.data);
+      if (response.data) {
+        navigate('/'); // Redirect to the signin page after successful signup
+      } else {
+        setErrorMessage('Registration failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error during registration:', error);
+      setErrorMessage('Failed to register. Please try again later.', error.message);
+    }
+  };
 
-    return (
-        <Container component="main" maxWidth="xs">
-            <Grid container spacing={2} justifyContent="center" alignItems="center">
-                <Grid item xs={12}>
-                    <SignUpHeading variant="h5">Sign Up</SignUpHeading>
-                </Grid>
-                <Grid item xs={12}>
-                    <form onSubmit={handleSubmit}>
-                        <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="firstName"
-                        label="First Name"
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleInputChange}
-                        />
-                        <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="lastName"
-                        label="Last Name"
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleInputChange}
-                        />
-                        <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        />
-                        <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        value={formData.password}
-                        onChange={handleInputChange}
-                        />
-                        <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        >
-                            Sign Up
-                        </Button>
-                    </form>
-                </Grid>
-                <Grid item xs={12}>
-                    <Link to="/">Already have an account? Sign In</Link>
-                </Grid>
+  return (
+    <ThemeProvider theme={defaultTheme}>
+      <Container component="main" maxWidth="md">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Typography component="h1" variant="h4" sx={{ m: 2 }}>
+            Sign Up
+          </Typography>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
+              autoFocus
+              onChange={handleChange}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              onChange={handleChange}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="new-password"
+              onChange={handleChange}
+            />
+
+            {errorMessage && (
+              <Typography variant="body2" color="error" align="center" style={{ width: '100%' }}>
+                {errorMessage}
+              </Typography>
+            )}
+
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="success"
+              sx={{
+                mt: 3,
+                mb: 2,
+                bgcolor: '#C4E15B',
+                borderRadius: '20px',
+                height: '50px',
+                width: '500px',
+                color: '#7F808F',
+                fontWeight: 'bold',
+              }}
+            >
+              Sign Up
+            </Button>
+
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link href="/" variant="body2">
+                  Already have an account? Sign in
+                </Link>
+              </Grid>
             </Grid>
-        </Container>
-    );
+          </Box>
+        </Box>
+      </Container>
+    </ThemeProvider>
+  );
 }
