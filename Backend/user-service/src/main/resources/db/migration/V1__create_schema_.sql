@@ -7,6 +7,9 @@
 -- -----------------------------------------------------
 -- Table Users
 -- -----------------------------------------------------
+
+USE userdb;
+
 CREATE TABLE IF NOT EXISTS Users (
   UserID INT AUTO_INCREMENT PRIMARY KEY,
   FirstName VARCHAR(255) NOT NULL,
