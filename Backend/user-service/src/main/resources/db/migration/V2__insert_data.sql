@@ -1,3 +1,5 @@
+USE userdb
+
 -- Sample Inputs for Users
 INSERT INTO Users (FirstName, LastName, Username, Password, Email, Notifications, CardName, CardNumber, CardExpiration, CardCVV) VALUES
 ('alice', '123', 'alice123', 'password123', 'alice@email.com', 'false', '', 0, '', 0),
