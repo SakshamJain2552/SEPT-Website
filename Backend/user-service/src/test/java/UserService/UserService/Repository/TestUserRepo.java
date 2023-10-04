@@ -2,6 +2,9 @@ package UserService.UserService.Repository;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.flywaydb.core.Flyway;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import UserService.UserService.Model.User;
@@ -19,6 +22,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TestUserRepo {
     @Autowired
     private UserRepo userRepo;
+
+    @Autowired
+    private Flyway databaseMigrator;
+
+   
+    @BeforeEach
+    public void initialize() {
+        databaseMigrator.migrate();
+    }
+
+    @AfterEach
+    public void cleanup() {
+        databaseMigrator.clean();
+    }
 
     @Test
     public void testUserFound() {
