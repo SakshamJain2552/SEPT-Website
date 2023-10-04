@@ -1,3 +1,5 @@
+USE deliverydb;
+
 -- Sample Inputs for Users
 INSERT INTO Users (Username, Password, Email) VALUES
 ('alice123', 'password123', 'alice@email.com'),
