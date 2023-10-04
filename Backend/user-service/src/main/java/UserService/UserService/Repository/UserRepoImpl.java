@@ -71,45 +71,44 @@ public class UserRepoImpl implements UserRepo {
         String cardExpiration = user.cardExpiration();
         int cardCVV = user.cardCVV();
   
-        try {
-            Connection connection = dataSource.getConnection();
-            PreparedStatement stm = connection.prepareStatement(
-                "SELECT UserID, Username, Password, Email\r\n" + //
-                "FROM Users;"
+        try (Connection connection = dataSource.getConnection()) {
+        
+            // Check for uniqueness of username and email
+            PreparedStatement checkStm = connection.prepareStatement(
+                "SELECT UserID FROM Users WHERE Username = ? OR Email = ?"
             );
-
-            ResultSet rs = stm.executeQuery();
-
-            System.out.println("Given username and email: " + username + " - " + email);
-            int userID = 0;
-            while(rs.next()) {
-                userID = rs.getInt(1);
-                if (rs.getString(2).equals(username) || rs.getString(4).equals(email)) {
-                    System.out.println("Username or Email is already in the database.");
-                    connection.close();
-                    return false;
-                }
+            checkStm.setString(1, username);
+            checkStm.setString(2, email);
+            ResultSet rs = checkStm.executeQuery();
+            
+            if (rs.next()) {
+                System.out.println("Username or Email is already in the database.");
+                return false;
             }
-            
-            // Username and Email is unique, so insert new user into database
-            userID += 1;
-            stm = connection.prepareStatement(
-                "INSERT INTO Users\r\n" + //
-                "VALUES (" + userID + ",'" + firstname + "','" + lastname + "','" + username + "','" + password + "','" + email + 
-                "','" + notifications + "','" + cardName + "'," + cardNumber + ",'" + cardExpiration + "'," + cardCVV + ");"
+    
+            // Insert new user
+            PreparedStatement stm = connection.prepareStatement(
+                "INSERT INTO Users (FirstName, LastName, Username, Password, Email, Notifications, CardName, CardNumber, CardExpiration, CardCVV) " + 
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             );
+            stm.setString(1, firstname);
+            stm.setString(2, lastname);
+            stm.setString(3, username);
+            stm.setString(4, password);
+            stm.setString(5, email);
+            stm.setBoolean(6, notifications);
+            stm.setString(7, cardName);
+            stm.setInt(8, cardNumber);
+            stm.setString(9, cardExpiration);
+            stm.setInt(10, cardCVV);
             stm.execute();
-
-            System.out.println("New user inserted into database:");
-            System.out.println("UserID: " + userID);
-            System.out.println("Username: " + username);
-            System.out.println("Email: " + email);
-
-            connection.close();
+    
+            System.out.println("New user inserted into database.");
+            // ... [print user details]
             return true;
-            
+    
         } catch (SQLException e) {
-            throw new RuntimeException("Error in usernameUniqueVerified()", e);
+            throw new RuntimeException("Error in addUser()", e);
         }
     }
 
@@ -158,42 +157,29 @@ public class UserRepoImpl implements UserRepo {
     }
 
     @Override
-    public boolean updateUserNotificationPreference(boolean userPreference, String username) {
-        try {
-            Connection connection = dataSource.getConnection();
+public boolean updateUserNotificationPreference(boolean userPreference, String username) {
+    try (Connection connection = dataSource.getConnection()) {
 
-            PreparedStatement stm = connection.prepareStatement(
-                "SELECT Notifications\r\n" +
-                "FROM Users\r\n" +
-                "WHERE Username = '" + username + "';"
-            );
+        // Update user notification preference
+        PreparedStatement stm = connection.prepareStatement(
+            "UPDATE Users SET Notifications = ? WHERE Username = ?"
+        );
+        stm.setBoolean(1, userPreference);
+        stm.setString(2, username);
 
-            ResultSet rs = stm.executeQuery();
+        int affectedRows = stm.executeUpdate();
 
-            // Check if user exists
-            if (!rs.next()) {
-                System.out.println("User not found");
-                connection.close();
-                return false;
-            }
-
-            // Update user notification preference
-            stm = connection.prepareStatement(
-                "UPDATE Users\r\n" +
-                "SET Notifications = '" + userPreference + "'\r\n" +
-                "WHERE Username = '" + username + "';"
-            );
-
-            stm.executeUpdate();
-
+        if (affectedRows > 0) {
             System.out.println("User notification preference updated.");
-            connection.close();
             return true;
-            
-        } catch (SQLException e) {
-            throw new RuntimeException("Error in updateUserNotificationPreference()", e);
+        } else {
+            System.out.println("User not found or no changes made.");
+            return false;
         }
+    } catch (SQLException e) {
+        throw new RuntimeException("Error in updateUserNotificationPreference()", e);
     }
+}
 
     @Override
     public Cart create(Cart cart) {
