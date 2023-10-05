@@ -1,0 +1,96 @@
+version: '3.4'
+
+services:
+  delivery-service:
+    image: 309985726257.dkr.ecr.us-east-1.amazonaws.com/delivery-service:latest
+    platform: "linux/amd64"
+    restart: on-failure
+    ports:
+      - "8082:8082"
+    environment:
+      - spring.datasource.url=jdbc:mysql://deliverydb:3306/deliverydb?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+      - spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
+      - spring.datasource.username=root
+      - spring.datasource.password=password
+    depends_on:
+      - deliverydb
+  
+  deliverydb:
+    platform: "linux/amd64"
+    image: mysql:8.0-oracle
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: deliverydb 
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "33061:3306"
+    volumes:
+      - deliverydb_data:/var/lib/mysql
+
+  product-service:
+    image: 309985726257.dkr.ecr.us-east-1.amazonaws.com/product-service:latest
+    platform: "linux/amd64"
+    restart: on-failure
+    ports:
+      - "8081:8081"
+    environment:
+      - spring.datasource.url=jdbc:mysql://productdb:3306/productdb?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+      - spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
+      - spring.datasource.username=root
+      - spring.datasource.password=password
+    depends_on:
+      - productdb
+  
+  productdb:
+    platform: "linux/amd64"
+    image: mysql:8.0-oracle
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: productdb 
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "33062:3306"
+    volumes:
+      - productdb_data:/var/lib/mysql
+
+  user-service:
+    image: 309985726257.dkr.ecr.us-east-1.amazonaws.com/user-service:latest
+    platform: "linux/amd64"
+    restart: on-failure
+    ports:
+      - "8080:8080"
+    environment:
+      - spring.datasource.url=jdbc:mysql://userdb:3306/userdb?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+      - spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
+      - spring.datasource.username=root
+      - spring.datasource.password=password
+    depends_on:
+      - userdb
+
+  userdb:
+    platform: "linux/amd64"
+    image: mysql:8.0-oracle
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: userdb 
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "33063:3306"
+    volumes:
+      - userdb_data:/var/lib/mysql
+
+  adminer:
+    platform: "linux/amd64"
+    image: adminer
+    restart: always
+    ports:
+      - 9000:8080
+    depends_on:
+      - deliverydb
+      - productdb
+      - userdb
+
+volumes:
+  deliverydb_data:
+  productdb_data:
+  userdb_data:
