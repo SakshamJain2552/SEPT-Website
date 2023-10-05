@@ -1,4 +1,4 @@
-USE deliverydb;
+-- USE deliverydb;
 
 -- Sample Inputs for Users
 INSERT INTO Users (Username, Password, Email) VALUES

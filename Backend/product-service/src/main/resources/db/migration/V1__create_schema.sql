@@ -1,4 +1,4 @@
-USE productdb; 
+-- USE productdb; 
 
 -- -----------------------------------------------------
 -- Table Products

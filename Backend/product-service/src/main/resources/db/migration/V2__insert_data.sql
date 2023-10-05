@@ -1,4 +1,4 @@
-USE productdb; 
+-- USE productdb; 
 
 -- Sample Inputs for Stores
 INSERT INTO Stores (StoreName, StoreLocation, StoreDescription) VALUES

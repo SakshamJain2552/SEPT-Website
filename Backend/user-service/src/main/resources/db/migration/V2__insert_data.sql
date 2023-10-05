@@ -1,4 +1,4 @@
-USE userdb;
+-- USE userdb;
 
 -- Sample Inputs for Users
 INSERT INTO Users (FirstName, LastName, Username, Password, Email, Notifications, CardName, CardNumber, CardExpiration, CardCVV) VALUES

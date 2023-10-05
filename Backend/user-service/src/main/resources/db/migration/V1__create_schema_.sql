@@ -8,7 +8,7 @@
 -- Table Users
 -- -----------------------------------------------------
 
-USE userdb;
+-- USE userdb;
 
 CREATE TABLE IF NOT EXISTS Users (
   UserID INT AUTO_INCREMENT PRIMARY KEY,
