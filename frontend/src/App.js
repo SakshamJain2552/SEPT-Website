@@ -14,7 +14,7 @@ import AboutLance from './pages/FooterPages/AboutLance';
 import ProductDetail from './pages/product-details'; 
 import CartPage from './pages/cart';
 import Checkout from './pages/checkout';
-
+import SignUp from './pages/signup';
 
 const theme = createTheme({
   palette: {
@@ -43,7 +43,7 @@ function App() {
         <Route path='/contact/saksham' element={<AboutSaksham/>} />
         <Route path='/contact/hari' element={<AboutHari/>} />
         <Route path='/contact/lance' element={<AboutLance/>} />
-          {/* <Route path='/signup' element={<SignUp />} /> */}
+          <Route path='/signup' element={<SignUp />} />
           <Route path="/product/:productId" element={<ProductDetail />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="checkout" element={<Checkout />} />
