@@ -1,6 +1,9 @@
 package DeliveryService.DeliveryService.Repository;
 import DeliveryService.DeliveryService.Model.Delivery;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
@@ -104,6 +107,51 @@ public class DeliveryRepoImpl implements DeliveryRepo{
 
         catch (SQLException e) {
             throw new RuntimeException("Error in DeliveryRepoImpl.java - findDelivery()", e);
+        }
+    }
+
+    @Override
+    public List<Delivery> findDeliveryByUser(String username) {
+        List<Delivery> deliveries = new ArrayList<>();
+        try {
+            Connection connection = dataSource.getConnection();
+
+            // Check if user has existing orders
+            PreparedStatement checkOrderID = connection.prepareStatement(
+                "SELECT Username FROM Deliveries WHERE Username = '" + username + "';"
+            );
+
+            ResultSet orderIDResult = checkOrderID.executeQuery();
+            if (!orderIDResult.next()) {
+                connection.close();
+                throw new SQLException("Order does not exist");
+            }
+
+            // Get delivery
+            PreparedStatement getDelivery = connection.prepareStatement(
+                "SELECT * FROM Deliveries WHERE Username = '" + username + "';"
+            );
+
+            ResultSet deliveryResult = getDelivery.executeQuery();
+
+            while(deliveryResult.next()) {
+                int id = deliveryResult.getInt(1);
+                String user = deliveryResult.getString(2);
+                String address = deliveryResult.getString(3);
+                String date = deliveryResult.getString(4);
+                String time = deliveryResult.getString(5);
+                String paymentMethod = deliveryResult.getString(6);
+
+                Delivery delivery = new Delivery(id, user, address, date, time, paymentMethod);
+                deliveries.add(delivery);
+            }
+
+            connection.close();
+            return deliveries;
+        }
+
+        catch (SQLException e) {
+            throw new RuntimeException("Error in DeliveryRepoImpl.java - findDeliveryByUser()", e);
         }
     }
 }

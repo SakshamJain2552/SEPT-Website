@@ -2,6 +2,7 @@ package DeliveryService.DeliveryService.Contoller;
 import DeliveryService.DeliveryService.Model.Delivery;
 
 import java.util.Map;
+import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,8 +41,13 @@ public class DeliveryController {
         return new ResponseEntity<Delivery>(delivery, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("deliveryID/{id}")
     public Delivery deliveryDetails(@PathVariable("id") String id) {
         return deliveryService.getDelivery(id);
+    }
+
+    @GetMapping("username/{username}")
+    public List<Delivery> deliveryDetailsByUser(@PathVariable("username") String username) {
+        return deliveryService.getDeliveryByUser(username);
     }
 }

@@ -1,5 +1,8 @@
 package DeliveryService.DeliveryService.Controller;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -71,5 +74,15 @@ public class TestDeliveryController {
         when(deliveryService.getDelivery("1")).thenReturn(testDelivery);
         Delivery returnedDelivery = deliveryController.deliveryDetails("1");
         assertEquals(testDelivery, returnedDelivery);
+    }
+
+    @Test
+    public void testDeliveryDetailsByUser() {
+        Delivery testDelivery = new Delivery(1, "alice123", "1 Alice Street, Victoria", "1-1-2023", "12:00", "card");
+        List<Delivery> testDeliveries = new ArrayList<>();
+        testDeliveries.add(testDelivery);
+        when(deliveryService.getDeliveryByUser("alice123")).thenReturn(testDeliveries);
+        List<Delivery> returnedDeliveries = deliveryController.deliveryDetailsByUser("alice123");
+        assertEquals(testDeliveries, returnedDeliveries);
     }
 }

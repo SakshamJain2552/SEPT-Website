@@ -1,5 +1,7 @@
 package DeliveryService.DeliveryService.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +25,10 @@ public class DeliveryServiceImpl implements DeliveryService {
     @Override
     public Delivery getDelivery(String deliveryID) {
         return deliveryRepo.findDelivery(deliveryID);
+    }
+
+    @Override
+    public List<Delivery> getDeliveryByUser(String username) {
+        return deliveryRepo.findDeliveryByUser(username);
     }
 }
