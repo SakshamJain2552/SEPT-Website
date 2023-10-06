@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import ProductService.ProductService.Model.DetailedProduct;
 import ProductService.ProductService.Model.Product;
+import ProductService.ProductService.Model.UserReview;
 
 @SpringBootTest
 class TestProductRepository {
@@ -53,6 +54,29 @@ class TestProductRepository {
 
         // Compare prices array
         assertArrayEquals(expectedProduct.prices(), actualProduct.prices());
+    }
+
+    // Rating for this product by same user should be 5.0, after running this test it should be 3.0.
+    @Test
+    public void testSetReview(){
+        UserReview expReview = new UserReview(1L, 1L, "Supermarket Central", 3.0);
+
+        UserReview actReview = productRepository.setReview(expReview);
+
+        assertEquals(expReview.userId(), actReview.userId());
+        assertEquals(expReview.productId(), actReview.productId());
+        assertEquals(expReview.rating(), actReview.rating());
+
+    }
+
+    // Rating was avg 3.667 before testSetReview, should be 3.0 now.
+    @Test
+    public void testGetReview(){
+        Long productId = 1L;
+
+        Double actAvgRating = productRepository.getReview(productId);
+
+        assertEquals(actAvgRating, 3.0);
     }
 
 }
