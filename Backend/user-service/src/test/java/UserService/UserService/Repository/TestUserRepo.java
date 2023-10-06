@@ -46,7 +46,7 @@ public class TestUserRepo {
     @Test
     public void testAddUser() {
         // New user object to be tested
-        User user = new User(0, "test", "user", "unittestuser", "password123", "unittestuser@gmail.com", true, "", 0, "", 0);
+        User user = new User(0, "test", "user", "unittestuser", "password123", "unittestuser@gmail.com", "1 Test Street, Victoria", true, "", 0, "", 0);
         boolean usernameUnique = userRepo.addUser(user);
         assertTrue(usernameUnique);
     }
@@ -60,6 +60,7 @@ public class TestUserRepo {
         testDetails.put("Username", "alice123");
         testDetails.put("Password", "password123");
         testDetails.put ("Email", "alice@email.com");
+        testDetails.put("Address", "1 Alice Street, Victoria");
         testDetails.put("Notifications", "false");
         testDetails.put("CardName", "");
         testDetails.put("CardNumber", "0");
@@ -73,6 +74,7 @@ public class TestUserRepo {
         assertEquals(testDetails.get("Username"), userDetails.get("Username"));
         assertEquals(testDetails.get("Password"), userDetails.get("Password"));
         assertEquals(testDetails.get("Email"), userDetails.get("Email"));
+        assertEquals(testDetails.get("Address"), userDetails.get("Address"));
         assertEquals(testDetails.get("Notifications"), userDetails.get("Notifications"));
         assertEquals(testDetails.get("CardName"), userDetails.get("CardName"));
         assertEquals(testDetails.get("CardNumber"), userDetails.get("CardNumber"));

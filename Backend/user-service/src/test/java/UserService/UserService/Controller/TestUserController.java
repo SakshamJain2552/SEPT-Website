@@ -62,7 +62,7 @@ public class TestUserController {
     @Test
     public void testUserSignupSuccesful() {
         // New user object to be tested
-        User user = new User(0, "test", "user", "unittestuser", "password123", "unittestuser@email.com", true, "", 0, "", 0);
+        User user = new User(0, "test", "user", "unittestuser", "password123", "unittestuser@email.com", "1 Test Street, Victoria", true, "", 0, "", 0);
         when(userService.createUser(user)).thenReturn(true);
         
         // Mapping of user values to be passed on to the function to be tested
@@ -72,6 +72,7 @@ public class TestUserController {
         body.put("username", "unittestuser");
         body.put("password", "password123");
         body.put ("email", "unittestuser@email.com");
+        body.put("address", "1 Test Street, Victoria");
         body.put("notifications", "true");
         body.put("cardName", "");
         body.put("cardNumber", "0");
@@ -91,6 +92,7 @@ public class TestUserController {
         testDetails.put("Username", "alice123");
         testDetails.put("Password", "password123");
         testDetails.put ("Email", "alice@email.com");
+        testDetails.put("Address", "1 Alice Street, Victoria");
         testDetails.put("Notifications", "true");
         testDetails.put("CardName", "");
         testDetails.put("CardNumber", "0");
@@ -105,6 +107,7 @@ public class TestUserController {
         assertEquals(testDetails.get("Username"), userDetails.get("Username"));
         assertEquals(testDetails.get("Password"), userDetails.get("Password"));
         assertEquals(testDetails.get("Email"), userDetails.get("Email"));
+        assertEquals(testDetails.get("Address"), userDetails.get("Address"));
         assertEquals(testDetails.get("Notifications"), userDetails.get("Notifications"));
         assertEquals(testDetails.get("CardName"), userDetails.get("CardName"));
         assertEquals(testDetails.get("CardNumber"), userDetails.get("CardNumber"));

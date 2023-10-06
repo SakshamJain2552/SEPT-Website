@@ -60,6 +60,7 @@ public class UserController {
         String username = body.get("username");
         String password = body.get("password");
         String email = body.get("email");
+        String address = body.get("address");
         boolean notifications = Boolean.parseBoolean(body.get("notifications"));
         String cardName = body.get("cardName");
         int cardNumber = Integer.parseInt(body.get("cardNumber"));
@@ -67,7 +68,7 @@ public class UserController {
         int cardCVV = Integer.parseInt(body.get("cardCVV"));
 
         // New user object to be created
-        User user = new User(userID, firstname, lastname, username, password, email, notifications, cardName, cardNumber, cardExpiration, cardCVV);
+        User user = new User(userID, firstname, lastname, username, password, email, address, notifications, cardName, cardNumber, cardExpiration, cardCVV);
         return userService.createUser(user);
     }
 
