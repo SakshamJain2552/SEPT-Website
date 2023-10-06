@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS Users (
   Email VARCHAR(255) NOT NULL,
   Notifications BOOLEAN NOT NULL,
   CardName VARCHAR(255),
-  CardNumber INT,
+  CardNumber BIGINT,
   CardExpiration VARCHAR(255),
   CardCVV INT,
   CONSTRAINT UQ_Username UNIQUE (Username),

@@ -29,7 +29,7 @@ public class TestUserRepo {
     @Test
     public void testAddUser() {
         // New user object to be tested
-        User user = new User(0, "test", "user", "unittestuser", "password123", "unittestuser@gmail.com", true, "", 0, "", 0);
+        User user = new User(0, "test", "user", "unittestuser", "password123", "unittestuser@gmail.com",  true, "", Long.valueOf(0), "", 0);
         boolean usernameUnique = userRepo.addUser(user);
         assertTrue(usernameUnique);
     }

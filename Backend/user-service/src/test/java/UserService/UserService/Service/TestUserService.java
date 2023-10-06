@@ -46,7 +46,7 @@ public class TestUserService {
     @Test
     public void testCreateUser() {
         // New user object to be tested
-        User user = new User(0, "test", "user", "unittestuser", "password123", "unittestuser@gmail.com", true, "", 0, "", 0);
+        User user = new User(0, "test", "user", "unittestuser", "password123", "unittestuser@gmail.com",  true, "", Long.valueOf(0), "", 0);
 
         when(userRepo.addUser(user)).thenReturn(true);
         boolean successfulLogin = userService.createUser(user);

@@ -62,7 +62,7 @@ public class UserController {
         String email = body.get("email");
         boolean notifications = Boolean.parseBoolean(body.get("notifications"));
         String cardName = body.get("cardName");
-        int cardNumber = Integer.parseInt(body.get("cardNumber"));
+        Long cardNumber = Long.parseLong(body.get("cardNumber"));
         String cardExpiration = body.get("cardExpiration");
         int cardCVV = Integer.parseInt(body.get("cardCVV"));
 

@@ -67,49 +67,48 @@ public class UserRepoImpl implements UserRepo {
         String email = user.email();
         boolean notifications = user.notifications();
         String cardName = user.cardName();
-        int cardNumber = user.cardNumber();
+        Long cardNumber = user.cardNumber();
         String cardExpiration = user.cardExpiration();
         int cardCVV = user.cardCVV();
   
-        try {
-            Connection connection = dataSource.getConnection();
-            PreparedStatement stm = connection.prepareStatement(
-                "SELECT UserID, Username, Password, Email\r\n" + //
-                "FROM Users;"
+        try (Connection connection = dataSource.getConnection()) {
+        
+            // Check for uniqueness of username and email
+            PreparedStatement checkStm = connection.prepareStatement(
+                "SELECT UserID FROM Users WHERE Username = ? OR Email = ?"
             );
-
-            ResultSet rs = stm.executeQuery();
-
-            System.out.println("Given username and email: " + username + " - " + email);
-            int userID = 0;
-            while(rs.next()) {
-                userID = rs.getInt(1);
-                if (rs.getString(2).equals(username) || rs.getString(4).equals(email)) {
-                    System.out.println("Username or Email is already in the database.");
-                    connection.close();
-                    return false;
-                }
+            checkStm.setString(1, username);
+            checkStm.setString(2, email);
+            ResultSet rs = checkStm.executeQuery();
+            
+            if (rs.next()) {
+                System.out.println("Username or Email is already in the database.");
+                return false;
             }
-            
-            // Username and Email is unique, so insert new user into database
-            userID += 1;
-            stm = connection.prepareStatement(
-                "INSERT INTO Users\r\n" + //
-                "VALUES (" + userID + ",'" + firstname + "','" + lastname + "','" + username + "','" + password + "','" + email + 
-                "','" + notifications + "','" + cardName + "'," + cardNumber + ",'" + cardExpiration + "'," + cardCVV + ");"
+    
+            // Insert new user
+            PreparedStatement stm = connection.prepareStatement(
+                "INSERT INTO Users (FirstName, LastName, Username, Password, Email, Notifications, CardName, CardNumber, CardExpiration, CardCVV) " + 
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             );
+            stm.setString(1, firstname);
+            stm.setString(2, lastname);
+            stm.setString(3, username);
+            stm.setString(4, password);
+            stm.setString(5, email);          
+            stm.setBoolean(6, notifications);
+            stm.setString(7, cardName);
+            stm.setLong(8, cardNumber);
+            stm.setString(9, cardExpiration);
+            stm.setInt(10, cardCVV);
             stm.execute();
-
-            System.out.println("New user inserted into database:");
-            System.out.println("UserID: " + userID);
-            System.out.println("Username: " + username);
-            System.out.println("Email: " + email);
-
-            connection.close();
+    
+            System.out.println("New user inserted into database.");
+            // ... [print user details]
             return true;
-            
+    
         } catch (SQLException e) {
-            throw new RuntimeException("Error in usernameUniqueVerified()", e);
+            throw new RuntimeException("Error in addUser()", e);
         }
     }
 
@@ -130,7 +129,7 @@ public class UserRepoImpl implements UserRepo {
             while(rs.next()) {
                 if (rs.getString(4).equals(username)) {
                     System.out.println("User found: " + rs.getString(2));
-                    
+
                     userDetails.put("UserID", Integer.toString(rs.getInt(1)));
                     userDetails.put("FirstName", rs.getString(2));
                     userDetails.put("LastName", rs.getString(3));
@@ -139,7 +138,7 @@ public class UserRepoImpl implements UserRepo {
                     userDetails.put("Email", rs.getString(6));
                     userDetails.put("Notifications", Boolean.toString(rs.getBoolean(7)));
                     userDetails.put("CardName", rs.getString(8));
-                    userDetails.put("CardNumber", Integer.toString(rs.getInt(9)));
+                    userDetails.put("CardNumber", Long.toString(rs.getLong(9)));
                     userDetails.put("CardExpiration", rs.getString(10));
                     userDetails.put("CardCVV", Integer.toString(rs.getInt(11)));
 
@@ -151,7 +150,7 @@ public class UserRepoImpl implements UserRepo {
 
             connection.close();
             return null;
-            
+
         } catch (SQLException e) {
             throw new RuntimeException("Error in getUserDetails()", e);
         }
