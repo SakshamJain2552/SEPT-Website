@@ -62,7 +62,7 @@ public class TestUserController {
     @Test
     public void testUserSignupSuccesful() {
         // New user object to be tested
-        User user = new User(0, "test", "user", "unittestuser", "password123", "unittestuser@email.com", "1 Test Street, Victoria", true, "", 0, "", 0);
+        User user = new User(0, "test", "user", "unittestuser", "password123", "unittestuser@email.com", "1 Test Street, Victoria", true, "", Long.valueOf(0), "", 0);
         when(userService.createUser(user)).thenReturn(true);
         
         // Mapping of user values to be passed on to the function to be tested

@@ -68,7 +68,7 @@ public class UserRepoImpl implements UserRepo {
         String address = user.address();
         boolean notifications = user.notifications();
         String cardName = user.cardName();
-        int cardNumber = user.cardNumber();
+        Long cardNumber = user.cardNumber();
         String cardExpiration = user.cardExpiration();
         int cardCVV = user.cardCVV();
   
@@ -100,7 +100,7 @@ public class UserRepoImpl implements UserRepo {
             stm.setString(6, address);
             stm.setBoolean(7, notifications);
             stm.setString(8, cardName);
-            stm.setInt(9, cardNumber);
+            stm.setLong(9, cardNumber);
             stm.setString(10, cardExpiration);
             stm.setInt(11, cardCVV);
             stm.execute();
@@ -141,7 +141,7 @@ public class UserRepoImpl implements UserRepo {
                     userDetails.put("Address", rs.getString(7));
                     userDetails.put("Notifications", Boolean.toString(rs.getBoolean(8)));
                     userDetails.put("CardName", rs.getString(9));
-                    userDetails.put("CardNumber", Integer.toString(rs.getInt(10)));
+                    userDetails.put("CardNumber", Long.toString(rs.getLong(10)));
                     userDetails.put("CardExpiration", rs.getString(11));
                     userDetails.put("CardCVV", Integer.toString(rs.getInt(12)));
 
