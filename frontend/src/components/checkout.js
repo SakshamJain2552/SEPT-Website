@@ -47,23 +47,6 @@ const [responseMessage, setResponseMessage] = useState('');
     setTotalPrice(total);
   };
 
-  // const handleSubmit = async () => {
-  //   const userData = JSON.parse(localStorage.getItem('user'));
-  //   const payload = {
-  //     username: userData.Username,
-  //     address,
-  //     date: selectedDate,
-  //     time,
-  //     paymentMethod
-  //   };
-
-  //   try {
-  //     await axios.post('http://localhost:8082/delivery/setDelivery', payload);
-  //     alert("Order placed successfully!");
-  //   } catch (error) {
-  //     alert("Error placing the order. Please try again later.");
-  //   }
-  //   };
 
   const handleSubmit = async () => {
     const userData = JSON.parse(localStorage.getItem('user'));
