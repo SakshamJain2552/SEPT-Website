@@ -26,7 +26,42 @@
 * TBD
   
 # Run Instructions
-TBD
+## Run Without Docker
+```bash
+cd Backend
+cd product-service
+mvn spring-boot::run
+
+# new shell
+
+cd Backend
+cd user-service
+mvn spring-boot::run
+
+# new shell
+
+cd Backend
+cd delivery-service
+mvn spring-boot::run
+
+# new shell
+
+cd frontend
+npm install
+npm run start
+```
+
+## Run Without AWS ECR
+```bash
+docker-compose up
+```
+
+## Run With AWS ECR
+- Update AWS Credentials
+- Start AWS Lab
+```bash
+docker-compose -f docker-compose-ecr.yml up
+```
 
 # Initial Setup
 
@@ -39,19 +74,3 @@ You will need to have in your system
 - IDE or Editor
 
 Other tools will be required to complete the project (e.g., Docker)
-
-## Backend
-
-- Delete any unused services (i.e. backend/movies). They are there only for an initial reference.
-- Use [Spring initializr](https://start.spring.io/) to create your (micro)services
-- Place any new backend service in its own directory (i.e., backend/<service-name>)
-- Confirm you can run your applicaiton (./mvnw package && java -jar target/[microservice]-0.0.1-SNAPSHOT.jar)
-
-## Frontend
-- cd into frontend/
-- Install dependencies "npm install"
-- Run the app with "npm run dev"
-
-
-
-
