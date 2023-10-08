@@ -8,6 +8,8 @@ import Breadcrumb from './Breadcrumbs';
 import { Drawer, List, ListItem, ListItemText, Typography} from '@mui/material';
 import ArrowForwardIos from '@mui/icons-material/ArrowForwardIos';
 
+import { API_URL_1, API_URL_2, API_URL_3 } from './apiConfig';
+
 const Productlist = () => {
     const itemsPerPage = 16;
     const [currentPage, setCurrentPage] = useState(1);
@@ -19,7 +21,7 @@ const Productlist = () => {
 const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     useEffect(() => {
-        axios.get('http://localhost:8081/products')
+        axios.get(`${API_URL_2}/products`)
             .then(response => {
                 setProducts(response.data);
             })
