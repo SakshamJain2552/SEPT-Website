@@ -14,6 +14,8 @@ import { useNavigate } from 'react-router-dom';
 import logo from './logo.png';
 import axios from 'axios';
 
+import { API_URL_1, API_URL_2, API_URL_3 } from '../components/apiConfig';
+
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -53,17 +55,16 @@ export default function SignIn() {
     const password = data.get('password');
 
     try {
-      const response = await axios.post('http://localhost:8080/user/signin', {
+      const response = await axios.post(`${API_URL_1}/user/signin`, {
           "username": email,
           "password": password
         
       });
 
-    // try {
-    //   const response = await axios.get(`http://localhost:8080/user?username=${email}&password=${password}`);
+
 
       if (response.data) {
-        const userdata = await axios.get('http://localhost:8080/user/details?username=' + email);
+        const userdata = await axios.get(`${API_URL_1}/user/details?username=` + email);
         localStorage.setItem('user', JSON.stringify(userdata.data));
         navigate("/list");
       } else {
