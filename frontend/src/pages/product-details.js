@@ -1,7 +1,7 @@
 import React from 'react';
-import ProductDetail from '../components/productdetails';  // Adjust path as necessary
-import NavBar from '../components/NavBar';  // Adjust path as necessary
-import Footer from '../components/Footer';  // Adjust path as necessary
+import ProductDetail from '../components/productdetails'; 
+import NavBar from '../components/NavBar';  
+import Footer from '../components/Footer';  
 
 function ProductPage() {
     return (

@@ -1,7 +1,7 @@
 import React from 'react';
-import CartPage from '../components/cart';  // Adjust the path as necessary
-import NavBar from '../components/NavBar';  // Adjust the path as necessary
-import Footer from '../components/Footer';  // Adjust the path as necessary
+import CartPage from '../components/cart';  
+import NavBar from '../components/NavBar';  
+import Footer from '../components/Footer';  
 
 function CartLayout() {
     return (

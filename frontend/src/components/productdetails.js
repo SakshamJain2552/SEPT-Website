@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Button, Select, MenuItem, Rating } from '@mui/material';
-import { Link } from 'react-router-dom'; 
 import Breadcrumb from './Breadcrumbs';
 
 import { API_URL_1, API_URL_2, API_URL_3 } from './apiConfig';

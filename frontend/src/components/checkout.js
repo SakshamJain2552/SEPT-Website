@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { TextField, Button, Select, MenuItem, FormControl, InputLabel, Typography, Card, CardContent } from '@mui/material';
+import { TextField, Button, Select, MenuItem, FormControl, InputLabel, Typography, Card} from '@mui/material';
 import Breadcrumb from './Breadcrumbs';
 
-import { Modal, Box, CircularProgress } from '@mui/material';
+import { Modal, Box} from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 import { API_URL_1, API_URL_2, API_URL_3 } from './apiConfig';

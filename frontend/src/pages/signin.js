@@ -34,17 +34,6 @@ const defaultTheme = createTheme();
 export default function SignIn() {
   const navigate = useNavigate();
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   console.log({
-  //     email: data.get('email'),
-  //     password: data.get('password'),
-  //   });
-
-  //   navigate("/list");
-  // };
-
   const [errorMessage, setErrorMessage] = useState(null);  // to display error messages
 
   const handleSubmit = async (event) => {

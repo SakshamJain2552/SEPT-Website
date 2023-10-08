@@ -1,8 +1,7 @@
 import React from 'react';
-import axios from 'axios'; // <-- Import axios
+import axios from 'axios';
 import { Card, CardContent, CardHeader, Typography, CardActionArea, CardMedia, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import image from './288-2881831_grey-food-icon-png-transparent-png.png';
 import CheckIcon from '@mui/icons-material/Check';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
@@ -18,8 +17,8 @@ export default function ActionAreaCard({ product }) {
       userId,
       dateCreated: currentDate,
       productId: product.productId,
-      storeName: product.storeName, // Assuming each product has a storeName property
-      quantity: 1 // Assuming a default quantity of 1 for the ProductCard
+      storeName: product.storeName,
+      quantity: 1 
     };
 
     // Check if product from the same store is already in the cart

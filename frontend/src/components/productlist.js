@@ -3,7 +3,6 @@ import { Grid, Pagination, useMediaQuery, useTheme } from '@mui/material';
 import ProductCard from './ProductCard';
 import FilterBar from './filterbar';
 import axios from 'axios';
-// import Sidebar from './sidebar';
 import Breadcrumb from './Breadcrumbs';
 import { Drawer, List, ListItem, ListItemText, Typography} from '@mui/material';
 import ArrowForwardIos from '@mui/icons-material/ArrowForwardIos';
@@ -136,18 +135,6 @@ const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     }
     
     return (
-        // <div style={{ flex: 1, marginLeft: '450px', marginRight: '200px', marginTop: '100px', width: '80%'}}>
-        //     <Sidebar onCategoryChange={setSelectedCategory} />
-        //     <Breadcrumb category={selectedCategory} />
-        //     <FilterBar onSortChange={setSortOrder} onSearchChange={setSearchQuery} />
-        //     <p>{countText}</p>
-        //     <Grid container spacing={2}>
-        //         {DisplayedProducts.map((product) => (
-        //             <Grid item xs={12} sm={6} md={4} lg={3} key={product.productId}>
-        //                 <ProductCard product={product} />
-        //             </Grid>
-        //         ))}
-        //     </Grid>
         <div><div>
             {!isMobile && <Sidebar onCategoryChange={setSelectedCategory} />}
             </div>

@@ -1,7 +1,7 @@
 import React from 'react';
-import OrdersPage from '../components/orders';  // Adjust the path as necessary
-import NavBar from '../components/NavBar';  // Adjust the path as necessary
-import Footer from '../components/Footer';  // Adjust the path as necessary
+import OrdersPage from '../components/orders';  
+import NavBar from '../components/NavBar';  
+import Footer from '../components/Footer';  
 
 function OrdersLayout() {
     return (
