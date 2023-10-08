@@ -7,6 +7,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import logo from '../pages/logo.png';
 
 
@@ -87,9 +88,9 @@ function NavBar() {
               </Tooltip>
             </Grid>
             <Grid item>
-              <Tooltip title="Liked Products">
-                <IconButton color="primary" component={Link} to="/liked-products">
-                  <FavoriteBorderIcon />
+              <Tooltip title="Your Orders">
+                <IconButton color="primary" component={Link} to="/orders">
+                  <BookmarkBorderIcon />
                 </IconButton>
               </Tooltip>
             </Grid>
