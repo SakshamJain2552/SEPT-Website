@@ -128,15 +128,6 @@ const [responseMessage, setResponseMessage] = useState('');
                 }}
             />
 
-            {/* <TextField
-                fullWidth
-                variant="outlined"
-                label="Time (HH:mm)"
-                type="time"
-                value={time}
-                onChange={e => setTime(e.target.value)}
-                margin="normal"
-            /> */}
         
         <FormControl fullWidth variant="outlined" margin="normal">
                 <InputLabel>Time Range</InputLabel>
