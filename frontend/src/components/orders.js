@@ -1,0 +1,109 @@
+// import React, { useState, useEffect } from 'react';
+// import { Paper, Typography, Grid, Divider } from '@mui/material';
+
+// function OrdersPage() {
+//   const [orders, setOrders] = useState([]);
+//   const username = JSON.parse(localStorage.getItem('user')).Username;
+
+//   useEffect(() => {
+//     // Fetch orders using the provided endpoint
+//     fetch(`http://localhost:8082/delivery/username/${username}`)
+//       .then(response => response.json())
+//       .then(data => setOrders(data))
+//       .catch(error => console.error('Error fetching orders:', error));
+//   }, [username]);
+
+//   return (
+//     <div style={{ padding: '20px' }}>
+//       <Typography variant="h4" gutterBottom>Your Orders</Typography>
+      
+//       {orders.map(order => (
+//         <Paper style={{ padding: '20px', marginBottom: '20px' }} key={order.deliveryID}>
+//           <Grid container spacing={3}>
+//             <Grid item xs={12} md={6}>
+//               <Typography variant="h6">Delivery Details:</Typography>
+//               <Typography>Address: {order.address}</Typography>
+//               <Typography>Delivery Date: {order.deliveryDate}</Typography>
+//               <Typography>Delivery Time: {order.deliveryTime}</Typography>
+//             </Grid>
+//             <Grid item xs={12} md={6}>
+//               <Typography variant="h6">Payment:</Typography>
+//               <Typography>Method: {order.paymentMethod}</Typography>
+//             </Grid>
+//           </Grid>
+//           <Divider style={{ marginTop: '10px', marginBottom: '10px' }} />
+//           <Typography variant="subtitle1">Thank you for shopping with us!</Typography>
+//         </Paper>
+//       ))}
+
+//       {orders.length === 0 && (
+//         <Typography variant="subtitle1">You have no orders at the moment.</Typography>
+//       )}
+//     </div>
+//   );
+// }
+
+// export default OrdersPage;
+
+import React, { useState, useEffect } from 'react';
+import { Paper, Typography, Grid, Divider, Box, Container } from '@mui/material';
+import { styled } from '@mui/system';
+import Breadcrumb from './Breadcrumbs';
+
+const StyledPaper = styled(Paper)({
+  padding: '20px',
+  marginBottom: '30px',
+  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+});
+
+function OrdersPage() {
+  const [orders, setOrders] = useState([]);
+  const username = JSON.parse(localStorage.getItem('user')).Username;
+
+  useEffect(() => {
+    fetch(`http://localhost:8082/delivery/username/${username}`)
+      .then(response => response.json())
+      .then(data => setOrders(data))
+      .catch(error => console.error('Error fetching orders:', error));
+  }, [username]);
+
+  return (
+      <Container maxWidth="lg">
+           <Breadcrumb category="Your Orders" />
+      <Box my={4}>
+        <Typography variant="h4" gutterBottom color="textPrimary" align="center">
+          Your Orders
+        </Typography>
+      </Box>
+
+      {orders.map(order => (
+        <StyledPaper key={order.deliveryID}>
+          <Typography variant="h6" color="textPrimary" gutterBottom>
+            Order ID: {order.deliveryID}
+          </Typography>
+          <Divider style={{ marginBottom: '20px' }} />
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6}>
+              <Typography variant="subtitle1" gutterBottom>Delivery Details:</Typography>
+              <Typography>Address: {order.address}</Typography>
+              <Typography>Delivery Date: {order.deliveryDate}</Typography>
+              <Typography>Delivery Time: {order.deliveryTime}</Typography>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography variant="subtitle1" gutterBottom>Payment:</Typography>
+              <Typography>Method: {order.paymentMethod}</Typography>
+            </Grid>
+          </Grid>
+        </StyledPaper>
+      ))}
+
+      {orders.length === 0 && (
+        <Typography variant="subtitle1" align="center">
+          You have no orders at the moment.
+        </Typography>
+      )}
+    </Container>
+  );
+}
+
+export default OrdersPage;
