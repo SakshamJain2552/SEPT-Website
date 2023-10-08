@@ -5,6 +5,8 @@ import { Button, Select, MenuItem, Rating } from '@mui/material';
 import { Link } from 'react-router-dom'; 
 import Breadcrumb from './Breadcrumbs';
 
+import { API_URL_1, API_URL_2, API_URL_3 } from './apiConfig';
+
 function ProductDetail() {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
@@ -15,8 +17,8 @@ function ProductDetail() {
   useEffect(() => {
     async function fetchProductDetails() {
       try {
-        const productResponse = await axios.get(`http://localhost:8081/products/${productId}`);
-        const productDetailsResponse = await axios.get('http://localhost:8081/products');
+        const productResponse = await axios.get(`${API_URL_2}/products/${productId}`);
+        const productDetailsResponse = await axios.get(`${API_URL_2}/products`);
 
         const consolidatedProduct = {
           ...productDetailsResponse.data.find(p => p.productId === parseInt(productId)),
@@ -35,7 +37,7 @@ function ProductDetail() {
 
   const fetchProductRating = async () => {
     try {
-        const response = await axios.get(`http://localhost:8081/products/review/${productId}`);
+        const response = await axios.get(`${API_URL_2}/products/review/${productId}`);
         setRating(response.data);
     } catch (error) {
         console.error("Error fetching product rating", error);
@@ -63,7 +65,7 @@ function ProductDetail() {
     };
 
     try {
-        await axios.post('http://localhost:8081/products/review', ratingData);
+        await axios.post(`${API_URL_2}/products/review`, ratingData);
         fetchProductRating(); // Refetch the rating after posting
     } catch (error) {
         console.error("Error posting product rating", error);
@@ -90,7 +92,7 @@ function ProductDetail() {
     }
 
     try {
-      const response = await axios.post('http://localhost:8080/user/cart', cartData);
+      const response = await axios.post(`${API_URL_1}/user/cart`, cartData);
       if (response && response.data) {
         cartItems.push(response.data);
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
