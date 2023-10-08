@@ -65,6 +65,7 @@ public class UserRepoImpl implements UserRepo {
         String username = user.username();
         String password = user.password();
         String email = user.email();
+        String address = user.address();
         boolean notifications = user.notifications();
         String cardName = user.cardName();
         Long cardNumber = user.cardNumber();
@@ -88,19 +89,20 @@ public class UserRepoImpl implements UserRepo {
     
             // Insert new user
             PreparedStatement stm = connection.prepareStatement(
-                "INSERT INTO Users (FirstName, LastName, Username, Password, Email, Notifications, CardName, CardNumber, CardExpiration, CardCVV) " + 
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                "INSERT INTO Users (FirstName, LastName, Username, Password, Email, Address, Notifications, CardName, CardNumber, CardExpiration, CardCVV) " + 
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             );
             stm.setString(1, firstname);
             stm.setString(2, lastname);
             stm.setString(3, username);
             stm.setString(4, password);
-            stm.setString(5, email);          
-            stm.setBoolean(6, notifications);
-            stm.setString(7, cardName);
-            stm.setLong(8, cardNumber);
-            stm.setString(9, cardExpiration);
-            stm.setInt(10, cardCVV);
+            stm.setString(5, email);     
+            stm.setString(6, address);       
+            stm.setBoolean(7, notifications);
+            stm.setString(8, cardName);
+            stm.setLong(9, cardNumber);
+            stm.setString(10, cardExpiration);
+            stm.setInt(11, cardCVV);
             stm.execute();
     
             System.out.println("New user inserted into database.");
@@ -136,11 +138,12 @@ public class UserRepoImpl implements UserRepo {
                     userDetails.put("Username", rs.getString(4));
                     userDetails.put("Password", rs.getString(5));
                     userDetails.put("Email", rs.getString(6));
-                    userDetails.put("Notifications", Boolean.toString(rs.getBoolean(7)));
-                    userDetails.put("CardName", rs.getString(8));
-                    userDetails.put("CardNumber", Long.toString(rs.getLong(9)));
-                    userDetails.put("CardExpiration", rs.getString(10));
-                    userDetails.put("CardCVV", Integer.toString(rs.getInt(11)));
+                    userDetails.put("Address", rs.getString(7));
+                    userDetails.put("Notifications", Boolean.toString(rs.getBoolean(8)));
+                    userDetails.put("CardName", rs.getString(9));
+                    userDetails.put("CardNumber", Long.toString(rs.getLong(10)));
+                    userDetails.put("CardExpiration", rs.getString(11));
+                    userDetails.put("CardCVV", Integer.toString(rs.getInt(12)));
 
                     connection.close();
 

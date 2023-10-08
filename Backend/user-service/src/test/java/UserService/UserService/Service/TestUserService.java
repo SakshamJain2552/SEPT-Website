@@ -46,7 +46,7 @@ public class TestUserService {
     @Test
     public void testCreateUser() {
         // New user object to be tested
-        User user = new User(0, "test", "user", "unittestuser", "password123", "unittestuser@gmail.com",  true, "", Long.valueOf(0), "", 0);
+        User user = new User(0, "test", "user", "unittestuser", "password123", "unittestuser@gmail.com", "1 Test Street, Victoria", true, "", Long.valueOf(0), "", 0);
 
         when(userRepo.addUser(user)).thenReturn(true);
         boolean successfulLogin = userService.createUser(user);
@@ -62,6 +62,7 @@ public class TestUserService {
         testDetails.put("Username", "alice123");
         testDetails.put("Password", "password123");
         testDetails.put ("Email", "alice@email.com");
+        testDetails.put ("Address", "1 Test Street, Victoria");
         testDetails.put("Notifications", "true");
         testDetails.put("CardName", "");
         testDetails.put("CardNumber", "0");
@@ -76,6 +77,7 @@ public class TestUserService {
         assertEquals(testDetails.get("Username"), userDetails.get("Username"));
         assertEquals(testDetails.get("Password"), userDetails.get("Password"));
         assertEquals(testDetails.get("Email"), userDetails.get("Email"));
+        assertEquals(testDetails.get("Address"), userDetails.get("Address"));
         assertEquals(testDetails.get("Notifications"), userDetails.get("Notifications"));
         assertEquals(testDetails.get("CardName"), userDetails.get("CardName"));
         assertEquals(testDetails.get("CardNumber"), userDetails.get("CardNumber"));
