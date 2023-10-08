@@ -22,6 +22,7 @@ export default function SignUp() {
     username: '',
     email: '',
     password: '',
+    address: '',
     notifications: '',
     cardName: '',
     cardNumber: '',
@@ -34,7 +35,7 @@ export default function SignUp() {
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    const temp = {firstname: formData.firstname, lastname: formData.lastname, username: formData.username, email: formData.email, password: formData.password,
+    const temp = {firstname: formData.firstname, lastname: formData.lastname, username: formData.username, email: formData.email, password: formData.password, address: formData.address,
         notifications: formData.notifications, cardName: formData.cardName, cardNumber: formData.cardNumber, cardExpiration: formData.cardExpiration, cardCVV: formData.cardCVV};
     temp[name] = value;
     setFormData(temp);
@@ -44,20 +45,28 @@ export default function SignUp() {
     e.preventDefault();
 
    // Check if any of the required fields are empty
-    if ( !formData.firstname || !formData.lastname || !formData.username || !formData.email || !formData.password || !formData.notifications || !formData.cardName || !formData.cardNumber || !formData.cardExpiration || !formData.cardCVV) {
+    if ( !formData.firstname || !formData.lastname || !formData.username || !formData.email || !formData.password || !formData.address ||
+        !formData.notifications || !formData.cardName || !formData.cardNumber || !formData.cardExpiration || !formData.cardCVV) {
         setErrorMessage('Please fill in all the required fields.');
         return; // Prevent form submission
     }
     
     try {
-      
+        let notifications = "";
+        if (formData.notifications == 'y') {
+            notifications = 'true';
+        }
+        else {
+            notifications = 'false';
+        }
         const response = await axios.post('http://localhost:8080/user/signup', {
             "firstname": formData.firstname,
             "lastname": formData.lastname,
             "username": formData.username,
             "email": formData.email,
             "password": formData.password,
-            "notifications": formData.notifications,
+            "address": formData.address,
+            "notifications": notifications,
             "cardName": formData.cardName,
             "cardNumber": formData.cardNumber,
             "cardExpiration": formData.cardExpiration,
@@ -166,6 +175,18 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="address"
+                  label="Delivery Address"
+                  name="address"
+                  autoComplete="address"
                   onChange={handleChange}
                 />
               </Grid>
