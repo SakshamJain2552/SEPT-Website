@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Paper, Typography, Grid, Divider, Box, Container } from '@mui/material';
 import { styled } from '@mui/system';
 import Breadcrumb from './Breadcrumbs';
+import axios from 'axios';
+import { API_URL_1, API_URL_2, API_URL_3 } from './apiConfig';
 
 const StyledPaper = styled(Paper)({
   padding: '20px',
@@ -14,7 +16,7 @@ function OrdersPage() {
   const username = JSON.parse(localStorage.getItem('user')).Username;
 
   useEffect(() => {
-    fetch(`http://localhost:8082/delivery/username/${username}`)
+    fetch(`http://inc-env.eba-bxmkgzsy.us-east-1.elasticbeanstalk.com:8082/delivery/username/${username}`)
       .then(response => response.json())
       .then(data => {
         if (Array.isArray(data)) {
