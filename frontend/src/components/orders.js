@@ -16,20 +16,27 @@ function OrdersPage() {
   useEffect(() => {
     fetch(`http://localhost:8082/delivery/username/${username}`)
       .then(response => response.json())
-      .then(data => setOrders(data))
+      .then(data => {
+        if (Array.isArray(data)) {
+          setOrders(data);
+        } else {
+          console.error('Received non-array data:', data);
+          setOrders([]); // set orders to an empty array if the data is not an array
+        }
+      })
       .catch(error => console.error('Error fetching orders:', error));
   }, [username]);
 
   return (
-      <Container maxWidth="lg">
-           <Breadcrumb category="Your Orders" />
+    <Container maxWidth="lg">
+      <Breadcrumb category="Your Orders" />
       <Box my={4}>
         <Typography variant="h4" gutterBottom color="textPrimary" align="center">
           Your Orders
         </Typography>
       </Box>
 
-      {orders.map(order => (
+      {Array.isArray(orders) && orders.map(order => (
         <StyledPaper key={order.deliveryID}>
           <Typography variant="h6" color="textPrimary" gutterBottom>
             Order ID: {order.deliveryID}
