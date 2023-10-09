@@ -29,7 +29,7 @@ export default function ActionAreaCard({ product }) {
     }
 
     try {
-      const response = await axios.post(`${API_URL_1}/user/cart`, cartData);
+      const response = await axios.post(`http://inc-env.eba-bxmkgzsy.us-east-1.elasticbeanstalk.com:8080/user/cart`, cartData);
       if (response && response.data) {
         cartItems.push(response.data);
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
