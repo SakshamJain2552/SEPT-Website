@@ -72,7 +72,11 @@ public class TestUserController {
         body.put("username", "unittestuser");
         body.put("password", "password123");
         body.put ("email", "unittestuser@email.com");
+<<<<<<< HEAD
         body.put ("address", "1 Test Street, Victoria");
+=======
+        body.put("address", "1 Test Street, Victoria");
+>>>>>>> origin/develop
         body.put("notifications", "true");
         body.put("cardName", "");
         body.put("cardNumber", "0");
@@ -92,7 +96,11 @@ public class TestUserController {
         testDetails.put("Username", "alice123");
         testDetails.put("Password", "password123");
         testDetails.put ("Email", "alice@email.com");
+<<<<<<< HEAD
         testDetails.put ("Address", "1 Test Street, Victoria");
+=======
+        testDetails.put("Address", "1 Alice Street, Victoria");
+>>>>>>> origin/develop
         testDetails.put("Notifications", "true");
         testDetails.put("CardName", "");
         testDetails.put("CardNumber", "0");

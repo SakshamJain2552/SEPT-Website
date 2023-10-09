@@ -1,5 +1,8 @@
 package DeliveryService.DeliveryService.Repository;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import org.springframework.boot.test.context.SpringBootTest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +35,14 @@ public class TestDeliveryRepo {
         Delivery testDelivery = new Delivery(1, "alice123", "1 Alice Street, Victoria", "01-01-2023", "12:00", "card");
         Delivery returnedDelivery = deliveryRepo.findDelivery("1");
         assertEquals(testDelivery, returnedDelivery);
+    }
+
+    @Test
+    public void testFindDeliveryByUser() {
+        Delivery testDelivery = new Delivery(1, "alice123", "1 Alice Street, Victoria", "01-01-2023", "12:00", "card");
+        List<Delivery> testDeliveries = new ArrayList<>();
+        testDeliveries.add(testDelivery);
+        List<Delivery> returnedDeliveries = deliveryRepo.findDeliveryByUser("alice123");
+        assertEquals(testDeliveries.get(0), returnedDeliveries.get(0));
     }
 }

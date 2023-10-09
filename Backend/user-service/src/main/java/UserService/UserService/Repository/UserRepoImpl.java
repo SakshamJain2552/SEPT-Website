@@ -96,8 +96,13 @@ public class UserRepoImpl implements UserRepo {
             stm.setString(2, lastname);
             stm.setString(3, username);
             stm.setString(4, password);
+<<<<<<< HEAD
             stm.setString(5, email);     
             stm.setString(6, address);       
+=======
+            stm.setString(5, email);
+            stm.setString(6, address);
+>>>>>>> origin/develop
             stm.setBoolean(7, notifications);
             stm.setString(8, cardName);
             stm.setLong(9, cardNumber);
@@ -160,42 +165,29 @@ public class UserRepoImpl implements UserRepo {
     }
 
     @Override
-    public boolean updateUserNotificationPreference(boolean userPreference, String username) {
-        try {
-            Connection connection = dataSource.getConnection();
+public boolean updateUserNotificationPreference(boolean userPreference, String username) {
+    try (Connection connection = dataSource.getConnection()) {
 
-            PreparedStatement stm = connection.prepareStatement(
-                "SELECT Notifications\r\n" +
-                "FROM Users\r\n" +
-                "WHERE Username = '" + username + "';"
-            );
+        // Update user notification preference
+        PreparedStatement stm = connection.prepareStatement(
+            "UPDATE Users SET Notifications = ? WHERE Username = ?"
+        );
+        stm.setBoolean(1, userPreference);
+        stm.setString(2, username);
 
-            ResultSet rs = stm.executeQuery();
+        int affectedRows = stm.executeUpdate();
 
-            // Check if user exists
-            if (!rs.next()) {
-                System.out.println("User not found");
-                connection.close();
-                return false;
-            }
-
-            // Update user notification preference
-            stm = connection.prepareStatement(
-                "UPDATE Users\r\n" +
-                "SET Notifications = '" + userPreference + "'\r\n" +
-                "WHERE Username = '" + username + "';"
-            );
-
-            stm.executeUpdate();
-
+        if (affectedRows > 0) {
             System.out.println("User notification preference updated.");
-            connection.close();
             return true;
-            
-        } catch (SQLException e) {
-            throw new RuntimeException("Error in updateUserNotificationPreference()", e);
+        } else {
+            System.out.println("User not found or no changes made.");
+            return false;
         }
+    } catch (SQLException e) {
+        throw new RuntimeException("Error in updateUserNotificationPreference()", e);
     }
+}
 
     @Override
     public Cart create(Cart cart) {

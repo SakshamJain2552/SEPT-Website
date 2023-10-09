@@ -1,5 +1,8 @@
 package DeliveryService.DeliveryService.Service;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import org.mockito.Mock;
 
@@ -51,5 +54,17 @@ public class TestDeliveryService {
 
         assertNotNull(createdDelivery);
         assertEquals(testDelivery, createdDelivery);
+    }
+
+    @Test
+    public void testGetDeliveryByUser() {
+        Delivery testDelivery = new Delivery(1, "alice123", "1 Alice Street, Victoria", "01-01-2023", "12:00", "card");
+        List<Delivery> testDeliveries = new ArrayList<>();
+        testDeliveries.add(testDelivery);
+        when(deliveryRepo.findDeliveryByUser("alice123")).thenReturn(testDeliveries);
+        List<Delivery> createdDeliveries = deliveryService.getDeliveryByUser("alice123");
+
+        assertNotNull(createdDeliveries);
+        assertEquals(testDeliveries, createdDeliveries);
     }
 }
