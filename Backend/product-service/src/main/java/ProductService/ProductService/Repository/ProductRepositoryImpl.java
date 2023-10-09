@@ -102,33 +102,64 @@ public class ProductRepositoryImpl implements ProductRepository{
     public UserReview setReview(UserReview userReview) {
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement insertStatement = connection.prepareStatement(
-                "INSERT INTO UserRating (UserID, ProductID, StoreName, ReviewInteger) VALUES (?, ?, ?, ?)",
-                PreparedStatement.RETURN_GENERATED_KEYS
+            // Check if a review already exists for the user and product
+            PreparedStatement checkStatement = connection.prepareStatement(
+                "SELECT COUNT(*) FROM UserRating WHERE UserID = ? AND ProductID = ?"
             );
+            checkStatement.setLong(1, userReview.userId());
+            checkStatement.setLong(2, userReview.productId());
+            ResultSet resultSet = checkStatement.executeQuery();
+            resultSet.next();
+            int existingReviewCount = resultSet.getInt(1);
     
-            // Set parameters for the INSERT statement
-            insertStatement.setLong(1, userReview.userId());
-            insertStatement.setLong(2, userReview.productId());
-            insertStatement.setString(3, userReview.storeName());
-            insertStatement.setDouble(4, userReview.rating());
+            if (existingReviewCount > 0) {
+                // Review already exists, update it
+                PreparedStatement updateStatement = connection.prepareStatement(
+                    "UPDATE UserRating SET StoreName = ?, ReviewInteger = ? WHERE UserID = ? AND ProductID = ?"
+                );
+                updateStatement.setString(1, userReview.storeName());
+                updateStatement.setDouble(2, userReview.rating());
+                updateStatement.setLong(3, userReview.userId());
+                updateStatement.setLong(4, userReview.productId());
+                int affectedRows = updateStatement.executeUpdate();
     
-            // Execute the INSERT statement
-            int affectedRows = insertStatement.executeUpdate();
-    
-            if (affectedRows > 0) {
-                // The review was successfully inserted, return the same UserReview object
-                connection.close();
-                return userReview;
+                if (affectedRows > 0) {
+                    // The review was successfully updated
+                    connection.close();
+                    return userReview;
+                } else {
+                    connection.close();
+                    throw new RuntimeException("Failed to update review.");
+                }
             } else {
-                // Something went wrong, no rows were affected
-                connection.close();
-                throw new RuntimeException("Failed to insert review.");
+                // Review does not exist, insert a new one
+                PreparedStatement insertStatement = connection.prepareStatement(
+                    "INSERT INTO UserRating (UserID, ProductID, StoreName, ReviewInteger) VALUES (?, ?, ?, ?)",
+                    PreparedStatement.RETURN_GENERATED_KEYS
+                );
+    
+                // Set parameters for the INSERT statement
+                insertStatement.setLong(1, userReview.userId());
+                insertStatement.setLong(2, userReview.productId());
+                insertStatement.setString(3, userReview.storeName());
+                insertStatement.setDouble(4, userReview.rating());
+    
+                // Execute the INSERT statement
+                int affectedRows = insertStatement.executeUpdate();
+    
+                if (affectedRows > 0) {
+                    // The review was successfully inserted
+                    connection.close();
+                    return userReview;
+                } else {
+                    connection.close();
+                    throw new RuntimeException("Failed to insert review.");
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error in setReview()", e);
         }
-    }    
+    }        
 
     @Override
     public Double getReview(Long productId) {

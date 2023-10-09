@@ -15,6 +15,8 @@ import ProductDetail from './pages/product-details';
 import CartPage from './pages/cart';
 import Checkout from './pages/checkout';
 import SignUp from './pages/signup';
+import OrdersPage from './pages/orderspage';
+
 
 const theme = createTheme({
   palette: {
@@ -47,6 +49,7 @@ function App() {
           <Route path="/product/:productId" element={<ProductDetail />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="checkout" element={<Checkout />} />
+          <Route path="orders" element={<OrdersPage />} />
 
       </Routes>
       </BrowserRouter>

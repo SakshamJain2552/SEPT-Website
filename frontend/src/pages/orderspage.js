@@ -1,14 +1,14 @@
 import React from 'react';
-import CartPage from '../components/cart';  
+import OrdersPage from '../components/orders';  
 import NavBar from '../components/NavBar';  
 import Footer from '../components/Footer';  
 
-function CartLayout() {
+function OrdersLayout() {
     return (
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '110vh' }}>
         <NavBar />
         <div style={{ flex: '1 0 auto' }}>
-          <CartPage />
+          <OrdersPage />
         </div>
         <div style={{ flexShrink: 0 }}>
           <Footer />
@@ -17,4 +17,4 @@ function CartLayout() {
     );
 }
 
-export default CartLayout;
+export default OrdersLayout;

@@ -1,7 +1,7 @@
 import React from 'react';
-import CheckoutPage from '../components/checkout';  // Adjust the path as necessary
-import NavBar from '../components/NavBar';  // Adjust the path as necessary
-import Footer from '../components/Footer';  // Adjust the path as necessary
+import CheckoutPage from '../components/checkout';  
+import NavBar from '../components/NavBar';  
+import Footer from '../components/Footer';  
 
 function CheckoutLayout() {
     return (

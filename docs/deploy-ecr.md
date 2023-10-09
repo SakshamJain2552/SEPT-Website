@@ -9,6 +9,9 @@ URL: 309985726257.dkr.ecr.us-east-1.amazonaws.com/product-service
 ## ECR Registry URL - delivery-service
 URL: 309985726257.dkr.ecr.us-east-1.amazonaws.com/delivery-service
 
+## ECR Registry URL - frontend
+URL: 309985726257.dkr.ecr.us-east-1.amazonaws.com/frontend
+
 ## Sequence of Docker Commands to deploy to ecr
 ### Change directory accordingly for each image
 ```bash

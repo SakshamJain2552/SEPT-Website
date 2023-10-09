@@ -90,6 +90,19 @@ services:
       - productdb
       - userdb
 
+  frontend:
+    image: 309985726257.dkr.ecr.us-east-1.amazonaws.com/frontend:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL_1=http://user-service:8080
+      - REACT_APP_API_URL_2=http://product-service:8081
+      - REACT_APP_API_URL_3=http://delivery-service:8082
+    depends_on:
+      - user-service
+      - product-service
+      - delivery-service
+
 volumes:
   deliverydb_data:
   productdb_data:
