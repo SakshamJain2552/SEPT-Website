@@ -17,39 +17,64 @@ export default function SignUp() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    "username": '',
-    "email": '',
-    "password": '',
+    firstname: '',
+    lastname: '',
+    username: '',
+    email: '',
+    password: '',
+    address: '',
+    notifications: '',
+    cardName: '',
+    cardNumber: '',
+    cardExpiration: '',
+    cardCVV: ''
   });
 
   const [errorMessage, setErrorMessage] = useState(null);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    const name = e.target.name;
+    const value = e.target.value;
+    const temp = {firstname: formData.firstname, lastname: formData.lastname, username: formData.username, email: formData.email, password: formData.password, address: formData.address,
+        notifications: formData.notifications, cardName: formData.cardName, cardNumber: formData.cardNumber, cardExpiration: formData.cardExpiration, cardCVV: formData.cardCVV};
+    temp[name] = value;
+    setFormData(temp);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = new FormData(e.currentTarget);
-  
-    const username = data.get('username');
-    const email = data.get('email');
-    const password = data.get('password');
-
+   // Check if any of the required fields are empty
+    if ( !formData.firstname || !formData.lastname || !formData.username || !formData.email || !formData.password || !formData.address ||
+        !formData.notifications || !formData.cardName || !formData.cardNumber || !formData.cardExpiration || !formData.cardCVV) {
+        setErrorMessage('Please fill in all the required fields.');
+        return; // Prevent form submission
+    }
+    
     try {
-      const response = await axios.post('http://localhost:8080/user/signup', {
-          "username": username,
-          "email": email,
-          "password": password,
+        let notifications = "";
+        if (formData.notifications == 'y') {
+            notifications = 'true';
+        }
+        else {
+            notifications = 'false';
+        }
+        const response = await axios.post('http://localhost:8080/user/signup', {
+            "firstname": formData.firstname,
+            "lastname": formData.lastname,
+            "username": formData.username,
+            "email": formData.email,
+            "password": formData.password,
+            "address": formData.address,
+            "notifications": notifications,
+            "cardName": formData.cardName,
+            "cardNumber": formData.cardNumber,
+            "cardExpiration": formData.cardExpiration,
+            "cardCVV": formData.cardCVV
       });
     //   console.log('Registration successful:', response.data);
       if (response.data) {
-        navigate('/signin'); // Redirect to the signin page after successful signup
+        navigate('/'); // Redirect to the signin page after successful signup
       } else {
         setErrorMessage('Registration failed. Please try again.');
       }
@@ -75,38 +100,149 @@ export default function SignUp() {
             Sign Up
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
-              autoFocus
-              onChange={handleChange}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              onChange={handleChange}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="new-password"
-              onChange={handleChange}
-            />
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="firstname"
+                  label="First Name"
+                  name="firstname"
+                  autoComplete="firstname"
+                  autoFocus
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="lastname"
+                  label="Last Name"
+                  name="lastname"
+                  autoComplete="lastname"
+                  autoFocus
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="username"
+                  label="Username"
+                  name="username"
+                  autoComplete="username"
+                  autoFocus
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="notifications"
+                  label="Notifications (y or n)"
+                  name="notifications"
+                  autoComplete="notifications"
+                  autoFocus
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="address"
+                  label="Delivery Address"
+                  name="address"
+                  autoComplete="address"
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="cardName"
+                  label="Card Name"
+                  type="cardName"
+                  id="cardName"
+                  autoComplete="cardName"
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="cardNumber"
+                  label="Card Number"
+                  type="cardNumber"
+                  id="cardNumber"
+                  autoComplete="cardNumber"
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="cardExpiration"
+                  label="Card Expiration Date (mm/yy)"
+                  type="cardExpiration"
+                  id="cardExpiration"
+                  autoComplete="cardExpiration"
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="cardCVV"
+                  label="CVV"
+                  type="cardCVV"
+                  id="cardCVV"
+                  autoComplete="cardCVV"
+                  onChange={handleChange}
+                />
+              </Grid>
+            </Grid>
 
             {errorMessage && (
               <Typography variant="body2" color="error" align="center" style={{ width: '100%' }}>

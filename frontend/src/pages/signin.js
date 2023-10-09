@@ -14,6 +14,8 @@ import { useNavigate } from 'react-router-dom';
 import logo from './logo.png';
 import axios from 'axios';
 
+import { API_URL_1, API_URL_2, API_URL_3 } from '../components/apiConfig';
+
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -32,17 +34,6 @@ const defaultTheme = createTheme();
 export default function SignIn() {
   const navigate = useNavigate();
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   console.log({
-  //     email: data.get('email'),
-  //     password: data.get('password'),
-  //   });
-
-  //   navigate("/list");
-  // };
-
   const [errorMessage, setErrorMessage] = useState(null);  // to display error messages
 
   const handleSubmit = async (event) => {
@@ -53,16 +44,17 @@ export default function SignIn() {
     const password = data.get('password');
 
     try {
-      const response = await axios.post('http://localhost:8080/user/signin', {
+      const response = await axios.post(`${API_URL_1}/user/signin`, {
           "username": email,
           "password": password
         
       });
 
-    // try {
-    //   const response = await axios.get(`http://localhost:8080/user?username=${email}&password=${password}`);
+
 
       if (response.data) {
+        const userdata = await axios.get(`${API_URL_1}/user/details?username=` + email);
+        localStorage.setItem('user', JSON.stringify(userdata.data));
         navigate("/list");
       } else {
         setErrorMessage('Invalid username or password');

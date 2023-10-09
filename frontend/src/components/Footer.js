@@ -5,10 +5,42 @@ const Footer = () => {
   return (
     <Box sx={{ bgcolor: 'white', color: 'primary.main', py: 4 }}>
       <Container>
-        <Grid container spacing={3}>
-            <Grid item xs={12} sm={6} md={3}>
+              <Grid container spacing={3}>
+                  
+              <Grid item xs={12} sm={6} md={3}>
                 <Typography variant="h6" gutterBottom fontWeight="bold">
                     About Us
+                </Typography>
+                <Typography variant="subtitle1">
+                <Link href="/contact/saksham" color="primary">
+                    Saksham
+                </Link> 
+                </Typography>
+                <Typography variant="subtitle1">
+                <Link href="/contact/lawrence" color="primary">
+                    Lawrence
+                </Link>
+                </Typography>
+                <Typography variant="subtitle1">
+                <Link href="/contact/laura" color="primary">
+                    Laura
+                </Link>
+                </Typography>
+                <Typography variant="subtitle1">
+                <Link href="/contact/hari" color="primary">
+                    Hari
+                </Link>
+                </Typography>
+                <Typography variant="subtitle1">
+                <Link href="/contact/lance" color="primary">
+                    Lance
+                </Link>
+                </Typography>
+                  </Grid>
+                  
+            <Grid item xs={12} sm={6} md={3}>
+                <Typography variant="h6" gutterBottom fontWeight="bold">
+                    SuperPrice
                 </Typography>
                 <Typography variant="subtitle1">
                 <Link href="#" color="primary">
@@ -51,41 +83,7 @@ const Footer = () => {
                 </Link>
                 </Typography>
             </Grid>
-            <Grid item xs={12} sm={6} md={3}>
-                <Typography variant="h6" gutterBottom fontWeight="bold">
-                    Contact Us
-                </Typography>
-                <Typography variant="subtitle1">
-                <Link href="/contact/laura" color="primary">
-                    Laura
-                </Link> 
-                </Typography>
-                <Typography variant="subtitle1">
-                <Link href="/contact/lawrence" color="primary">
-                    Lawrence
-                </Link>
-                </Typography>
-                <Typography variant="subtitle1">
-                <Link href="/contact/saksham" color="primary">
-                    Saksham
-                </Link>
-                </Typography>
-                <Typography variant="subtitle1">
-                <Link href="/contact/hari" color="primary">
-                    Hari
-                </Link>
-                </Typography>
-                <Typography variant="subtitle1">
-                <Link href="/contact/lance" color="primary">
-                    Lance
-                </Link>
-                </Typography>
-                <Typography variant="subtitle1">
-                <Link href="/contact/darby" color="primary">
-                    Darby
-                </Link>
-                </Typography>
-            </Grid>
+            
             <Grid item xs={12} sm={6} md={3}>
                 <Typography variant="h6" gutterBottom fontWeight="bold">
                 Social Media
