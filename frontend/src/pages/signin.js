@@ -44,7 +44,7 @@ export default function SignIn() {
     const password = data.get('password');
 
     try {
-      const response = await axios.post(`${API_URL_1}/user/signin`, {
+      const response = await axios.post(`http://inc-env.eba-bxmkgzsy.us-east-1.elasticbeanstalk.com:8080/user/signin`, {
           "username": email,
           "password": password
         
@@ -53,7 +53,7 @@ export default function SignIn() {
 
 
       if (response.data) {
-        const userdata = await axios.get(`${API_URL_1}/user/details?username=` + email);
+        const userdata = await axios.get(`http://inc-env.eba-bxmkgzsy.us-east-1.elasticbeanstalk.com:8080/user/details?username=` + email);
         localStorage.setItem('user', JSON.stringify(userdata.data));
         navigate("/list");
       } else {
