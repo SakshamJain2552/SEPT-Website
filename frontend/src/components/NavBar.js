@@ -59,7 +59,7 @@ function NavBar() {
             </Grid>
             <Grid item xs>
               <div style={{ position: 'relative' }}>
-                  <Paper elevation={3} style={{ width: '300px', borderRadius: '50px', padding: '0px 4px', display: 'flex', alignItems: 'center'}}>
+                  {/* <Paper elevation={3} style={{ width: '300px', borderRadius: '50px', padding: '0px 4px', display: 'flex', alignItems: 'center'}}>
                     <div style={{ paddingLeft: '10px' }}>
                       <SearchIcon color="primary" />
                     </div>
@@ -69,7 +69,7 @@ function NavBar() {
                       inputProps={{ 'aria-label': 'search' }}
                       style={{ padding: '10px 20px', borderRadius: '25px' }}
                     />
-                  </Paper>
+                  </Paper> */}
                 </div>
             </Grid>
             <Grid item>
@@ -137,7 +137,7 @@ function NavBar() {
                 getContentAnchorEl={null}
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
               >
-                <MenuItem component={Link} to="/account/about" onClick={handleMenuClose}>About Account</MenuItem>
+                <MenuItem component={Link} to="/profile" onClick={handleMenuClose}>About Profile</MenuItem>
               </Menu>
             </Grid>
           </Grid>
