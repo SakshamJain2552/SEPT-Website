@@ -92,7 +92,7 @@ export default function ProfilePage() {
           </Grid>
           <Grid item xs={12} sm={6}>
             <Typography variant="notifications">
-              Notifications: {userDetails.Notifications ? 'Yes' : 'No'}
+              Notifications: {userDetails.Notifications === 'true' ? 'Yes' : 'No'}
             </Typography>
           </Grid>
         </Grid>
