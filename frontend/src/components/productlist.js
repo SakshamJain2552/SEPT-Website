@@ -20,8 +20,9 @@ const Productlist = () => {
 const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     useEffect(() => {
-        axios.get(`${API_URL_2}/products`)
+        axios.get(`http://inc-env.eba-bxmkgzsy.us-east-1.elasticbeanstalk.com:8081/products`)
             .then(response => {
+                console.log("API Response:", response.data); // Add this line for debugging
                 setProducts(response.data);
             })
             .catch(error => {
