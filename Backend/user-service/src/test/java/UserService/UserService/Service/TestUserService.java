@@ -62,11 +62,7 @@ public class TestUserService {
         testDetails.put("Username", "alice123");
         testDetails.put("Password", "password123");
         testDetails.put ("Email", "alice@email.com");
-<<<<<<< HEAD
-        testDetails.put ("Address", "1 Test Street, Victoria");
-=======
         testDetails.put("Address", "1 Test Street, Victoria");
->>>>>>> origin/develop
         testDetails.put("Notifications", "true");
         testDetails.put("CardName", "");
         testDetails.put("CardNumber", "0");

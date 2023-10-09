@@ -96,13 +96,8 @@ public class UserRepoImpl implements UserRepo {
             stm.setString(2, lastname);
             stm.setString(3, username);
             stm.setString(4, password);
-<<<<<<< HEAD
-            stm.setString(5, email);     
-            stm.setString(6, address);       
-=======
             stm.setString(5, email);
             stm.setString(6, address);
->>>>>>> origin/develop
             stm.setBoolean(7, notifications);
             stm.setString(8, cardName);
             stm.setLong(9, cardNumber);

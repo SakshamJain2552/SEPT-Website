@@ -60,11 +60,7 @@ public class TestUserRepo {
         testDetails.put("Username", "alice123");
         testDetails.put("Password", "password123");
         testDetails.put ("Email", "alice@email.com");
-<<<<<<< HEAD
-        testDetails.put ("Address", "1 Test Street, Victoria");
-=======
         testDetails.put("Address", "1 Alice Street, Victoria");
->>>>>>> origin/develop
         testDetails.put("Notifications", "false");
         testDetails.put("CardName", "");
         testDetails.put("CardNumber", "0");
