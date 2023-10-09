@@ -17,6 +17,9 @@ function NavBar() {
   const [shopMenuAnchor, setShopMenuAnchor] = useState(null);
   const [accountMenuAnchor, setAccountMenuAnchor] = useState(null);
 
+  const storedUser = JSON.parse(localStorage.getItem('user'));
+  const hasNotifications = storedUser && storedUser.Notifications === "true";
+
   const handleShopMenuOpen = (event) => {
     setShopMenuAnchor(event.currentTarget);
   };
@@ -59,26 +62,15 @@ function NavBar() {
             </Grid>
             <Grid item xs>
               <div style={{ position: 'relative' }}>
-                  {/* <Paper elevation={3} style={{ width: '300px', borderRadius: '50px', padding: '0px 4px', display: 'flex', alignItems: 'center'}}>
-                    <div style={{ paddingLeft: '10px' }}>
-                      <SearchIcon color="primary" />
-                    </div>
-                    <InputBase
-                      placeholder="What are you looking for?"
-                      fullWidth
-                      inputProps={{ 'aria-label': 'search' }}
-                      style={{ padding: '10px 20px', borderRadius: '25px' }}
-                    />
-                  </Paper> */}
                 </div>
             </Grid>
             <Grid item>
-              {/* Bell Icon */}
-              <Tooltip title="Notifications">
-                <IconButton color="primary" component={Link} to="/notifications">
-                  <NotificationsNoneIcon />
-                </IconButton>
-              </Tooltip>
+
+        <Tooltip title={hasNotifications ? "You are subscribed to notifications" : "You are not subscribed to notifications"}>
+                        <IconButton color="primary">
+                          <NotificationsNoneIcon />
+                        </IconButton>
+                      </Tooltip>
             </Grid>
             <Grid item>
               <Tooltip title="User Details">
