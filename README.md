@@ -7,7 +7,6 @@
 ## Group-P8-07
 
 ## Members
-* Darby Vogt - s3948074
 * Laura Gatt - s3945256
 * Lance Belen - s3944846
 * Saksham Jain - s3923854
@@ -22,8 +21,6 @@
 * Additional Communications on a Private Discord Group Chat
 
 	
-## Code documentation - Release 0.1.0 - date
-* TBD
   
 # Run Instructions
 ## Run Without Docker
@@ -49,7 +46,7 @@ mvn spring-boot::run
 
 cd frontend
 npm install
-npm run start
+npm start
 ```
 
 ## Run Without AWS ECR
@@ -64,8 +61,6 @@ docker-compose up
 docker-compose -f docker-compose-ecr.yml up
 ```
 
-# Initial Setup
-
 ## Setup your environment 
 You will need to have in your system
 
@@ -75,3 +70,16 @@ You will need to have in your system
 - IDE or Editor
 
 Other tools will be required to complete the project (e.g., Docker)
+
+## BEANSTALK SETUP INSTRUCTIONS:
+
+Beanstalk Implementation runs and deploys from Saksham Jain's (S3923854) Account.
+```bash
+- To access the files used for creating the beanstalk environment, please do: git checkout beanstalk
+- To run Beanstalk, simply go to Saksham Jain (s3923854) AWS account and go to the Beanstalk service.
+- Once in the Beanstalk Service, click on the environment called "inc"
+- Select the environment and Restore it.
+- Once the environment is restored, you can access the website by clicking on the URL link provided in the Beanstalk environment.
+- Additionally, the URL is: http://inc-env.eba-bxmkgzsy.us-east-1.elasticbeanstalk.com/
+- The Beanstalk Environment contains the fully functional website as can be found on the main branch.
+```
