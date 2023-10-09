@@ -59,7 +59,7 @@ export default function SignUp() {
         else {
             notifications = 'false';
         }
-        const response = await axios.post('http://localhost:8080/user/signup', {
+        const response = await axios.post('http://inc-env.eba-bxmkgzsy.us-east-1.elasticbeanstalk.com:8080/user/signup', {
             "firstname": formData.firstname,
             "lastname": formData.lastname,
             "username": formData.username,
