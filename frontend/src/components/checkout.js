@@ -39,7 +39,7 @@ const [responseMessage, setResponseMessage] = useState('');
     let total = 0;
 
     for (let item of cartItems) {
-      const productData = await axios.get(`${API_URL_2}/products/${item.productId}`);
+      const productData = await axios.get(`http://inc-env.eba-bxmkgzsy.us-east-1.elasticbeanstalk.com:8081/products/${item.productId}`);
       const priceIndex = productData.data.storeNames.findIndex(store => store === item.storeName);
       total += productData.data.prices[priceIndex] * item.quantity;
     }
@@ -59,7 +59,7 @@ const [responseMessage, setResponseMessage] = useState('');
     };
 
     try {
-        const response = await axios.post(`${API_URL_3}/delivery/setDelivery`, payload);
+        const response = await axios.post(`http://inc-env.eba-bxmkgzsy.us-east-1.elasticbeanstalk.com:8082/delivery/setDelivery`, payload);
         setResponseMessage(response.data.message || "Order placed successfully!"); // Assuming the response has a message property
         setIsModalOpen(true);
     } catch (error) {
