@@ -27,7 +27,7 @@ export default function ProfilePage() {
       try {
         // Extract the username from the stored user object
         const storedUsername = storedUser.Username; // Use the correct property name
-        const response = await axios.get(`http://localhost:8080/user/details?username=${storedUsername}`);
+        const response = await axios.get(`http://inc-env.eba-bxmkgzsy.us-east-1.elasticbeanstalk.com:8080/user/details?username=${storedUsername}`);
         setUserDetails(response.data);
         setLoading(false);
       } catch (error) {
