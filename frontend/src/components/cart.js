@@ -18,11 +18,11 @@ function CartPage() {
     const userId = localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).UserID;
     if (userId) {
       try {
-        const cartResponse = await axios.get(`${API_URL_1}/user/cart/${userId}`);
-        const productResponse = await axios.get(`${API_URL_2}/products`);
+        const cartResponse = await axios.get(`http://inc-env.eba-bxmkgzsy.us-east-1.elasticbeanstalk.com:8080/user/cart/${userId}`);
+        const productResponse = await axios.get(`http://inc-env.eba-bxmkgzsy.us-east-1.elasticbeanstalk.com:8081/products`);
         
         const detailedPrices = await Promise.all(cartResponse.data.map(async item => {
-          const productDetails = await axios.get(`${API_URL_2}/products/${item.productId}`);
+          const productDetails = await axios.get(`http://inc-env.eba-bxmkgzsy.us-east-1.elasticbeanstalk.com:8081/products/${item.productId}`);
           const storeIndex = productDetails.data.storeNames.indexOf(item.storeName);
           return {
             productId: item.productId,
@@ -58,7 +58,7 @@ function CartPage() {
     const userId = localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).UserID;
       
     try {
-      await axios.delete(`${API_URL_1}/user/cart`, {
+      await axios.delete(`http://inc-env.eba-bxmkgzsy.us-east-1.elasticbeanstalk.com:8080/user/cart`, {
         data: {
           userId: cartItem.userId,
           cartId: cartItem.cartId,
