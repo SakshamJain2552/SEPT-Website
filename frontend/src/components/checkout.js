@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 
 function CheckoutPage() {
-  const [address, setAddress] = useState('');
+//   const [address, setAddress] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [time, setTime] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('card');
@@ -21,16 +21,31 @@ function CheckoutPage() {
   const [cardNumberHelperText, setCardNumberHelperText] = useState('');
 const [cvvHelperText, setCvvHelperText] = useState('');
 
-  const [cardNumber, setCardNumber] = useState('');
+//   const [cardNumber, setCardNumber] = useState('');
+// const [expiryDate, setExpiryDate] = useState('');
+    //   const [cvv, setCvv] = useState('');
+    
+    const [address, setAddress] = useState('');
+const [cardNumber, setCardNumber] = useState('');
 const [expiryDate, setExpiryDate] = useState('');
-  const [cvv, setCvv] = useState('');
+const [cvv, setCvv] = useState('');
 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 const [responseMessage, setResponseMessage] = useState('');
 
 
-  useEffect(() => {
+    useEffect(() =>
+    {
+        const userData = JSON.parse(localStorage.getItem('user'));
+        
+        if (userData) {
+          setAddress(userData.Address || '');
+          setCardNumber(userData.CardNumber || '');
+          setExpiryDate(userData.CardExpiration || '');
+          setCvv(userData.CardCVV || '');
+        }
+
     calculateTotalPrice();
   }, []);
 
