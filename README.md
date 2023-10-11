@@ -28,6 +28,10 @@
 ```
   
 # Run Instructions
+
+- If you get a dependecy error for the backend services, please run the following command in the backend folder of the service that is giving the error:
+- mvn wrapper::wrapper
+
 ## Run Without Docker
 ```bash
 
