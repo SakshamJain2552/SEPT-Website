@@ -26,17 +26,6 @@ public class DeliveryRepoImpl implements DeliveryRepo{
         try {
             Connection connection = dataSource.getConnection();
 
-            // Check if username exists
-            PreparedStatement checkUsername = connection.prepareStatement(
-                "SELECT Username FROM Users WHERE Username = '" + username + "';"
-            );
-            ResultSet usernameResult = checkUsername.executeQuery();
-
-            if (!usernameResult.next()) {
-                connection.close();
-                throw new SQLException("Username does not exist");
-            }
-
             // Get last delivery id
             PreparedStatement getDeliveries = connection.prepareStatement(
                 "SELECT * FROM Deliveries;"
