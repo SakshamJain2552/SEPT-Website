@@ -83,3 +83,12 @@ Beanstalk Implementation runs and deploys from Saksham Jain's (S3923854) Account
 - Additionally, the URL is: http://inc-env.eba-bxmkgzsy.us-east-1.elasticbeanstalk.com/
 - The Beanstalk Environment contains the fully functional website as can be found on the main branch.
 ```
+
+## Website Run INSTRUCTIONS:
+
+```bash
+- ** On the Sign In Page:
+  Username: alice123
+  Password: password123**
+- You may use one of the other preset accounts to access the website, or you may create your own account through the sign up page.
+```
