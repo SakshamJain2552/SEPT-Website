@@ -20,7 +20,12 @@
 * Teams Link : https://teams.microsoft.com/l/channel/19%3aZYWFqHolT5UAJb-q8hjY_h-OL87wKsUMG-TcbMgVzdQ1%40thread.tacv2/General?groupId=8f496168-6600-4b77-a866-7818f47e1cca&tenantId=d1323671-cdbe-4417-b4d4-bdb24b51316b
 * Additional Communications on a Private Discord Group Chat
 
-	
+## IMPORTANT NOTE:
+
+```bash
+- CHANGES WERE MADE AFTER 8/10/2023 11:59PM as discussed with the product owner due to unvoidable circumstances. Please refer to the commit history for the changes made. 
+- Additionally, please refer to the email chain between the team, Sebastian and Prakash for further information.
+```
   
 # Run Instructions
 ## Run Without Docker
