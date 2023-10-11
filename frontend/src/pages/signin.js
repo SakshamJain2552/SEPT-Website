@@ -90,7 +90,7 @@ export default function SignIn() {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Username"
               name="email"
               autoComplete="email"
               autoFocus
@@ -104,10 +104,6 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="secondary" />}
-              label="Remember me"
             />
 
 {errorMessage && (
@@ -139,9 +135,6 @@ export default function SignIn() {
               </div>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
               </Grid>
               <Grid item>
                 <Link href="/signup" variant="body2">
